@@ -15,11 +15,11 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read().replace('.. :changelog:', '')
 
 requirements = [
-    # TODO: put package requirements here
+    'requests>=2.8.0'
 ]
 
 test_requirements = [
-    # TODO: put package test requirements here
+    'vcrpy>=1.7.3'
 ]
 
 setup(
@@ -39,17 +39,15 @@ setup(
     install_requires=requirements,
     license="ISCL",
     zip_safe=False,
-    keywords='anydo_api',
+    keywords='anydo, anydo_api, api',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: ISC License (ISCL)',
         'Natural Language :: English',
         "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
     ],
     test_suite='tests',
