@@ -3,12 +3,15 @@
 
 
 import requests
+import json
 
 SERVER_API_URL = 'https://sm-prod2.any.do'
 
 CONSTANTS = {
     'SERVER_API_URL': SERVER_API_URL,
-    'LOGIN_URL': SERVER_API_URL + '/j_spring_security_check',}
+    'LOGIN_URL': SERVER_API_URL + '/j_spring_security_check',
+    'ME_URL': SERVER_API_URL + '/me',
+}
 
 class Error(Exception): pass
 class ClientError(Error): pass
@@ -21,25 +24,38 @@ class Client(object):
     """
 
     @classmethod
-    def log_in(klass, username, password):
+    def log_in(klass, email, password):
         credentials = {
-            'j_username': username,
+            'j_username': email,
             'j_password': password,
-            '_spring_security_remember_me': 'on'}
+            '_spring_security_remember_me': 'on'
+        }
 
-        #Session()
-        response_obj = requests.post(CONSTANTS.get('LOGIN_URL'),
-            json=credentials,
-            headers={'content-type': 'application/x-www-form-urlencoded'})
+        headers = {
+            'content-type': 'application/x-www-form-urlencoded',
+            'Accept-Encoding': None
+        }
+
+        session = requests.Session()
+
+        response_obj = session.post(
+            CONSTANTS.get('LOGIN_URL'),
+            data=credentials,
+            headers=headers
+        )
 
         try:
             response_obj.raise_for_status()
-            response_json = response_obj.json()
         except requests.exceptions.HTTPError as error:
             client_error = Unauthorized(error)
             client_error.__cause__ = None
-
             raise client_error
+        finally: session.close()
 
-        return response_json
+        return session#klass.me(session)
 
+    @classmethod
+    def me(klass, session):
+        user = session.get(CONSTANTS.get('ME_URL'))
+        session.close()
+        return user.json()

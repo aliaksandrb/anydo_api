@@ -1,0 +1,85 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "status": {
+                    "message": "OK",
+                    "code": 200
+                },
+                "body": {
+                    "string": ""
+                },
+                "headers": {
+                    "Access-Control-Allow-Credentials": [
+                        "true"
+                    ],
+                    "Access-Control-Expose-Headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ],
+                    "X-Anydo-Auth": [
+                        "emVwYXRhY0BpbmJveGRlc2lnbi5tZToxNzYwMTE2NzY2MzEzOjYxZDY2OTZmYjEyMjcxYWYxMTBhNGU5ZGU2N2NlOTZl"
+                    ],
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Content-Length": [
+                        "0"
+                    ],
+                    "Access-Control-Allow-Methods": [
+                        "POST, OPTIONS"
+                    ],
+                    "Date": [
+                        "Tue, 13 Oct 2015 17:19:26 GMT"
+                    ],
+                    "Server": [
+                        "gunicorn/19.0.0"
+                    ],
+                    "Access-Control-Allow-Headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ],
+                    "Via": [
+                        "1.1 vegur"
+                    ],
+                    "X-Frame-Options": [
+                        "SAMEORIGIN"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "Content-Type": [
+                        "text/html; charset=utf-8"
+                    ],
+                    "Set-Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=emVwYXRhY0BpbmJveGRlc2lnbi5tZToxNzYwMTE2NzY2MzEzOjYxZDY2OTZmYjEyMjcxYWYxMTBhNGU5ZGU2N2NlOTZl; Domain=.any.do; Expires=Thu, 12-Oct-2017 17:19:26 GMT; HttpOnly; Path=/"
+                    ],
+                    "Access-Control-Max-Age": [
+                        "21600"
+                    ]
+                }
+            },
+            "request": {
+                "headers": {
+                    "Accept": [
+                        "*/*"
+                    ],
+                    "content-type": [
+                        "application/x-www-form-urlencoded"
+                    ],
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "Content-Length": [
+                        "87"
+                    ]
+                },
+                "method": "POST",
+                "body": "_spring_security_remember_me=on",
+                "uri": "https://sm-prod2.any.do/j_spring_security_check"
+            }
+        }
+    ],
+    "version": 1
+}
