@@ -1,14 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-`Client` is the main interface for communication with an API.
-
-Responsible for authentication and user management.
-"""
 
 import requests
-import json
 
 SERVER_API_URL = 'https://sm-prod2.any.do'
 
@@ -21,6 +15,10 @@ class ClientError(Error): pass
 class Unauthorized(ClientError): pass
 
 class Client(object):
+    """
+    `Client` is the main interface for communication with an API.
+    Responsible for authentication and user management.
+    """
 
     @classmethod
     def log_in(klass, username, password):

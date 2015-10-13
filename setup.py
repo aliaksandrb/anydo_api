@@ -22,6 +22,10 @@ test_requirements = [
     'vcrpy>=1.7.3'
 ]
 
+extras_require = {
+    ':python_version in "2.7"': ['contextlib2', 'mock'],
+}
+
 setup(
     name='anydo_api',
     version='0.0.1',
@@ -37,6 +41,7 @@ setup(
                  'anydo_api'},
     include_package_data=True,
     install_requires=requirements,
+    extras_require=extras_require,
     license="ISCL",
     zip_safe=False,
     keywords='anydo, anydo_api, api',

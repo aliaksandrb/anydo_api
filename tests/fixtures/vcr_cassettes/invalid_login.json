@@ -1,61 +1,61 @@
 {
-    "version": 1, 
     "interactions": [
         {
             "response": {
+                "body": {
+                    "string": ""
+                }, 
                 "headers": {
-                    "content-length": [
-                        "0"
-                    ], 
-                    "server": [
-                        "gunicorn/19.0.0"
-                    ], 
-                    "via": [
-                        "1.1 vegur"
+                    "content-type": [
+                        "text/html; charset=utf-8"
                     ], 
                     "connection": [
                         "keep-alive"
                     ], 
                     "date": [
-                        "Mon, 12 Oct 2015 18:41:57 GMT"
+                        "Tue, 13 Oct 2015 10:01:36 GMT"
                     ], 
-                    "content-type": [
-                        "text/html; charset=utf-8"
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-length": [
+                        "0"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
                     ]
                 }, 
                 "status": {
-                    "code": 500, 
-                    "message": "INTERNAL SERVER ERROR"
-                }, 
-                "body": {
-                    "string": ""
+                    "message": "INTERNAL SERVER ERROR", 
+                    "code": 500
                 }
             }, 
             "request": {
+                "method": "POST", 
+                "uri": "https://sm-prod2.any.do/j_spring_security_check", 
+                "body": "{\"j_username\": \"***\", \"j_password\": \"***\", \"_spring_security_remember_me\": \"on\"}", 
                 "headers": {
-                    "Accept-Encoding": [
-                        "gzip, deflate"
-                    ], 
-                    "Connection": [
-                        "keep-alive"
-                    ], 
                     "Accept": [
                         "*/*"
                     ], 
-                    "Content-Length": [
-                        "80"
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Accept-Encoding": [
+                        "gzip, deflate"
                     ], 
                     "content-type": [
                         "application/x-www-form-urlencoded"
                     ], 
-                    "User-Agent": [
-                        "python-requests/2.8.0"
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Content-Length": [
+                        "80"
                     ]
-                }, 
-                "uri": "https://sm-prod2.any.do/j_spring_security_check", 
-                "method": "POST", 
-                "body": "{\"j_username\": \"***\", \"j_password\": \"***\", \"_spring_security_remember_me\": \"on\"}"
+                }
             }
         }
-    ]
+    ], 
+    "version": 1
 }
