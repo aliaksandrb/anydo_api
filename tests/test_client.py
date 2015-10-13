@@ -10,6 +10,7 @@ Tests for `client` module.
 
 import unittest
 import vcr
+import json
 
 from anydo_api import client
 
@@ -17,6 +18,26 @@ vcr = vcr.VCR(
     serializer='json',
     cassette_library_dir='tests',
 )
+
+__credentials_file = 'test_credentials.json'
+
+try:
+    with open(__credentials_file) as f:
+        credentials = json.load(f)
+except FileNotFoundError as e:
+    error = FileNotFoundError('{} file is required for remote API testing'
+        .format(__credentials_file))
+    error.__cause__ = e
+    raise error
+except ValueError as e:
+    error = ValueError('{} file is bad formatted'.format(__credentials_file))
+    error.__cause__ = e
+    raise error
+
+
+if len([item for item in credentials.items() if item[0] in ('username', 'password', 'email')
+                                                and item[1] != '']) < 3:
+    raise ValueError('{} file has missed required keys or values'.format(__credentials_file))
 
 class TestClient(unittest.TestCase):
 
