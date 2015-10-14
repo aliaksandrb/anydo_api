@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
 import requests
 import json
 
@@ -20,7 +19,7 @@ class Unauthorized(ClientError): pass
 class Client(object):
     """
     `Client` is the main interface for communication with an API.
-    Responsible for authentication and user management.
+    Responsible for authentication.
     """
 
     def __init__(self, email, password):
@@ -60,5 +59,3 @@ class Client(object):
         finally: session.close()
 
         return session
-
-
