@@ -1,0 +1,82 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "response": {
+                "body": {
+                    "string": "Cannot create new user - User with this email already exists"
+                },
+                "status": {
+                    "code": 409,
+                    "message": "CONFLICT"
+                },
+                "headers": {
+                    "X-Frame-Options": [
+                        "SAMEORIGIN"
+                    ],
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Date": [
+                        "Wed, 14 Oct 2015 17:00:04 GMT"
+                    ],
+                    "Access-Control-Allow-Credentials": [
+                        "true"
+                    ],
+                    "Content-Length": [
+                        "60"
+                    ],
+                    "Content-Type": [
+                        "text/html; charset=utf-8"
+                    ],
+                    "Via": [
+                        "1.1 vegur"
+                    ],
+                    "Server": [
+                        "gunicorn/19.0.0"
+                    ],
+                    "Access-Control-Expose-Headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "Access-Control-Max-Age": [
+                        "21600"
+                    ],
+                    "Access-Control-Allow-Headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ],
+                    "Access-Control-Allow-Methods": [
+                        "DELETE, POST, OPTIONS"
+                    ]
+                }
+            },
+            "request": {
+                "method": "POST",
+                "body": "{\"name\": \"kulibaba\", \"username\": \"tolumis@postonline.me\", \"emails\": \"tolumis@postonline.me\", \"phoneNumbers\": []}",
+                "headers": {
+                    "Accept": [
+                        "*/*"
+                    ],
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ],
+                    "Content-Length": [
+                        "136"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "Accept-Encoding": [
+                        "gzip, deflate"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ]
+                },
+                "uri": "https://sm-prod2.any.do/user"
+            }
+        }
+    ]
+}

@@ -4,7 +4,7 @@
 import requests
 import json
 
-from .client import CONSTANTS, InternalServerError, BadRequest
+from .client import CONSTANTS, InternalServerError, BadRequestError, ConflictError
 
 class User(object):
     """
@@ -13,20 +13,27 @@ class User(object):
     responsible for user management.
     """
 
-    @staticmethod
-    def create(name, username, password, emails, phone_numbers=[]):
+    def __init__(self, data_dict):
+        self.data = data_dict
+
+    @classmethod
+    def create(klass, name, email, password, emails=None, phone_numbers=[]):
+        """
+        Creates new user by required parameters
+        """
         headers = {
             'Content-Type' : 'application/json',
         }
 
         json_data = {
             'name': name,
-            'username': username,
+            'username': email,
             'password': password,
-            'emails': emails,
+            'emails': emails or email,
             'phoneNumbers': phone_numbers
         }
 
+        # session
         response_obj = requests.post(
             CONSTANTS.get('USER_URL'),
             json=json_data,
@@ -37,12 +44,15 @@ class User(object):
             response_obj.raise_for_status()
         except requests.exceptions.HTTPError as error:
             if response_obj.status_code == 400:
-                client_error = BadRequest(response_obj.content)
+                client_error = BadRequestError(response_obj.content)
+            elif response_obj.status_code == 409:
+                client_error = ConflictError(response_obj.content)
             else:
                 client_error = InternalServerError(error)
 
             client_error.__cause__ = None
             raise client_error
 
-        return response_obj.json()
+       # catch possible exceptions
+        return klass(data_dict=response_obj.json())
 

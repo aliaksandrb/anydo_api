@@ -1,159 +1,159 @@
 {
-    "version": 1, 
     "interactions": [
         {
             "response": {
-                "headers": {
-                    "access-control-expose-headers": [
-                        "X-Anydo-Auth,X-Platform"
-                    ], 
-                    "content-length": [
-                        "0"
-                    ], 
-                    "set-cookie": [
-                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=emVwYXRhY0BpbmJveGRlc2lnbi5tZToxNzYwMTg0OTg2MjM5OjExNWY3ZjI4NDAyMmMxY2Q4NDFhNTA1Yjk0ZGY2MGI4; Domain=.any.do; Expires=Fri, 13-Oct-2017 12:16:26 GMT; HttpOnly; Path=/"
-                    ], 
-                    "access-control-allow-methods": [
-                        "OPTIONS, POST"
-                    ], 
-                    "server": [
-                        "gunicorn/19.0.0"
-                    ], 
-                    "x-frame-options": [
-                        "SAMEORIGIN"
-                    ], 
-                    "access-control-allow-origin": [
-                        "*"
-                    ], 
-                    "x-anydo-auth": [
-                        "emVwYXRhY0BpbmJveGRlc2lnbi5tZToxNzYwMTg0OTg2MjM5OjExNWY3ZjI4NDAyMmMxY2Q4NDFhNTA1Yjk0ZGY2MGI4"
-                    ], 
-                    "date": [
-                        "Wed, 14 Oct 2015 12:16:26 GMT"
-                    ], 
-                    "access-control-allow-credentials": [
-                        "true"
-                    ], 
-                    "content-type": [
-                        "text/html; charset=utf-8"
-                    ], 
-                    "via": [
-                        "1.1 vegur"
-                    ], 
-                    "access-control-allow-headers": [
-                        "Content-Type,X-Anydo-Auth,X-Platform"
-                    ], 
-                    "access-control-max-age": [
-                        "21600"
-                    ], 
-                    "connection": [
-                        "keep-alive"
-                    ]
-                }, 
                 "body": {
                     "string": ""
-                }, 
-                "status": {
-                    "message": "OK", 
-                    "code": 200
-                }
-            }, 
-            "request": {
-                "uri": "https://sm-prod2.any.do/j_spring_security_check", 
-                "body": "_spring_security_remember_me=on&j_username=zepatac%40inboxdesign.me", 
+                },
                 "headers": {
-                    "Content-Length": [
-                        "87"
-                    ], 
-                    "Accept": [
-                        "*/*"
-                    ], 
-                    "User-Agent": [
-                        "python-requests/2.8.0"
-                    ], 
+                    "Via": [
+                        "1.1 vegur"
+                    ],
+                    "X-Frame-Options": [
+                        "SAMEORIGIN"
+                    ],
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Access-Control-Allow-Credentials": [
+                        "true"
+                    ],
                     "Connection": [
                         "keep-alive"
-                    ], 
-                    "content-type": [
+                    ],
+                    "Access-Control-Allow-Methods": [
+                        "POST, OPTIONS"
+                    ],
+                    "X-Anydo-Auth": [
+                        "dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ],
+                    "Server": [
+                        "gunicorn/19.0.0"
+                    ],
+                    "Access-Control-Expose-Headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ],
+                    "Content-Length": [
+                        "0"
+                    ],
+                    "Set-Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI; Domain=.any.do; Expires=Fri, 13-Oct-2017 17:15:29 GMT; HttpOnly; Path=/"
+                    ],
+                    "Access-Control-Max-Age": [
+                        "21600"
+                    ],
+                    "Date": [
+                        "Wed, 14 Oct 2015 17:15:29 GMT"
+                    ],
+                    "Content-Type": [
+                        "text/html; charset=utf-8"
+                    ],
+                    "Access-Control-Allow-Headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ]
+                },
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "uri": "https://sm-prod2.any.do/j_spring_security_check",
+                "headers": {
+                    "Content-Length": [
+                        "86"
+                    ],
+                    "Accept": [
+                        "*/*"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ],
+                    "Content-Type": [
                         "application/x-www-form-urlencoded"
                     ]
-                }, 
-                "method": "POST"
+                },
+                "body": "_spring_security_remember_me=on&j_username=tolumis%40postonline.me"
             }
-        }, 
+        },
         {
             "response": {
-                "headers": {
-                    "access-control-expose-headers": [
-                        "X-Anydo-Auth,X-Platform"
-                    ], 
-                    "content-length": [
-                        "351"
-                    ], 
-                    "access-control-allow-methods": [
-                        "HEAD, GET, OPTIONS, PUT"
-                    ], 
-                    "server": [
-                        "gunicorn/19.0.0"
-                    ], 
-                    "x-frame-options": [
-                        "SAMEORIGIN"
-                    ], 
-                    "access-control-allow-origin": [
-                        "*"
-                    ], 
-                    "date": [
-                        "Wed, 14 Oct 2015 12:16:27 GMT"
-                    ], 
-                    "access-control-allow-credentials": [
-                        "true"
-                    ], 
-                    "content-type": [
-                        "application/json"
-                    ], 
-                    "via": [
-                        "1.1 vegur"
-                    ], 
-                    "access-control-allow-headers": [
-                        "Content-Type,X-Anydo-Auth,X-Platform"
-                    ], 
-                    "access-control-max-age": [
-                        "21600"
-                    ], 
-                    "connection": [
-                        "keep-alive"
-                    ]
-                }, 
                 "body": {
-                    "string": "{\"email\": \"zepatac@inboxdesign.me\", \"creationDate\": 1444738766000, \"name\": \"kulibaba\", \"googleAvatarUrl\": null, \"idSalt\": \"018b78e5d0fee6467eafe910a6fd5f6ac5b98e7080bbc9c3000a18f99cc21dd7\", \"profilePicture\": null, \"anonymous\": false, \"phoneNumbers\": [], \"hasGoogleNowRefreshToken\": false, \"id\": \"ZT-9K1teQ6wdGkJzGWBsLw==\", \"emails\": [], \"fake\": false}"
-                }, 
+                    "string": "{\"creationDate\": 1444841739000, \"idSalt\": \"1da1dc217ea4c93da01d7ff396d25c1ac1956caad3a4bfead873032b9ba2b143\", \"email\": \"tolumis@postonline.me\", \"id\": \"WQ-si7dlsgqhkzAhg7b2ig==\", \"fake\": false, \"hasGoogleNowRefreshToken\": false, \"emails\": [], \"name\": \"kulibaba\", \"phoneNumbers\": [], \"googleAvatarUrl\": null, \"anonymous\": false, \"profilePicture\": null}"
+                },
+                "headers": {
+                    "Via": [
+                        "1.1 vegur"
+                    ],
+                    "X-Frame-Options": [
+                        "SAMEORIGIN"
+                    ],
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Access-Control-Allow-Credentials": [
+                        "true"
+                    ],
+                    "Access-Control-Allow-Headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "Access-Control-Allow-Methods": [
+                        "HEAD, PUT, GET, OPTIONS"
+                    ],
+                    "Access-Control-Max-Age": [
+                        "21600"
+                    ],
+                    "Access-Control-Expose-Headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ],
+                    "Content-Length": [
+                        "350"
+                    ],
+                    "Date": [
+                        "Wed, 14 Oct 2015 17:15:30 GMT"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Server": [
+                        "gunicorn/19.0.0"
+                    ]
+                },
                 "status": {
-                    "message": "OK", 
-                    "code": 200
+                    "code": 200,
+                    "message": "OK"
                 }
-            }, 
+            },
             "request": {
-                "uri": "https://sm-prod2.any.do/me", 
-                "body": null, 
+                "method": "GET",
+                "uri": "https://sm-prod2.any.do/me",
                 "headers": {
                     "Accept-Encoding": [
                         "gzip, deflate"
-                    ], 
+                    ],
                     "Cookie": [
-                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=emVwYXRhY0BpbmJveGRlc2lnbi5tZToxNzYwMTg0OTg2MjM5OjExNWY3ZjI4NDAyMmMxY2Q4NDFhNTA1Yjk0ZGY2MGI4"
-                    ], 
-                    "User-Agent": [
-                        "python-requests/2.8.0"
-                    ], 
-                    "Accept": [
-                        "*/*"
-                    ], 
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ],
                     "Connection": [
                         "keep-alive"
+                    ],
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ],
+                    "Accept": [
+                        "*/*"
                     ]
-                }, 
-                "method": "GET"
+                },
+                "body": null
             }
         }
-    ]
+    ],
+    "version": 1
 }

@@ -16,9 +16,10 @@ CONSTANTS = {
 class Error(Exception): pass
 class ClientError(Error): pass
 
-class Unauthorized(ClientError): pass
-class BadRequest(ClientError): pass
+class UnauthorizedError(ClientError): pass
+class BadRequestError(ClientError): pass
 class InternalServerError(ClientError): pass
+class ConflictError(ClientError): pass
 
 class Client(object):
     """
@@ -57,7 +58,7 @@ class Client(object):
         try:
             response_obj.raise_for_status()
         except requests.exceptions.HTTPError as error:
-            client_error = Unauthorized(error)
+            client_error = UnauthorizedError(error)
             client_error.__cause__ = None
             raise client_error
         finally: session.close()

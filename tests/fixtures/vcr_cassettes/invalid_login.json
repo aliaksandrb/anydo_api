@@ -1,79 +1,79 @@
 {
-    "version": 1, 
     "interactions": [
         {
             "response": {
-                "headers": {
-                    "access-control-expose-headers": [
-                        "X-Anydo-Auth,X-Platform"
-                    ], 
-                    "content-length": [
-                        "0"
-                    ], 
-                    "access-control-allow-methods": [
-                        "OPTIONS, POST"
-                    ], 
-                    "server": [
-                        "gunicorn/19.0.0"
-                    ], 
-                    "x-frame-options": [
-                        "SAMEORIGIN"
-                    ], 
-                    "access-control-allow-origin": [
-                        "*"
-                    ], 
-                    "date": [
-                        "Wed, 14 Oct 2015 12:16:24 GMT"
-                    ], 
-                    "access-control-allow-credentials": [
-                        "true"
-                    ], 
-                    "content-type": [
-                        "text/html; charset=utf-8"
-                    ], 
-                    "via": [
-                        "1.1 vegur"
-                    ], 
-                    "access-control-allow-headers": [
-                        "Content-Type,X-Anydo-Auth,X-Platform"
-                    ], 
-                    "access-control-max-age": [
-                        "21600"
-                    ], 
-                    "connection": [
-                        "keep-alive"
-                    ]
-                }, 
-                "body": {
-                    "string": ""
-                }, 
                 "status": {
-                    "message": "UNAUTHORIZED", 
-                    "code": 401
-                }
-            }, 
-            "request": {
-                "uri": "https://sm-prod2.any.do/j_spring_security_check", 
-                "body": "_spring_security_remember_me=on&j_username=%2A%2A%2A&j_password=%2A%2A%2A", 
+                    "code": 401,
+                    "message": "UNAUTHORIZED"
+                },
                 "headers": {
+                    "Access-Control-Max-Age": [
+                        "21600"
+                    ],
+                    "Access-Control-Expose-Headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ],
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Content-Type": [
+                        "text/html; charset=utf-8"
+                    ],
                     "Content-Length": [
-                        "73"
-                    ], 
-                    "Accept": [
-                        "*/*"
-                    ], 
-                    "User-Agent": [
-                        "python-requests/2.8.0"
-                    ], 
+                        "0"
+                    ],
                     "Connection": [
                         "keep-alive"
-                    ], 
-                    "content-type": [
-                        "application/x-www-form-urlencoded"
+                    ],
+                    "Via": [
+                        "1.1 vegur"
+                    ],
+                    "X-Frame-Options": [
+                        "SAMEORIGIN"
+                    ],
+                    "Date": [
+                        "Wed, 14 Oct 2015 17:01:47 GMT"
+                    ],
+                    "Access-Control-Allow-Headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ],
+                    "Server": [
+                        "gunicorn/19.0.0"
+                    ],
+                    "Access-Control-Allow-Methods": [
+                        "OPTIONS, POST"
+                    ],
+                    "Access-Control-Allow-Credentials": [
+                        "true"
                     ]
-                }, 
-                "method": "POST"
+                },
+                "body": {
+                    "string": ""
+                }
+            },
+            "request": {
+                "uri": "https://sm-prod2.any.do/j_spring_security_check",
+                "headers": {
+                    "Content-Type": [
+                        "application/x-www-form-urlencoded"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "Accept": [
+                        "*/*"
+                    ],
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ],
+                    "Content-Length": [
+                        "73"
+                    ]
+                },
+                "method": "POST",
+                "body": "_spring_security_remember_me=on&j_password=%2A%2A%2A&j_username=%2A%2A%2A"
             }
         }
-    ]
+    ],
+    "version": 1
 }

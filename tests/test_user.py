@@ -47,16 +47,54 @@ class TestUser(unittest.TestCase):
             self.User = user.User
         except AttributeError: pass
 
+        self.username = credentials['username']
+        self.password = credentials['password']
+        self.email = credentials['email']
+
     def tearDown(self):
         if hasattr(self, 'User'): del self.User
+        del self.username
+        del self.password
+        del self.email
+
 
     def test_implemented(self):
         self.assertTrue(hasattr(user, 'User'))
 
     def test_user_creation_reraises_occured_errors(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/invalid_create_user.json'):
-            with self.assertRaises(client.BadRequest):
-                self.User.create(name='*', username='*', password='*', emails=[])
+            with self.assertRaises(client.BadRequestError):
+                self.User.create(name='*', email='*', password='*')
+
+    def test_valid_user_creation_returns_user_intance(self):
+        with vcr.use_cassette('fixtures/vcr_cassettes/valid_create_user.json',
+            before_record_response=scrub_string(self.password),
+            filter_post_data_parameters=['password']
+        ):
+            user = self.User.create(name=self.username, email=self.email, password=self.password)
+            self.assertIsInstance(user, self.User)
+
+    def test_duplicate_user_creation_raises_conflict(self):
+        with vcr.use_cassette('fixtures/vcr_cassettes/duplicate_user.json',
+            filter_post_data_parameters=['password']
+        ):
+            with self.assertRaises(client.ConflictError):
+                self.User.create(name=self.username, email=self.email, password=self.password)
+
+# Server Error tests
+# check attributes of new user
+
+def scrub_string(string, replacement='******'):
+    def before_record_response(response):
+        text = response['body']['string'].decode('utf-8')
+        text.replace(string, replacement)
+        text_dict = json.loads(text)
+        text_dict['auth_token'] = replacement
+        response['body']['string'] = json.dumps(text_dict).encode('utf-8')
+
+        return response
+    return before_record_response
+
 
 if __name__ == '__main__':
     import sys

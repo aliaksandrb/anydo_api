@@ -3,27 +3,27 @@
         {
             "response": {
                 "body": {
-                    "string": "Cannot create new user - Given email is invalid"
+                    "string": "{\"anonymous\": false, \"googleAvatarUrl\": null, \"emails\": [], \"phoneNumbers\": [], \"profilePicture\": null, \"auth_token\": \"******\", \"hasGoogleNowRefreshToken\": false, \"name\": \"kulibaba\", \"fake\": false, \"idSalt\": \"1da1dc217ea4c93da01d7ff396d25c1ac1956caad3a4bfead873032b9ba2b143\", \"email\": \"tolumis@postonline.me\", \"id\": \"WQ-si7dlsgqhkzAhg7b2ig==\", \"creationDate\": 1444841739000}"
                 },
                 "status": {
-                    "code": 400,
-                    "message": "BAD REQUEST"
+                    "code": 200,
+                    "message": "OK"
                 },
                 "headers": {
                     "X-Frame-Options": [
                         "SAMEORIGIN"
                     ],
                     "Content-Length": [
-                        "47"
+                        "459"
                     ],
                     "Server": [
                         "gunicorn/19.0.0"
                     ],
                     "Content-Type": [
-                        "text/html; charset=utf-8"
+                        "application/json"
                     ],
                     "Access-Control-Allow-Methods": [
-                        "OPTIONS, DELETE, POST"
+                        "POST, OPTIONS, DELETE"
                     ],
                     "Access-Control-Allow-Credentials": [
                         "true"
@@ -38,7 +38,7 @@
                         "*"
                     ],
                     "Date": [
-                        "Wed, 14 Oct 2015 16:55:38 GMT"
+                        "Wed, 14 Oct 2015 16:55:39 GMT"
                     ],
                     "Access-Control-Max-Age": [
                         "21600"
@@ -53,11 +53,11 @@
             },
             "request": {
                 "uri": "https://sm-prod2.any.do/user",
-                "body": "{\"phoneNumbers\": [], \"password\": \"*\", \"name\": \"*\", \"emails\": \"*\", \"username\": \"*\"}",
+                "body": "{\"username\": \"tolumis@postonline.me\", \"name\": \"kulibaba\", \"phoneNumbers\": [], \"emails\": \"tolumis@postonline.me\"}",
                 "method": "POST",
                 "headers": {
                     "Content-Length": [
-                        "82"
+                        "136"
                     ],
                     "Connection": [
                         "keep-alive"
