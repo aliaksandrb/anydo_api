@@ -10,11 +10,15 @@ CONSTANTS = {
     'SERVER_API_URL': SERVER_API_URL,
     'LOGIN_URL': SERVER_API_URL + '/j_spring_security_check',
     'ME_URL': SERVER_API_URL + '/me',
+    'USER_URL': SERVER_API_URL + '/user',
 }
 
 class Error(Exception): pass
 class ClientError(Error): pass
+
 class Unauthorized(ClientError): pass
+class BadRequest(ClientError): pass
+class InternalServerError(ClientError): pass
 
 class Client(object):
     """
@@ -38,7 +42,7 @@ class Client(object):
         }
 
         headers = {
-            'content-type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/x-www-form-urlencoded',
             'Accept-Encoding': None # Why AnyDo says that gzipped but actually not?
         }
 

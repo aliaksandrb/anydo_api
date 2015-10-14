@@ -11,7 +11,6 @@ Tests for `Client` class.
 import unittest
 import vcr
 import json
-import requests
 
 from anydo_api import client
 
@@ -67,6 +66,7 @@ class TestClient(unittest.TestCase):
         self.assertTrue(client.CONSTANTS.get('SERVER_API_URL'))
         self.assertTrue(client.CONSTANTS.get('LOGIN_URL'))
         self.assertTrue(client.CONSTANTS.get('ME_URL'))
+        self.assertTrue(client.CONSTANTS.get('USER_URL'))
 
 
     def test_new_client_reraises_occured_errors(self):

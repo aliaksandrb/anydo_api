@@ -11,7 +11,6 @@ Tests for `User` class.
 import unittest
 import vcr
 import json
-import requests
 
 from anydo_api import client
 from anydo_api import user
@@ -45,27 +44,19 @@ class TestUser(unittest.TestCase):
 
     def setUp(self):
         try:
-            self.client = client.Client
+            self.User = user.User
         except AttributeError: pass
 
-        self.username = credentials['username']
-        self.password = credentials['password']
-        self.email = credentials['email']
-
     def tearDown(self):
-        if hasattr(self, 'client'): del self.client
-        del self.username
-        del self.password
-        del self.email
+        if hasattr(self, 'User'): del self.User
 
     def test_implemented(self):
         self.assertTrue(hasattr(user, 'User'))
 
-
-#    def test_new_client_reraises_occured_errors(self):
-#        with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login.json'):
-#            with self.assertRaises(client.Unauthorized):
-#                self.client(email='***', password='***')
+    def test_user_creation_reraises_occured_errors(self):
+        with vcr.use_cassette('fixtures/vcr_cassettes/invalid_create_user.json'):
+            with self.assertRaises(client.BadRequest):
+                self.User.create(name='*', username='*', password='*', emails=[])
 
 if __name__ == '__main__':
     import sys

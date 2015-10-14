@@ -1,0 +1,82 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "uri": "https://sm-prod2.any.do/user", 
+                "headers": {
+                    "Accept-Encoding": [
+                        "gzip, deflate"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Content-Length": [
+                        "81"
+                    ]
+                }, 
+                "method": "POST", 
+                "body": "{\"name\": \"*\", \"password\": \"*\", \"phoneNumbers\": [], \"emails\": [], \"username\": \"*\"}"
+            }, 
+            "response": {
+                "headers": {
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-allow-methods": [
+                        "OPTIONS, POST, DELETE"
+                    ], 
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ], 
+                    "date": [
+                        "Wed, 14 Oct 2015 14:42:39 GMT"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "content-length": [
+                        "47"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ]
+                }, 
+                "body": {
+                    "string": "Cannot create new user - Given email is invalid"
+                }, 
+                "status": {
+                    "code": 400, 
+                    "message": "BAD REQUEST"
+                }
+            }
+        }
+    ], 
+    "version": 1
+}
