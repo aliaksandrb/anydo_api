@@ -68,28 +68,22 @@ class TestClient(unittest.TestCase):
         self.assertTrue(client.CONSTANTS.get('LOGIN_URL'))
         self.assertTrue(client.CONSTANTS.get('ME_URL'))
 
-    def test_respond_to_log_in_method(self):
-        self.assertTrue(hasattr(self.client, 'log_in'))
 
-    def test_log_in_reraises_occured_errors(self):
+    def test_new_client_reraises_occured_errors(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login.json'):
             with self.assertRaises(client.Unauthorized):
-                self.client.log_in(email='***', password='***')
+                self.client(email='***', password='***')
 
-    def test_log_in_returns_closed_session_object_for_valid_credentials(self):
+    def test_test_me_returns_user_object_json(self):
         with vcr.use_cassette(
             'fixtures/vcr_cassettes/valid_login.json',
-            filter_post_data_parameters=['j_username', 'j_password']
+            filter_post_data_parameters=['j_password'],
+            record_mode='new_episodes'
         ):
-            session = self.client.log_in(email=self.email, password=self.password)
-            self.assertIsInstance(session, requests.Session)
-
-           # self.assertEqual(dict, type(user))
-           # self.assertEqual(self.email, user['email'])
-           # self.assertEqual(self.username, user['name'])
-
-#    def test_respond_to_me_method(self):
-#        self.assertTrue(hasattr(self.client, 'me'))
+            client = self.client(email=self.email, password=self.password)
+            user = client.me()
+            self.assertEqual(self.email, user['email'])
+            self.assertEqual(self.username, user['name'])
 
 if __name__ == '__main__':
     import sys

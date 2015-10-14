@@ -1,61 +1,79 @@
 {
+    "version": 1, 
     "interactions": [
         {
             "response": {
-                "body": {
-                    "string": ""
-                }, 
                 "headers": {
-                    "content-type": [
-                        "text/html; charset=utf-8"
-                    ], 
-                    "connection": [
-                        "keep-alive"
-                    ], 
-                    "date": [
-                        "Tue, 13 Oct 2015 10:01:36 GMT"
-                    ], 
-                    "via": [
-                        "1.1 vegur"
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
                     ], 
                     "content-length": [
                         "0"
                     ], 
+                    "access-control-allow-methods": [
+                        "OPTIONS, POST"
+                    ], 
                     "server": [
                         "gunicorn/19.0.0"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "date": [
+                        "Wed, 14 Oct 2015 12:16:24 GMT"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "connection": [
+                        "keep-alive"
                     ]
                 }, 
+                "body": {
+                    "string": ""
+                }, 
                 "status": {
-                    "message": "INTERNAL SERVER ERROR", 
-                    "code": 500
+                    "message": "UNAUTHORIZED", 
+                    "code": 401
                 }
             }, 
             "request": {
-                "method": "POST", 
                 "uri": "https://sm-prod2.any.do/j_spring_security_check", 
-                "body": "{\"j_username\": \"***\", \"j_password\": \"***\", \"_spring_security_remember_me\": \"on\"}", 
+                "body": "_spring_security_remember_me=on&j_username=%2A%2A%2A&j_password=%2A%2A%2A", 
                 "headers": {
+                    "Content-Length": [
+                        "73"
+                    ], 
                     "Accept": [
                         "*/*"
                     ], 
                     "User-Agent": [
                         "python-requests/2.8.0"
                     ], 
-                    "Accept-Encoding": [
-                        "gzip, deflate"
-                    ], 
-                    "content-type": [
-                        "application/x-www-form-urlencoded"
-                    ], 
                     "Connection": [
                         "keep-alive"
                     ], 
-                    "Content-Length": [
-                        "80"
+                    "content-type": [
+                        "application/x-www-form-urlencoded"
                     ]
-                }
+                }, 
+                "method": "POST"
             }
         }
-    ], 
-    "version": 1
+    ]
 }

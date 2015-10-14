@@ -23,8 +23,15 @@ class Client(object):
     Responsible for authentication and user management.
     """
 
-    @classmethod
-    def log_in(klass, email, password):
+    def __init__(self, email, password):
+        self.session = self.__log_in(email, password)
+
+    def me(self):
+        user = self.session.get(CONSTANTS.get('ME_URL'))
+        self.session.close()
+        return user.json()
+
+    def __log_in(self, email, password):
         credentials = {
             'j_username': email,
             'j_password': password,
@@ -33,7 +40,7 @@ class Client(object):
 
         headers = {
             'content-type': 'application/x-www-form-urlencoded',
-            'Accept-Encoding': None
+            'Accept-Encoding': None # Why AnyDo says that gzipped but actually not?
         }
 
         session = requests.Session()
@@ -52,10 +59,6 @@ class Client(object):
             raise client_error
         finally: session.close()
 
-        return session#klass.me(session)
+        return session
 
-    @classmethod
-    def me(klass, session):
-        user = session.get(CONSTANTS.get('ME_URL'))
-        session.close()
-        return user.json()
+
