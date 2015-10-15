@@ -13,6 +13,7 @@ import vcr
 import json
 
 from anydo_api import client
+from anydo_api.errors import *
 
 vcr = vcr.VCR(
     serializer='json',
@@ -71,7 +72,7 @@ class TestClient(unittest.TestCase):
 
     def test_new_client_reraises_occured_errors(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login.json'):
-            with self.assertRaises(client.UnauthorizedError):
+            with self.assertRaises(UnauthorizedError):
                 self.client(email='***', password='***')
 
     def test_test_me_returns_user_object_json(self):

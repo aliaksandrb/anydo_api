@@ -4,6 +4,8 @@
 import requests
 import json
 
+from .errors import *
+
 SERVER_API_URL = 'https://sm-prod2.any.do'
 
 CONSTANTS = {
@@ -12,14 +14,6 @@ CONSTANTS = {
     'ME_URL': SERVER_API_URL + '/me',
     'USER_URL': SERVER_API_URL + '/user',
 }
-
-class Error(Exception): pass
-class ClientError(Error): pass
-
-class UnauthorizedError(ClientError): pass
-class BadRequestError(ClientError): pass
-class InternalServerError(ClientError): pass
-class ConflictError(ClientError): pass
 
 class Client(object):
     """

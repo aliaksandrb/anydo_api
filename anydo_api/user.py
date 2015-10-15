@@ -4,7 +4,8 @@
 import requests
 import json
 
-from .client import CONSTANTS, InternalServerError, BadRequestError, ConflictError
+from .errors import *
+from .client import CONSTANTS
 
 class User(object):
     """

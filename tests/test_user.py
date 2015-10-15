@@ -12,6 +12,8 @@ import unittest
 import vcr
 import json
 
+
+from anydo_api.errors import *
 from anydo_api import client
 from anydo_api import user
 
@@ -63,7 +65,7 @@ class TestUser(unittest.TestCase):
 
     def test_user_creation_reraises_occured_errors(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/invalid_create_user.json'):
-            with self.assertRaises(client.BadRequestError):
+            with self.assertRaises(BadRequestError):
                 self.User.create(name='*', email='*', password='*')
 
     def test_valid_user_creation_returns_user_intance(self):
@@ -78,7 +80,7 @@ class TestUser(unittest.TestCase):
         with vcr.use_cassette('fixtures/vcr_cassettes/duplicate_user.json',
             filter_post_data_parameters=['password']
         ):
-            with self.assertRaises(client.ConflictError):
+            with self.assertRaises(ConflictError):
                 self.User.create(name=self.username, email=self.email, password=self.password)
 
 # Server Error tests
