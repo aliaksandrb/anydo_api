@@ -83,7 +83,7 @@ class TestUser(unittest.TestCase):
             with self.assertRaises(ConflictError):
                 self.User.create(name=self.username, email=self.email, password=self.password)
 
-    def test_user__has_appropriate_attributes(self):
+    def test_user_has_appropriate_attributes(self):
         with vcr.use_cassette(
             'fixtures/vcr_cassettes/valid_login.json',
             filter_post_data_parameters=['j_password'],
@@ -94,6 +94,19 @@ class TestUser(unittest.TestCase):
 
             self.assertEqual(self.username, user['name'])
             self.assertEqual(self.email, user['email'])
+
+    def test_user_attributes_accessible_directly(self):
+        with vcr.use_cassette(
+            'fixtures/vcr_cassettes/valid_login.json',
+            filter_post_data_parameters=['j_password'],
+            record_mode='new_episodes'
+        ):
+            client = Client(email=self.email, password=self.password)
+            user = client.me()
+
+            self.assertEqual(self.username, user.name)
+            self.assertEqual(self.email, user.email)
+
 
 def scrub_string(string, replacement='******'):
     def before_record_response(response):

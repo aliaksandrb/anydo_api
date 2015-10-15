@@ -20,6 +20,9 @@ class User(object):
     def __getitem__(self, key):
         return self.data_dict[key]
 
+    def __getattr__(self, attr):
+        return self[attr]
+
     @classmethod
     def create(klass, name, email, password, emails=None, phone_numbers=[]):
         """
