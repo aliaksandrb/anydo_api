@@ -21,7 +21,7 @@ class Client(object):
         data = self.session.get(CONSTANTS.get('ME_URL'))
         self.session.close()
 
-        user = User(data_dict=data)
+        user = User(data_dict=data.json())
         return user
 
     def __log_in(self, email, password):

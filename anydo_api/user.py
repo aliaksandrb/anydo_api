@@ -15,7 +15,10 @@ class User(object):
     """
 
     def __init__(self, data_dict):
-        self.data = data_dict
+        self.data_dict = data_dict
+
+    def __getitem__(self, key):
+        return self.data_dict[key]
 
     @classmethod
     def create(klass, name, email, password, emails=None, phone_numbers=[]):

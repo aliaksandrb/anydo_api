@@ -14,7 +14,7 @@ import json
 
 
 from anydo_api.errors import *
-from anydo_api import client
+from anydo_api.client import Client
 from anydo_api import user
 
 vcr = vcr.VCR(
@@ -83,8 +83,17 @@ class TestUser(unittest.TestCase):
             with self.assertRaises(ConflictError):
                 self.User.create(name=self.username, email=self.email, password=self.password)
 
-# Server Error tests
-# check attributes of new user
+    def test_user__has_appropriate_attributes(self):
+        with vcr.use_cassette(
+            'fixtures/vcr_cassettes/valid_login.json',
+            filter_post_data_parameters=['j_password'],
+            record_mode='new_episodes'
+        ):
+            client = Client(email=self.email, password=self.password)
+            user = client.me()
+
+            self.assertEqual(self.username, user['name'])
+            self.assertEqual(self.email, user['email'])
 
 def scrub_string(string, replacement='******'):
     def before_record_response(response):
