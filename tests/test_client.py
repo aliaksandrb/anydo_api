@@ -25,22 +25,30 @@ class TestClient(base.TestCase):
             with self.assertRaises(UnauthorizedError):
                 Client(email='***', password='***')
 
-    # split test by x2
-    def test_test_me_returns_user_object(self):
+    def test_valid_session_initialized_silently(self):
         with vcr.use_cassette(
             'fixtures/vcr_cassettes/valid_login.json',
-            filter_post_data_parameters=['j_password'],
-            record_mode='new_episodes'
+            filter_post_data_parameters=['j_password']
         ):
             client = Client(email=self.email, password=self.password)
-            user = client.me()
+            self.assertIsInstance(client, Client)
+
+    def test_me_returns_user_object(self):
+        with vcr.use_cassette(
+            'fixtures/vcr_cassettes/me.json',
+            filter_post_data_parameters=['j_password']
+        ):
+            user = self.session.me()
             self.assertIsInstance(user, User)
 
     def test_client_session_is_cached_and_not_requires_additional_request(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/me.json',
-            filter_post_data_parameters=['password']
+            filter_post_data_parameters=['password'],
+            record_mode='once'
         ):
             self.session.me()
+            self.session.me()
+
 
 if __name__ == '__main__':
     import sys

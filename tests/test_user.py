@@ -41,32 +41,29 @@ class TestUser(TestCase):
             with self.assertRaises(ConflictError):
                 User.create(name=self.username, email=self.email, password=self.password)
 
-    # split by x2
     def test_user_has_appropriate_attributes(self):
         with vcr.use_cassette(
-            'fixtures/vcr_cassettes/valid_login.json',
-            filter_post_data_parameters=['j_password'],
-            record_mode='new_episodes'
+            'fixtures/vcr_cassettes/me.json',
+            filter_post_data_parameters=['j_password']
         ):
-            client = Client(email=self.email, password=self.password)
-            user = client.me()
+            user = self.session.me()
 
             self.assertEqual(self.username, user['name'])
             self.assertEqual(self.email, user['email'])
 
-    # split by x2
     def test_user_attributes_accessible_directly(self):
         with vcr.use_cassette(
-            'fixtures/vcr_cassettes/valid_login.json',
-            filter_post_data_parameters=['j_password'],
-            record_mode='new_episodes'
+            'fixtures/vcr_cassettes/me.json',
+            filter_post_data_parameters=['j_password']
         ):
-            client = Client(email=self.email, password=self.password)
-            user = client.me()
+            user = self.session.me()
 
             self.assertEqual(self.username, user.name)
             self.assertEqual(self.email, user.email)
 
+# aliases name/username?
+# change attrs and save
+# Server Error tests
 
 if __name__ == '__main__':
     import sys

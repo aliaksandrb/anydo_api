@@ -18,11 +18,12 @@ class Client(object):
         self.session = self.__log_in(email, password)
 
     def me(self):
-        data = self.session.get(CONSTANTS.get('ME_URL'))
-        self.session.close()
+        if not hasattr(self, 'user'):
+            data = self.session.get(CONSTANTS.get('ME_URL'))
+            self.session.close()
+            self.user = User(data_dict=data.json())
 
-        user = User(data_dict=data.json())
-        return user
+        return self.user
 
     def __log_in(self, email, password):
         credentials = {
