@@ -1,0 +1,85 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Accept-Encoding": [
+                        "gzip, deflate"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Content-Length": [
+                        "350"
+                    ]
+                }, 
+                "method": "PUT", 
+                "body": "{\"phoneNumbers\": [], \"creationDate\": 1444841739000, \"id\": \"WQ-si7dlsgqhkzAhg7b2ig==\", \"profilePicture\": null, \"fake\": false, \"name\": \"New Name\", \"idSalt\": \"1da1dc217ea4c93da01d7ff396d25c1ac1956caad3a4bfead873032b9ba2b143\", \"googleAvatarUrl\": null, \"hasGoogleNowRefreshToken\": false, \"emails\": [], \"anonymous\": false, \"email\": \"tolumis@postonline.me\"}", 
+                "uri": "https://sm-prod2.any.do/me"
+            }, 
+            "response": {
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }, 
+                "body": {
+                    "string": "{\"anonymous\": false, \"email\": \"tolumis@postonline.me\", \"creationDate\": 1444841739000, \"phoneNumbers\": [], \"name\": \"New Name\", \"hasGoogleNowRefreshToken\": false, \"emails\": [], \"googleAvatarUrl\": null, \"profilePicture\": null, \"fake\": false, \"id\": \"WQ-si7dlsgqhkzAhg7b2ig==\"}"
+                }, 
+                "headers": {
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "access-control-allow-methods": [
+                        "GET, HEAD, OPTIONS, PUT"
+                    ], 
+                    "date": [
+                        "Thu, 15 Oct 2015 15:50:37 GMT"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "content-length": [
+                        "272"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ]
+                }
+            }
+        }
+    ]
+}

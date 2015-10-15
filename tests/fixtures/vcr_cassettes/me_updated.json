@@ -1,0 +1,79 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "response": {
+                "headers": {
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-allow-methods": [
+                        "PUT, OPTIONS, HEAD, GET"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "date": [
+                        "Thu, 15 Oct 2015 16:43:40 GMT"
+                    ], 
+                    "content-length": [
+                        "350"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ]
+                }, 
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }, 
+                "body": {
+                    "string": "{\"idSalt\": \"1da1dc217ea4c93da01d7ff396d25c1ac1956caad3a4bfead873032b9ba2b143\", \"creationDate\": 1444841739000, \"googleAvatarUrl\": null, \"name\": \"New Name\", \"phoneNumbers\": [], \"anonymous\": false, \"profilePicture\": null, \"hasGoogleNowRefreshToken\": false, \"id\": \"WQ-si7dlsgqhkzAhg7b2ig==\", \"fake\": false, \"emails\": [], \"email\": \"tolumis@postonline.me\"}"
+                }
+            }, 
+            "request": {
+                "headers": {
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Accept-Encoding": [
+                        "gzip, deflate"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ]
+                }, 
+                "body": null, 
+                "uri": "https://sm-prod2.any.do/me", 
+                "method": "GET"
+            }
+        }
+    ]
+}

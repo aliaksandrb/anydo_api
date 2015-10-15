@@ -17,11 +17,11 @@ class Client(object):
     def __init__(self, email, password):
         self.session = self.__log_in(email, password)
 
-    def me(self):
-        if not hasattr(self, 'user'):
+    def me(self, refresh=False):
+        if not hasattr(self, 'user') or refresh:
             data = self.session.get(CONSTANTS.get('ME_URL'))
             self.session.close()
-            self.user = User(data_dict=data.json())
+            self.user = User(session=self.session, data_dict=data.json())
 
         return self.user
 

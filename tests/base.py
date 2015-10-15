@@ -27,6 +27,12 @@ class TestCase(unittest.TestCase):
             session = Client(email=self.email, password=self.password)
             self.session = session
 
+        with test_helper.vcr.use_cassette(
+            'fixtures/vcr_cassettes/me.json',
+            filter_post_data_parameters=['j_password']
+        ):
+            self.me = self.session.me()
+
     def tearDown(self, *args, **kwargs):
         super(TestCase, self).tearDown(*args, **kwargs)
 

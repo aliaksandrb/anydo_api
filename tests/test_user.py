@@ -46,7 +46,7 @@ class TestUser(TestCase):
             'fixtures/vcr_cassettes/me.json',
             filter_post_data_parameters=['j_password']
         ):
-            user = self.session.me()
+            user = self.me
 
             self.assertEqual(self.username, user['name'])
             self.assertEqual(self.email, user['email'])
@@ -56,13 +56,55 @@ class TestUser(TestCase):
             'fixtures/vcr_cassettes/me.json',
             filter_post_data_parameters=['j_password']
         ):
-            user = self.session.me()
+            user = self.me
 
             self.assertEqual(self.username, user.name)
             self.assertEqual(self.email, user.email)
 
-# aliases name/username?
-# change attrs and save
+    def test_user_could_be_updated_successfully_by_index(self):
+        new_name = 'New Name'
+        user = self.me
+
+        with vcr.use_cassette(
+            'fixtures/vcr_cassettes/user_update_valid.json',
+            filter_post_data_parameters=['j_password']
+        ):
+            user['name'] = new_name
+            user.save()
+            self.assertEqual(new_name, user['name'])
+
+        with vcr.use_cassette(
+            'fixtures/vcr_cassettes/me_updated.json',
+        ):
+            user = self.session.me(refresh=True)
+            self.assertEqual(new_name, user['name'])
+
+    def test_user_could_be_updated_successfully_by_attribute(self):
+        new_name = 'New Name'
+        user = self.me
+
+        with vcr.use_cassette(
+            'fixtures/vcr_cassettes/user_update_valid.json',
+            filter_post_data_parameters=['j_password']
+        ):
+            user.name = new_name
+            user.save()
+            self.assertEqual(new_name, user.name)
+
+        with vcr.use_cassette(
+            'fixtures/vcr_cassettes/me_updated.json',
+        ):
+            user = self.session.me(refresh=True)
+            self.assertEqual(new_name, user.name)
+
+    def test_can_not_set_unmapped_attributes(self):
+        user = self.me
+        with self.assertRaises(AttributeError):
+            user['suppa-duppa'] = 1
+
+
+# cachec refresh
+# update not changed?
 # Server Error tests
 
 if __name__ == '__main__':
