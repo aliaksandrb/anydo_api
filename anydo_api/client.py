@@ -5,15 +5,8 @@ import requests
 import json
 
 from .errors import *
-
-SERVER_API_URL = 'https://sm-prod2.any.do'
-
-CONSTANTS = {
-    'SERVER_API_URL': SERVER_API_URL,
-    'LOGIN_URL': SERVER_API_URL + '/j_spring_security_check',
-    'ME_URL': SERVER_API_URL + '/me',
-    'USER_URL': SERVER_API_URL + '/user',
-}
+from .constants import CONSTANTS
+from .user import User
 
 class Client(object):
     """
@@ -25,9 +18,11 @@ class Client(object):
         self.session = self.__log_in(email, password)
 
     def me(self):
-        user = self.session.get(CONSTANTS.get('ME_URL'))
+        data = self.session.get(CONSTANTS.get('ME_URL'))
         self.session.close()
-        return user.json()
+
+        user = User(data_dict=data)
+        return user
 
     def __log_in(self, email, password):
         credentials = {

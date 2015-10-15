@@ -13,6 +13,7 @@ import vcr
 import json
 
 from anydo_api import client
+from anydo_api.user import User
 from anydo_api.errors import *
 
 vcr = vcr.VCR(
@@ -60,22 +61,12 @@ class TestClient(unittest.TestCase):
     def test_implemented(self):
         self.assertTrue(hasattr(client, 'Client'))
 
-    def test_knows_about_constants(self):
-        self.assertTrue(hasattr(client, 'SERVER_API_URL'))
-        self.assertTrue(hasattr(client, 'CONSTANTS'))
-
-        self.assertTrue(client.CONSTANTS.get('SERVER_API_URL'))
-        self.assertTrue(client.CONSTANTS.get('LOGIN_URL'))
-        self.assertTrue(client.CONSTANTS.get('ME_URL'))
-        self.assertTrue(client.CONSTANTS.get('USER_URL'))
-
-
     def test_new_client_reraises_occured_errors(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login.json'):
             with self.assertRaises(UnauthorizedError):
                 self.client(email='***', password='***')
 
-    def test_test_me_returns_user_object_json(self):
+    def test_test_me_returns_user_object(self):
         with vcr.use_cassette(
             'fixtures/vcr_cassettes/valid_login.json',
             filter_post_data_parameters=['j_password'],
@@ -83,8 +74,7 @@ class TestClient(unittest.TestCase):
         ):
             client = self.client(email=self.email, password=self.password)
             user = client.me()
-            self.assertEqual(self.email, user['email'])
-            self.assertEqual(self.username, user['name'])
+            self.assertIsInstance(user, User)
 
 if __name__ == '__main__':
     import sys

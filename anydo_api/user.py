@@ -5,7 +5,7 @@ import requests
 import json
 
 from .errors import *
-from .client import CONSTANTS
+from .constants import CONSTANTS
 
 class User(object):
     """
