@@ -52,11 +52,20 @@ class TestClient(unittest.TestCase):
         self.password = credentials['password']
         self.email = credentials['email']
 
+        with vcr.use_cassette(
+            'fixtures/vcr_cassettes/valid_login.json',
+            filter_post_data_parameters=['j_password'],
+            record_mode='new_episodes'
+        ):
+            session = client.Client(email=self.email, password=self.password)
+            self.logged_in_client = session
+
     def tearDown(self):
         if hasattr(self, 'client'): del self.client
         del self.username
         del self.password
         del self.email
+        del self.logged_in_client
 
     def test_implemented(self):
         self.assertTrue(hasattr(client, 'Client'))
@@ -75,6 +84,12 @@ class TestClient(unittest.TestCase):
             client = self.client(email=self.email, password=self.password)
             user = client.me()
             self.assertIsInstance(user, User)
+
+    def test_client_session_is_cached_and_not_requires_additional_request(self):
+        with vcr.use_cassette('fixtures/vcr_cassettes/me.json',
+            filter_post_data_parameters=['password']
+        ):
+            self.logged_in_client.me()
 
 if __name__ == '__main__':
     import sys

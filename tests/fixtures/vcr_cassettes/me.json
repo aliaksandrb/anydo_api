@@ -1,0 +1,79 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "body": {
+                    "string": "{\"idSalt\": \"1da1dc217ea4c93da01d7ff396d25c1ac1956caad3a4bfead873032b9ba2b143\", \"phoneNumbers\": [], \"creationDate\": 1444841739000, \"name\": \"kulibaba\", \"email\": \"tolumis@postonline.me\", \"anonymous\": false, \"profilePicture\": null, \"id\": \"WQ-si7dlsgqhkzAhg7b2ig==\", \"fake\": false, \"emails\": [], \"hasGoogleNowRefreshToken\": false, \"googleAvatarUrl\": null}"
+                }, 
+                "headers": {
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-allow-methods": [
+                        "OPTIONS, HEAD, GET, PUT"
+                    ], 
+                    "date": [
+                        "Thu, 15 Oct 2015 12:20:45 GMT"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-length": [
+                        "350"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ]
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }
+            }, 
+            "request": {
+                "headers": {
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Accept-Encoding": [
+                        "gzip, deflate"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ]
+                }, 
+                "method": "GET", 
+                "uri": "https://sm-prod2.any.do/me", 
+                "body": null
+            }
+        }
+    ], 
+    "version": 1
+}

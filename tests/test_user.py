@@ -59,7 +59,6 @@ class TestUser(unittest.TestCase):
         del self.password
         del self.email
 
-
     def test_implemented(self):
         self.assertTrue(hasattr(user, 'User'))
 
@@ -107,6 +106,26 @@ class TestUser(unittest.TestCase):
             self.assertEqual(self.username, user.name)
             self.assertEqual(self.email, user.email)
 
+
+#{
+#'emails': [],
+#'name': 'kulibaba',
+#'googleAvatarUrl': None,
+#'fake': False,
+#'creationDate': 1444738766000,
+#'phoneNumbers': [],
+#'profilePicture': None,
+#'hasGoogleNowRefreshToken': False,
+#'anonymous': False,
+#'id': 'ZT-9K1teQ6wdGkJzGWBsLw==',
+#'email': 'zepatac@inboxdesign.me'
+#}
+
+# check attributes of new user
+# aliases name/username?
+# indexing vs attributes vs getters?
+# change attrs and save
+# Server Error tests
 
 def scrub_string(string, replacement='******'):
     def before_record_response(response):
