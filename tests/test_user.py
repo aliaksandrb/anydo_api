@@ -46,7 +46,7 @@ class TestUser(TestCase):
             'fixtures/vcr_cassettes/me.json',
             filter_post_data_parameters=['j_password']
         ):
-            user = self.me
+            user = self.get_me()
 
             self.assertEqual(self.username, user['name'])
             self.assertEqual(self.email, user['email'])
@@ -56,14 +56,14 @@ class TestUser(TestCase):
             'fixtures/vcr_cassettes/me.json',
             filter_post_data_parameters=['j_password']
         ):
-            user = self.me
+            user = self.get_me()
 
             self.assertEqual(self.username, user.name)
             self.assertEqual(self.email, user.email)
 
     def test_user_could_be_updated_successfully_by_index(self):
         new_name = 'New Name'
-        user = self.me
+        user = self.get_me()
 
         with vcr.use_cassette(
             'fixtures/vcr_cassettes/user_update_valid.json',
@@ -76,12 +76,12 @@ class TestUser(TestCase):
         with vcr.use_cassette(
             'fixtures/vcr_cassettes/me_updated.json',
         ):
-            user = self.session.me(refresh=True)
+            user = self.get_session().me(refresh=True)
             self.assertEqual(new_name, user['name'])
 
     def test_user_could_be_updated_successfully_by_attribute(self):
         new_name = 'New Name'
-        user = self.me
+        user = self.get_me()
 
         with vcr.use_cassette(
             'fixtures/vcr_cassettes/user_update_valid.json',
@@ -94,11 +94,11 @@ class TestUser(TestCase):
         with vcr.use_cassette(
             'fixtures/vcr_cassettes/me_updated.json',
         ):
-            user = self.session.me(refresh=True)
+            user = self.get_session().me(refresh=True)
             self.assertEqual(new_name, user.name)
 
     def test_can_not_set_unmapped_attributes(self):
-        user = self.me
+        user = self.get_me()
         with self.assertRaises(AttributeError):
             user['suppa-duppa'] = 1
 

@@ -20,25 +20,25 @@ class TestCase(unittest.TestCase):
         self.password = credentials['password']
         self.email    = credentials['email']
 
-        with test_helper.vcr.use_cassette(
-            'fixtures/vcr_cassettes/valid_login.json',
-            filter_post_data_parameters=['j_password']
-        ):
-            session = Client(email=self.email, password=self.password)
-            self.session = session
-
-        with test_helper.vcr.use_cassette(
-            'fixtures/vcr_cassettes/me.json',
-            filter_post_data_parameters=['j_password']
-        ):
-            self.me = self.session.me()
-
     def tearDown(self, *args, **kwargs):
         super(TestCase, self).tearDown(*args, **kwargs)
 
         del self.username
         del self.password
         del self.email
-        del self.session
 
+    def get_session(self):
+        with test_helper.vcr.use_cassette(
+            'fixtures/vcr_cassettes/valid_login.json',
+            filter_post_data_parameters=['j_password']
+        ):
+            session = Client(email=self.email, password=self.password)
+        return session
+
+    def get_me(self):
+        with test_helper.vcr.use_cassette(
+            'fixtures/vcr_cassettes/me.json',
+            filter_post_data_parameters=['j_password']
+        ):
+            return self.get_session().me()
 

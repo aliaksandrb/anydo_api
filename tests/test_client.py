@@ -9,6 +9,7 @@ Tests for `Client` class.
 """
 
 import unittest
+import vcr as vcr_module
 
 from . import base
 from .test_helper import vcr
@@ -38,7 +39,7 @@ class TestClient(base.TestCase):
             'fixtures/vcr_cassettes/me.json',
             filter_post_data_parameters=['j_password']
         ):
-            user = self.session.me()
+            user = self.get_session().me()
             self.assertIsInstance(user, User)
 
     def test_client_session_is_cached_and_not_requires_additional_request(self):
@@ -46,8 +47,20 @@ class TestClient(base.TestCase):
             filter_post_data_parameters=['password'],
             record_mode='once'
         ):
-            self.session.me()
-            self.session.me()
+            user = self.get_session()
+            user.me()
+            user.me()
+
+    def test_user_data_could_be_refreshed_from_the_server(self):
+        with self.assertRaises(vcr_module.errors.CannotOverwriteExistingCassetteException):
+            with vcr.use_cassette('fixtures/vcr_cassettes/me.json',
+                filter_post_data_parameters=['password'],
+                record_mode='once'
+            ):
+                user = self.get_session()
+                user.me(refresh=True)
+                user.me(refresh=True)
+
 #access-control-max-age": "21600"
 
 if __name__ == '__main__':
