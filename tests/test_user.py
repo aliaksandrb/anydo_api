@@ -103,8 +103,17 @@ class TestUser(TestCase):
             user['suppa-duppa'] = 1
 
 
+    def test_unchanged_data_dont_hit_an_api(self):
+        user = self.get_me()
+        with vcr.use_cassette(
+            'fixtures/vcr_cassettes/fake.json',
+            record_mode='none'
+        ):
+            name = user.name
+            user['name'] = name[:]
+            user.save()
+
 # cachec refresh
-# update not changed?
 # Server Error tests
 
 if __name__ == '__main__':

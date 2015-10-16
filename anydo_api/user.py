@@ -18,35 +18,39 @@ class User(object):
     def __init__(self, session, data_dict):
         self.data_dict = data_dict
         self.session = session
+        self.is_dirty = False
 
     def save(self):
         """
         Pushes updated attributes to the server.
+        If nothing was changed we dont hit an API.
         """
 
-        headers = {
-            'Content-Type' : 'application/json',
-        }
+        if self.is_dirty:
+            headers = {
+                'Content-Type' : 'application/json',
+            }
 
-        response_obj = self.session.put(
-            CONSTANTS.get('ME_URL'),
-            json=self.data_dict,
-            headers=headers
-        )
+            response_obj = self.session.put(
+                CONSTANTS.get('ME_URL'),
+                json=self.data_dict,
+                headers=headers
+            )
 
-        try:
-            response_obj.raise_for_status()
-        except requests.exceptions.HTTPError as error:
-            if response_obj.status_code == 400:
-                client_error = errors.BadRequestError(response_obj.content)
-            elif response_obj.status_code == 409:
-                client_error = errors.ConflictError(response_obj.content)
-            else:
-                client_error = errors.InternalServerError(error)
+            try:
+                response_obj.raise_for_status()
+            except requests.exceptions.HTTPError as error:
+                if response_obj.status_code == 400:
+                    client_error = errors.BadRequestError(response_obj.content)
+                elif response_obj.status_code == 409:
+                    client_error = errors.ConflictError(response_obj.content)
+                else:
+                    client_error = errors.InternalServerError(error)
 
-            client_error.__cause__ = None
-            raise client_error
+                client_error.__cause__ = None
+                raise client_error
 
+        self.is_dirty = False
         return self
 
     def __getitem__(self, key):
@@ -62,7 +66,11 @@ class User(object):
 
     def __setitem__(self, attr, new_value):
         if attr in self.data_dict:
-            self.__dict__['data_dict'][attr] = new_value
+            old_value = self.__dict__['data_dict'][attr]
+
+            if old_value != new_value:
+                self.__dict__['data_dict'][attr] = new_value
+                self.is_dirty = True
         else:
             raise errors.AttributeError(attr + ' is not exist')
 
