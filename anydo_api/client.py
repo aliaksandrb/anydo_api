@@ -19,7 +19,7 @@ class Client(object):
         self.password = password
 
     def me(self, refresh=False):
-        if not hasattr(self, 'user') or refresh:
+        if not 'user' in self.__dict__ or refresh:
             data = self.session.get(CONSTANTS.get('ME_URL')).json()
             self.session.close()
             data.update({ 'password': self.password })
@@ -37,7 +37,7 @@ class Client(object):
 
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept-Encoding': None # Why AnyDo says that gzipped but actually not?
+            'Accept-Encoding': 'deflate'
         }
 
         session = requests.Session()

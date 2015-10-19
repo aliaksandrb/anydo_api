@@ -1,0 +1,85 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "body": {
+                    "string": "{\"longitude\": null, \"globalTaskId\": \"gd4lkPooSZTn7MZE2q8u0Q==\", \"notifications\": [], \"creationDate\": 1445255241000, \"status\": \"UNCHECKED\", \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"title\": \"New First\", \"lastUpdateDate\": 1445265686000, \"subTasks\": [], \"dueDate\": 1445256000000, \"latitude\": null, \"id\": \"gd4lkPooSZTn7MZE2q8u0Q==\", \"sharedMembers\": null, \"note\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"priority\": \"Normal\", \"parentGlobalTaskId\": null, \"alert\": {\"repeatEndsOn\": null, \"repeatInterval\": null, \"repeatDays\": null, \"offset\": 0, \"type\": \"NONE\", \"repeatStartsOn\": null, \"repeatNextOccurrence\": null, \"repeatEndType\": \"REPEAT_END_NEVER\", \"repeatMonthType\": \"ON_DATE\", \"repeatEndsAfterOccurrences\": null, \"customTime\": 0}, \"assignedTo\": \"tolumis@postonline.me\", \"participants\": [], \"shared\": false}"
+                }, 
+                "headers": {
+                    "content-length": [
+                        "810"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "date": [
+                        "Mon, 19 Oct 2015 14:41:26 GMT"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-allow-methods": [
+                        "HEAD, DELETE, PUT, POST, GET, OPTIONS"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ]
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }
+            }, 
+            "request": {
+                "body": "{\"subTasks\": [], \"creationDate\": 1445255241000, \"assignedTo\": \"tolumis@postonline.me\", \"participants\": [], \"notifications\": [], \"note\": null, \"lastUpdateDate\": 1445265652000, \"dueDate\": 1445256000000, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"id\": \"gd4lkPooSZTn7MZE2q8u0Q==\", \"alert\": {\"type\": \"NONE\", \"repeatDays\": null, \"offset\": 0, \"customTime\": 0, \"repeatNextOccurrence\": null, \"repeatEndType\": \"REPEAT_END_NEVER\", \"repeatMonthType\": \"ON_DATE\", \"repeatStartsOn\": null, \"repeatEndsOn\": null, \"repeatInterval\": null, \"repeatEndsAfterOccurrences\": null}, \"title\": \"New First\", \"sharedMembers\": null, \"latitude\": null, \"parentGlobalTaskId\": null, \"longitude\": null, \"globalTaskId\": \"gd4lkPooSZTn7MZE2q8u0Q==\", \"priority\": \"Normal\", \"status\": \"UNCHECKED\", \"shared\": false, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\"}", 
+                "headers": {
+                    "Content-Length": [
+                        "810"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ]
+                }, 
+                "method": "PUT", 
+                "uri": "https://sm-prod2.any.do/me/tasks/gd4lkPooSZTn7MZE2q8u0Q=="
+            }
+        }
+    ], 
+    "version": 1
+}

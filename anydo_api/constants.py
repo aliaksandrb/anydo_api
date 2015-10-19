@@ -8,4 +8,5 @@ CONSTANTS = {
     'LOGIN_URL': SERVER_API_URL + '/j_spring_security_check',
     'ME_URL': SERVER_API_URL + '/me',
     'USER_URL': SERVER_API_URL + '/user',
+    'TASKS_URL': SERVER_API_URL + '/me/tasks',
 }

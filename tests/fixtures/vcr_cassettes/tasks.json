@@ -1,0 +1,82 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "body": {
+                    "string": "[{\"assignedTo\": \"tolumis@postonline.me\", \"longitude\": null, \"latitude\": null, \"parentGlobalTaskId\": null, \"shared\": false, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"note\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"dueDate\": 1445256000000, \"priority\": \"Normal\", \"id\": \"gd4lkPooSZTn7MZE2q8u0Q==\", \"subTasks\": [], \"creationDate\": 1445255241000, \"status\": \"UNCHECKED\", \"notifications\": [], \"globalTaskId\": \"gd4lkPooSZTn7MZE2q8u0Q==\", \"alert\": {\"repeatDays\": null, \"customTime\": 0, \"repeatInterval\": null, \"repeatEndType\": \"REPEAT_END_NEVER\", \"repeatEndsOn\": null, \"repeatMonthType\": \"ON_DATE\", \"repeatStartsOn\": null, \"offset\": 0, \"repeatNextOccurrence\": null, \"type\": \"NONE\", \"repeatEndsAfterOccurrences\": null}, \"title\": \"New First\", \"lastUpdateDate\": 1445265686000, \"sharedMembers\": null, \"participants\": []}]"
+                }, 
+                "headers": {
+                    "content-length": [
+                        "812"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "date": [
+                        "Mon, 19 Oct 2015 14:41:28 GMT"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-allow-methods": [
+                        "DELETE, POST, OPTIONS, PUT, GET, HEAD"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ]
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }
+            }, 
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ]
+                }, 
+                "method": "GET", 
+                "uri": "https://sm-prod2.any.do/me/tasks?includeDeleted=False&includeDone=False"
+            }
+        }
+    ], 
+    "version": 1
+}

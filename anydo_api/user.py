@@ -3,10 +3,11 @@
 
 import requests
 import json
-import base64
 
 from . import errors
 from .constants import CONSTANTS
+
+from .task import Task
 
 class User(object):
     """
@@ -83,6 +84,27 @@ class User(object):
             raise client_error
 
         return self
+
+    def tasks(self, refresh=False):
+        if not 'tasks_list' in self.__dict__ or refresh:
+            params = {
+                'includeDeleted': False,
+                'includeDone': False,
+            }
+
+            tasks_data = self.session.get(
+                CONSTANTS.get('TASKS_URL'),
+                headers={
+                    'Content-Type': 'application/json',
+                    'Accept-Encoding': 'deflate'
+                },
+                params=params
+            ).json()
+            self.session.close()
+
+            self.tasks_list = [ Task(user=self, data_dict=task) for task in tasks_data ]
+
+        return self.tasks_list
 
     def __getitem__(self, key):
         return self.data_dict[key]
