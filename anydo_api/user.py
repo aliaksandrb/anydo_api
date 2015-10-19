@@ -53,6 +53,37 @@ class User(object):
         self.is_dirty = False
         return self
 
+    def destroy(self):
+        """
+        Hits the API to destroy the user.
+        """
+
+        headers = {
+            'Content-Type': 'application/json',
+            'AnyDO-Puid': str(self.data_dict['id'])
+        }
+
+        response_obj = self.session.delete(
+            CONSTANTS.get('USER_URL'),
+            json={ 'email': self.email, 'password': self.password },
+            headers=headers
+        )
+
+        try:
+            response_obj.raise_for_status()
+        except requests.exceptions.HTTPError as error:
+            if response_obj.status_code == 400:
+                client_error = errors.BadRequestError(response_obj.content)
+            elif response_obj.status_code == 409:
+                client_error = errors.ConflictError(response_obj.content)
+            else:
+                client_error = errors.InternalServerError(error)
+
+            client_error.__cause__ = None
+            raise client_error
+
+        return self
+
     def __getitem__(self, key):
         return self.data_dict[key]
 
@@ -113,5 +144,7 @@ class User(object):
         finally: session.close()
 
        # catch possible exceptions
-        return klass(session=session, data_dict=response_obj.json())
+        from .client import Client
+        user = Client(email=email, password=password).me()
+        return user
 

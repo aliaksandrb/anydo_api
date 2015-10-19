@@ -4,11 +4,11 @@
         {
             "response": {
                 "status": {
-                    "message": "BAD REQUEST", 
-                    "code": 400
+                    "message": "UNAUTHORIZED", 
+                    "code": 401
                 }, 
                 "body": {
-                    "string": "Cannot create new user - Given email is invalid"
+                    "string": ""
                 }, 
                 "headers": {
                     "via": [
@@ -33,10 +33,10 @@
                         "*"
                     ], 
                     "access-control-allow-methods": [
-                        "OPTIONS, POST, DELETE"
+                        "POST, OPTIONS"
                     ], 
                     "date": [
-                        "Mon, 19 Oct 2015 11:16:59 GMT"
+                        "Mon, 19 Oct 2015 11:16:54 GMT"
                     ], 
                     "content-type": [
                         "text/html; charset=utf-8"
@@ -45,7 +45,7 @@
                         "Content-Type,X-Anydo-Auth,X-Platform"
                     ], 
                     "content-length": [
-                        "47"
+                        "0"
                     ], 
                     "server": [
                         "gunicorn/19.0.0"
@@ -54,26 +54,23 @@
             }, 
             "request": {
                 "method": "POST", 
-                "uri": "https://sm-prod2.any.do/user", 
-                "body": "{\"username\": \"*\", \"phoneNumbers\": [], \"emails\": \"*\", \"name\": \"*\", \"password\": \"*\"}", 
+                "uri": "https://sm-prod2.any.do/j_spring_security_check", 
+                "body": "_spring_security_remember_me=on&j_username=unknown%40xxx.yyy", 
                 "headers": {
-                    "Accept-Encoding": [
-                        "gzip, deflate"
-                    ], 
-                    "Connection": [
-                        "keep-alive"
-                    ], 
-                    "User-Agent": [
-                        "python-requests/2.8.0"
-                    ], 
                     "Accept": [
                         "*/*"
                     ], 
                     "Content-Type": [
-                        "application/json"
+                        "application/x-www-form-urlencoded"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
                     ], 
                     "Content-Length": [
-                        "82"
+                        "85"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
                     ]
                 }
             }

@@ -29,7 +29,8 @@ class TestUser(TestCase):
     def test_valid_user_creation_returns_user_intance(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/valid_create_user.json',
             before_record_response=scrub_string(self.password),
-            filter_post_data_parameters=['password']
+            filter_post_data_parameters=['password', 'j_password'],
+            record_mode='new_episodes'
         ):
             user = User.create(name=self.username, email=self.email, password=self.password)
             self.assertIsInstance(user, User)
@@ -113,7 +114,59 @@ class TestUser(TestCase):
             user['name'] = name[:]
             user.save()
 
-# cachec refresh
+    def test_new_user_could_be_deleted_instanly(self):
+        fake_email = 'unknown@xxx.yyy'
+        fake_password = 'fake_password'
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/create_fake_user_to_destroy.json',
+            before_record_response=scrub_string(fake_password),
+            filter_post_data_parameters=['password', 'j_password']
+        ):
+            user = User.create(name='fake', email=fake_email, password=fake_password)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/user_destroy_valid.json',
+            before_record_response=scrub_string(fake_password),
+            filter_post_data_parameters=['password'],
+        ):
+            user.destroy()
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login_after_destroy.json',
+            filter_post_data_parameters=['password', 'j_password'],
+        ):
+            with self.assertRaises(UnauthorizedError):
+                Client(email=fake_email, password=fake_password)
+
+    def test_existent_user_could_be_deleted(self):
+        fake_email = 'unknown@xxx.yyy'
+        fake_password = 'fake_password'
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/create_fake_user_to_destroy2.json',
+            before_record_response=scrub_string(fake_password),
+            filter_post_data_parameters=['password', 'j_password']
+        ):
+            User.create(name='fake', email=fake_email, password=fake_password)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/fake_user_login.json',
+            before_record_response=scrub_string(fake_password),
+            filter_post_data_parameters=['j_password'],
+            record_mode='new_episodes'
+        ):
+            user = Client(email=fake_email, password=fake_password).me()
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/user_destroy_valid2.json',
+            before_record_response=scrub_string(fake_password),
+            filter_post_data_parameters=['password'],
+        ):
+            user.destroy()
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login_after_destroy.json',
+            filter_post_data_parameters=['password', 'j_password'],
+        ):
+            with self.assertRaises(UnauthorizedError):
+                Client(email=fake_email, password=fake_password)
+
+# test_user_Creation_logged_in
+
 # Server Error tests
 
 if __name__ == '__main__':

@@ -8,7 +8,7 @@
                     "code": 200
                 }, 
                 "body": {
-                    "string": "{\"anonymous\": false, \"name\": \"kulibaba\", \"phoneNumbers\": [], \"fake\": false, \"profilePicture\": null, \"email\": \"tolumis@postonline.me\", \"id\": \"EFjTdKwGttmGbT3LnxHjbg==\", \"auth_token\": \"******\", \"googleAvatarUrl\": null, \"creationDate\": 1445253422000, \"idSalt\": \"f71c86ffb9f4f637acbefb4fc065605d4cd947287901b42dbc8a1bcf2c29b1f6\", \"hasGoogleNowRefreshToken\": false, \"emails\": []}"
+                    "string": "{\"anonymous\": false, \"name\": \"fake\", \"auth_token\": \"******\", \"fake\": false, \"profilePicture\": null, \"email\": \"unknown@xxx.yyy\", \"id\": \"Jdwkmr-Q5sxOLYfBbirOvA==\", \"phoneNumbers\": [], \"googleAvatarUrl\": null, \"creationDate\": 1445253411000, \"idSalt\": \"a431225e77d79025519af2014783e51ae19c4d861d999ae5b6f95a42fec5e39a\", \"hasGoogleNowRefreshToken\": false, \"emails\": []}"
                 }, 
                 "headers": {
                     "via": [
@@ -33,10 +33,10 @@
                         "*"
                     ], 
                     "access-control-allow-methods": [
-                        "POST, OPTIONS, DELETE"
+                        "DELETE, OPTIONS, POST"
                     ], 
                     "date": [
-                        "Mon, 19 Oct 2015 11:17:01 GMT"
+                        "Mon, 19 Oct 2015 11:16:50 GMT"
                     ], 
                     "content-type": [
                         "application/json"
@@ -45,7 +45,7 @@
                         "Content-Type,X-Anydo-Auth,X-Platform"
                     ], 
                     "content-length": [
-                        "459"
+                        "441"
                     ], 
                     "server": [
                         "gunicorn/19.0.0"
@@ -55,7 +55,7 @@
             "request": {
                 "method": "POST", 
                 "uri": "https://sm-prod2.any.do/user", 
-                "body": "{\"username\": \"tolumis@postonline.me\", \"phoneNumbers\": [], \"emails\": \"tolumis@postonline.me\", \"name\": \"kulibaba\"}", 
+                "body": "{\"username\": \"unknown@xxx.yyy\", \"phoneNumbers\": [], \"emails\": \"unknown@xxx.yyy\", \"name\": \"fake\"}", 
                 "headers": {
                     "Accept-Encoding": [
                         "gzip, deflate"
@@ -73,7 +73,7 @@
                         "application/json"
                     ], 
                     "Content-Length": [
-                        "136"
+                        "125"
                     ]
                 }
             }
@@ -95,7 +95,7 @@
                         "21600"
                     ], 
                     "set-cookie": [
-                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjA2MTM0MjI1Nzk6Zjk4OTkxNDlmZTdiNGY4YjQ2ZTFlMDlmOTU5NmM2OWQ; Domain=.any.do; Expires=Wed, 18-Oct-2017 11:17:02 GMT; HttpOnly; Path=/"
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dW5rbm93bkB4eHgueXl5OjE3NjA2MTM0MTEyNzk6OTY2MDdmNWY4ODA2NThkYWRmYjY4ZDkyMmUxZTJmOTU; Domain=.any.do; Expires=Wed, 18-Oct-2017 11:16:51 GMT; HttpOnly; Path=/"
                     ], 
                     "access-control-expose-headers": [
                         "X-Anydo-Auth,X-Platform"
@@ -113,13 +113,13 @@
                         "text/html; charset=utf-8"
                     ], 
                     "x-anydo-auth": [
-                        "dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjA2MTM0MjI1Nzk6Zjk4OTkxNDlmZTdiNGY4YjQ2ZTFlMDlmOTU5NmM2OWQ"
+                        "dW5rbm93bkB4eHgueXl5OjE3NjA2MTM0MTEyNzk6OTY2MDdmNWY4ODA2NThkYWRmYjY4ZDkyMmUxZTJmOTU"
                     ], 
                     "access-control-allow-methods": [
                         "OPTIONS, POST"
                     ], 
                     "date": [
-                        "Mon, 19 Oct 2015 11:17:02 GMT"
+                        "Mon, 19 Oct 2015 11:16:51 GMT"
                     ], 
                     "access-control-allow-origin": [
                         "*"
@@ -138,7 +138,7 @@
             "request": {
                 "method": "POST", 
                 "uri": "https://sm-prod2.any.do/j_spring_security_check", 
-                "body": "_spring_security_remember_me=on&j_username=tolumis%40postonline.me", 
+                "body": "_spring_security_remember_me=on&j_username=unknown%40xxx.yyy", 
                 "headers": {
                     "Accept": [
                         "*/*"
@@ -150,7 +150,7 @@
                         "keep-alive"
                     ], 
                     "Content-Length": [
-                        "86"
+                        "85"
                     ], 
                     "User-Agent": [
                         "python-requests/2.8.0"
@@ -165,7 +165,7 @@
                     "code": 200
                 }, 
                 "body": {
-                    "string": "{\"anonymous\": false, \"name\": \"kulibaba\", \"auth_token\": \"******\", \"fake\": false, \"profilePicture\": null, \"email\": \"tolumis@postonline.me\", \"id\": \"EFjTdKwGttmGbT3LnxHjbg==\", \"phoneNumbers\": [], \"googleAvatarUrl\": null, \"creationDate\": 1445253422000, \"idSalt\": \"f71c86ffb9f4f637acbefb4fc065605d4cd947287901b42dbc8a1bcf2c29b1f6\", \"hasGoogleNowRefreshToken\": false, \"emails\": []}"
+                    "string": "{\"anonymous\": false, \"name\": \"fake\", \"auth_token\": \"******\", \"fake\": false, \"profilePicture\": null, \"email\": \"unknown@xxx.yyy\", \"id\": \"Jdwkmr-Q5sxOLYfBbirOvA==\", \"phoneNumbers\": [], \"googleAvatarUrl\": null, \"creationDate\": 1445253411000, \"idSalt\": \"a431225e77d79025519af2014783e51ae19c4d861d999ae5b6f95a42fec5e39a\", \"hasGoogleNowRefreshToken\": false, \"emails\": []}"
                 }, 
                 "headers": {
                     "via": [
@@ -190,10 +190,10 @@
                         "*"
                     ], 
                     "access-control-allow-methods": [
-                        "HEAD, GET, PUT, OPTIONS"
+                        "OPTIONS, GET, PUT, HEAD"
                     ], 
                     "date": [
-                        "Mon, 19 Oct 2015 11:17:03 GMT"
+                        "Mon, 19 Oct 2015 11:16:51 GMT"
                     ], 
                     "content-type": [
                         "application/json"
@@ -202,7 +202,7 @@
                         "Content-Type,X-Anydo-Auth,X-Platform"
                     ], 
                     "content-length": [
-                        "350"
+                        "340"
                     ], 
                     "server": [
                         "gunicorn/19.0.0"
@@ -215,7 +215,7 @@
                 "body": null, 
                 "headers": {
                     "Cookie": [
-                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjA2MTM0MjI1Nzk6Zjk4OTkxNDlmZTdiNGY4YjQ2ZTFlMDlmOTU5NmM2OWQ"
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dW5rbm93bkB4eHgueXl5OjE3NjA2MTM0MTEyNzk6OTY2MDdmNWY4ODA2NThkYWRmYjY4ZDkyMmUxZTJmOTU"
                     ], 
                     "Accept": [
                         "*/*"

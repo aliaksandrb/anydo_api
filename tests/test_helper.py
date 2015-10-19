@@ -33,11 +33,18 @@ def credentials_file():
 
 def scrub_string(string, replacement='******'):
     def before_record_response(response):
-        text = response['body']['string'].decode('utf-8')
-        text.replace(string, replacement)
-        text_dict = json.loads(text)
-        text_dict['auth_token'] = replacement
-        response['body']['string'] = json.dumps(text_dict).encode('utf-8')
+        try:
+            text = response['body']['string'].decode('utf-8')
+        except (KeyError, TypeError, UnicodeDecodeError):
+            # pass
+            # skip binary answers for now
+            response['body']['string'] = ''
+        else:
+            if text:
+                text.replace(string, replacement)
+                text_dict = json.loads(text)
+                text_dict['auth_token'] = replacement
+                response['body']['string'] = json.dumps(text_dict).encode('utf-8')
 
         return response
     return before_record_response
