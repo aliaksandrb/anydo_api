@@ -1,0 +1,91 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "headers": {
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-length": [
+                        "0"
+                    ], 
+                    "vary": [
+                        "Accept-Encoding"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "content-encoding": [
+                        "gzip"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "date": [
+                        "Tue, 20 Oct 2015 15:44:31 GMT"
+                    ], 
+                    "access-control-allow-methods": [
+                        "HEAD, PUT, OPTIONS, GET, POST, DELETE"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ]
+                }, 
+                "status": {
+                    "code": 204, 
+                    "message": "NO CONTENT"
+                }, 
+                "body": {
+                    "string": ""
+                }
+            }, 
+            "request": {
+                "method": "DELETE", 
+                "uri": "https://sm-prod2.any.do/me/tasks/AB_3gfYr6nDFJYo0lcvlwg==", 
+                "headers": {
+                    "Accept-Encoding": [
+                        "gzip, deflate"
+                    ], 
+                    "Content-Length": [
+                        "536"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ]
+                }, 
+                "body": "{\"subTasks\": [], \"title\": \"Delete me\", \"status\": \"UNCHECKED\", \"parentGlobalTaskId\": null, \"dueDate\": null, \"alert\": null, \"longitude\": null, \"assignedTo\": \"tolumis@postonline.me\", \"id\": \"AB_3gfYr6nDFJYo0lcvlwg==\", \"sharedMembers\": null, \"globalTaskId\": \"AB_3gfYr6nDFJYo0lcvlwg==\", \"lastUpdateDate\": 1445355760000, \"priority\": \"Normal\", \"participants\": [], \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"notifications\": [], \"creationDate\": 1445355760000, \"shared\": false, \"latitude\": null, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"note\": null}"
+            }
+        }
+    ], 
+    "version": 1
+}

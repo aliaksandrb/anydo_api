@@ -1,19 +1,61 @@
 {
+    "version": 1, 
     "interactions": [
         {
-            "request": {
-                "method": "POST", 
-                "body": "[{\"priority\": \"Normal\", \"category\": \"Personal\", \"title\": \"Test Task\", \"status\": \"UNCHECKED\", \"id\": \"ZRev8-uGYCY3m1GWT-pe6Q==\"}]", 
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
                 "headers": {
-                    "Accept": [
+                    "content-type": [
                         "application/json"
                     ], 
-                    "Cookie": [
-                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    "access-control-allow-methods": [
+                        "GET, HEAD, DELETE, OPTIONS, POST, PUT"
                     ], 
-                    "Accept-Encoding": [
-                        "deflate"
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
                     ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "content-length": [
+                        "538"
+                    ], 
+                    "date": [
+                        "Tue, 20 Oct 2015 15:42:42 GMT"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ]
+                }, 
+                "body": {
+                    "string": "[{\"sharedMembers\": null, \"subTasks\": [], \"parentGlobalTaskId\": null, \"assignedTo\": \"tolumis@postonline.me\", \"notifications\": [], \"priority\": \"Normal\", \"creationDate\": 1445355763000, \"globalTaskId\": \"tPW_gzV9EhaIyIR1M5nlnQ==\", \"status\": \"UNCHECKED\", \"dueDate\": null, \"title\": \"Test Task\", \"participants\": [], \"lastUpdateDate\": 1445355763000, \"note\": null, \"alert\": null, \"longitude\": null, \"id\": \"tPW_gzV9EhaIyIR1M5nlnQ==\", \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"shared\": false, \"latitude\": null}]"
+                }
+            }, 
+            "request": {
+                "body": "[{\"priority\": \"Normal\", \"status\": \"UNCHECKED\", \"title\": \"Test Task\", \"id\": \"tPW_gzV9EhaIyIR1M5nlnQ==\", \"category\": \"Personal\"}]", 
+                "method": "POST", 
+                "headers": {
                     "Content-Type": [
                         "application/json"
                     ], 
@@ -25,61 +67,19 @@
                     ], 
                     "Connection": [
                         "keep-alive"
-                    ]
-                }, 
-                "uri": "https://sm-prod2.any.do/me/tasks"
-            }, 
-            "response": {
-                "body": {
-                    "string": "[{\"assignedTo\": \"tolumis@postonline.me\", \"latitude\": null, \"shared\": false, \"lastUpdateDate\": 1445350227000, \"note\": null, \"subTasks\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"priority\": \"Normal\", \"parentGlobalTaskId\": null, \"participants\": [], \"status\": \"UNCHECKED\", \"creationDate\": 1445350227000, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"notifications\": [], \"dueDate\": null, \"sharedMembers\": null, \"globalTaskId\": \"ZRev8-uGYCY3m1GWT-pe6Q==\", \"longitude\": null, \"alert\": null, \"title\": \"Test Task\", \"id\": \"ZRev8-uGYCY3m1GWT-pe6Q==\"}]"
-                }, 
-                "status": {
-                    "message": "OK", 
-                    "code": 200
-                }, 
-                "headers": {
-                    "server": [
-                        "gunicorn/19.0.0"
                     ], 
-                    "x-frame-options": [
-                        "SAMEORIGIN"
+                    "Accept-Encoding": [
+                        "deflate"
                     ], 
-                    "access-control-max-age": [
-                        "21600"
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
                     ], 
-                    "content-type": [
+                    "Accept": [
                         "application/json"
-                    ], 
-                    "access-control-allow-headers": [
-                        "Content-Type,X-Anydo-Auth,X-Platform"
-                    ], 
-                    "date": [
-                        "Tue, 20 Oct 2015 14:10:26 GMT"
-                    ], 
-                    "connection": [
-                        "keep-alive"
-                    ], 
-                    "access-control-allow-origin": [
-                        "*"
-                    ], 
-                    "access-control-allow-methods": [
-                        "GET, DELETE, PUT, HEAD, OPTIONS, POST"
-                    ], 
-                    "access-control-allow-credentials": [
-                        "true"
-                    ], 
-                    "access-control-expose-headers": [
-                        "X-Anydo-Auth,X-Platform"
-                    ], 
-                    "content-length": [
-                        "538"
-                    ], 
-                    "via": [
-                        "1.1 vegur"
                     ]
-                }
+                }, 
+                "uri": "https://sm-prod2.any.do/me/tasks?includeDone=False&includeDeleted=False"
             }
         }
-    ], 
-    "version": 1
+    ]
 }
