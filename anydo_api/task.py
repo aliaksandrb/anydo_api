@@ -4,6 +4,8 @@
 import requests
 import json
 import base64
+import random
+import time
 
 from . import errors
 from .constants import CONSTANTS
@@ -75,129 +77,75 @@ class Task(object):
         self.is_dirty = False
         return self
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def session(self):
+        return self.user.session
+
+    @staticmethod
+    def generate_uid():
+        random_string = ''.join([chr(random.randint(0, 255)) for _ in range(0, 16)])
+        try:
+            random_string = random_string.encode('utf-8')
+        except UnicodeDecodeError: pass
+
+        result = base64.urlsafe_b64encode(random_string)
+        try:
+            result = result.decode('utf-8')
+        except UnicodeDecodeError: pass
+
+        return result
+
+    @classmethod
+    def create(klass, user, **kwargs):
+        """
+        Creates new task with required parameters
+        """
+
+        headers = {
+            'Content-Type'   : 'application/json',
+            'Accept'         : 'application/json',
+            'Accept-Encoding': 'deflate',
+        }
+
+        json_data = kwargs.copy()
+        json_data.update({ 'id': klass.generate_uid() })
+#        params = {
+#            'includeDeleted': 'false',
+#            'includeDone'   : 'false',
+#            'responseType'  : 'flat'
+#        }
+
+        response_obj = user.session.post(
+            CONSTANTS.get('TASKS_URL'),
+            json=[json_data],
+            headers=headers,
+#            params=params
+        )
+        #defaults: function() {
+        #        var a = (new Date).getTime();
+        #        return {
+        #            title: null,
+        #            status: TaskStatus.UNCHECKED,
+        #            repeatingMethod: TASK_REPEAT.TASK_REPEAT_OFF,
+        #            shared: !1,
+        #            priority: TaskPriority.Normal,
+        #            creationDate: a,
+        #            taskExpanded: !1
+        #            }
+        #        }
+        try:
+            response_obj.raise_for_status()
+        except requests.exceptions.HTTPError as error:
+            if response_obj.status_code == 400:
+                client_error = errors.BadRequestError(response_obj.content)
+            elif response_obj.status_code == 409:
+                client_error = errors.ConflictError(response_obj.content)
+            else:
+                client_error = errors.InternalServerError(error)
+
+            client_error.__cause__ = None
+            raise client_error
+        finally: user.session.close()
+
+        task = Task(user, response_obj.json())
+        return task
 

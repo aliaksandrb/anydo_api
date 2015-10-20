@@ -11,6 +11,8 @@ Tests for `Task` class.
 import unittest
 import json
 import vcr as vcr_module
+import time
+import datetime
 
 from .base import TestCase
 from .test_helper import vcr, scrub_string
@@ -99,13 +101,106 @@ class TestTask(TestCase):
         with self.assertRaises(AttributeError):
             task['suppa-duppa'] = 1
 
-
     def test_unchanged_data_dont_hit_an_api(self):
         task = self.__get_task()
         with vcr.use_cassette('fixtures/vcr_cassettes/fake.json', record_mode='none'):
             title = task.title
             task['title'] = title[:]
             task.save()
+
+    def test_task_creation_reraises_occured_errors(self):
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_invalid.json'):
+            with self.assertRaises(InternalServerError):
+                Task.create(user=self.get_me(),
+                    status='UNCHECKED'
+                )
+
+    def test_task_creation_returns_task_instance(self):
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_valid.json'):
+            task = Task.create(user=self.get_me(),
+                title='Test Task',
+                category='Personal',
+                priority='Normal',
+                status='UNCHECKED'
+            )
+            self.assertIsInstance(task, Task)
+
+
+# test attributes validaiton
+# only :id and :title attributes are required
+
+#                parentGlobalTaskId=None,
+#                categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
+#                dueDate=1445331600000,#int((time.time() + 3600) * 1000),
+#                repeating=False,
+#                repeatingMethod='TASK_REPEAT_OFF',
+#                latitude=None,
+#                longitude=None,
+#                shared=False,
+#                expanded=False,
+#                subTasks=[],
+#                alert={ 'type': 'NONE' },
+#                note='',
+
+#    def test_duplicate_user_creation_raises_conflict(self):
+#        with vcr.use_cassette('fixtures/vcr_cassettes/duplicate_user.json',
+#            filter_post_data_parameters=['password']
+#        ):
+#            with self.assertRaises(ConflictError):
+#                User.create(name=self.username, email=self.email, password=self.password)
+#
+#    def test_new_task_could_be_deleted_instanly(self):
+#        with vcr.use_cassette('fixtures/vcr_cassettes/create_fake_user_to_destroy.json',
+#            before_record_response=scrub_string(fake_password),
+#            filter_post_data_parameters=['password', 'j_password']
+#        ):
+#            user = User.create(name='fake', email=fake_email, password=fake_password)
+#
+#        with vcr.use_cassette('fixtures/vcr_cassettes/user_destroy_valid.json',
+#            before_record_response=scrub_string(fake_password),
+#            filter_post_data_parameters=['password'],
+#        ):
+#            user.destroy()
+#
+#        with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login_after_destroy.json',
+#            filter_post_data_parameters=['password', 'j_password'],
+#        ):
+#            with self.assertRaises(UnauthorizedError):
+#                Client(email=fake_email, password=fake_password)
+
+#    def test_existent_user_could_be_deleted(self):
+#        fake_email = 'unknown@xxx.yyy'
+#        fake_password = 'fake_password'
+#
+#        with vcr.use_cassette('fixtures/vcr_cassettes/create_fake_user_to_destroy2.json',
+#            before_record_response=scrub_string(fake_password),
+#            filter_post_data_parameters=['password', 'j_password']
+#        ):
+#            User.create(name='fake', email=fake_email, password=fake_password)
+#
+#        with vcr.use_cassette('fixtures/vcr_cassettes/fake_user_login.json',
+#            before_record_response=scrub_string(fake_password),
+#            filter_post_data_parameters=['j_password'],
+#            record_mode='new_episodes'
+#        ):
+#            user = Client(email=fake_email, password=fake_password).me()
+#
+#        with vcr.use_cassette('fixtures/vcr_cassettes/user_destroy_valid2.json',
+#            before_record_response=scrub_string(fake_password),
+#            filter_post_data_parameters=['password'],
+#        ):
+#            user.destroy()
+#
+#        with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login_after_destroy.json',
+#            filter_post_data_parameters=['password', 'j_password'],
+#        ):
+#            with self.assertRaises(UnauthorizedError):
+#                Client(email=fake_email, password=fake_password)
+#
+## test_user_Creation_logged_in
+#
+## Server Error tests
+
 
 if __name__ == '__main__':
     import sys
