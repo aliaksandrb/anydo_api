@@ -108,13 +108,6 @@ class TestTask(TestCase):
             task['title'] = title[:]
             task.save()
 
-    def test_task_creation_reraises_occured_errors(self):
-        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_invalid.json'):
-            with self.assertRaises(InternalServerError):
-                Task.create(user=self.get_me(),
-                    status='UNCHECKED'
-                )
-
     def test_task_creation_returns_task_instance(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/task_create_valid.json'):
             task = Task.create(user=self.get_me(),
@@ -125,9 +118,49 @@ class TestTask(TestCase):
             )
             self.assertIsInstance(task, Task)
 
+    def test_task_creation_saves_attributers_correctly(self):
+        title = 'New Task'
+        note = 'Hello world'
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_valid_with_attributes.json'):
+            task = Task.create(user=self.get_me(),
+                title=title,
+                category='Personal',
+                priority='Normal',
+                status='UNCHECKED',
+                repeatingMethod='TASK_REPEAT_OFF',
+                note=note,
+            )
 
-# test attributes validaiton
-# only :id and :title attributes are required
+        self.assertEqual(title, task.title)
+        self.assertEqual(note, task['note'])
+
+    def test_task_creation_checks_required_fields(self):
+        with vcr.use_cassette('fixtures/vcr_cassettes/fake.json', record_mode='none'):
+            with self.assertRaises(AttributeError):
+                Task.create(user=self.get_me(),
+                    status='UNCHECKED'
+                )
+
+    def test_task_creation_reraises_occured_errors(self):
+        # Emulate Server Error bypassing internal validaitons for missed fields
+        original = Task.required_attributes
+        def fake(): return set()
+        Task.required_attributes = staticmethod(fake)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_invalid.json'):
+            with self.assertRaises(InternalServerError):
+                Task.create(user=self.get_me(),
+                    status='UNCHECKED',
+                )
+        Task.required_attributes = staticmethod(original)
+
+
+# timers validatons
+#categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
+#find_by_id
+# parentGlobalTaskId=None,
+#subtasks
+#notes & etc
 
 #                parentGlobalTaskId=None,
 #                categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
@@ -142,13 +175,7 @@ class TestTask(TestCase):
 #                alert={ 'type': 'NONE' },
 #                note='',
 
-#    def test_duplicate_user_creation_raises_conflict(self):
-#        with vcr.use_cassette('fixtures/vcr_cassettes/duplicate_user.json',
-#            filter_post_data_parameters=['password']
-#        ):
-#            with self.assertRaises(ConflictError):
-#                User.create(name=self.username, email=self.email, password=self.password)
-#
+
 #    def test_new_task_could_be_deleted_instanly(self):
 #        with vcr.use_cassette('fixtures/vcr_cassettes/create_fake_user_to_destroy.json',
 #            before_record_response=scrub_string(fake_password),

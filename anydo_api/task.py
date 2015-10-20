@@ -94,11 +94,36 @@ class Task(object):
 
         return result
 
+    @staticmethod
+    def required_attributes():
+        """
+        Returns a set of required fields for valid task creation.
+        This tuple is checked to prevent unnecessary API calls.
+
+        Seems that :id and :title attributes are required for now, where
+        :id is set automatically.
+        """
+
+        return {'title'}
+
     @classmethod
-    def create(klass, user, **kwargs):
+    def check_for_missed_fields(klass, fields):
         """
-        Creates new task with required parameters
+        Checks task attributes for missed required.
+        Raises exception with a list of all missed.
         """
+
+        missed = klass.required_attributes() - set(fields.keys())
+        if len(missed) > 0:
+            raise errors.AttributeError('Missing required fields: {}!'.format(missed))
+
+    @classmethod
+    def create(klass, user, **fields):
+        """
+        Creates new task via API call.
+        """
+
+        klass.check_for_missed_fields(fields)
 
         headers = {
             'Content-Type'   : 'application/json',
@@ -106,7 +131,7 @@ class Task(object):
             'Accept-Encoding': 'deflate',
         }
 
-        json_data = kwargs.copy()
+        json_data = fields.copy()
         json_data.update({ 'id': klass.generate_uid() })
 #        params = {
 #            'includeDeleted': 'false',
@@ -120,18 +145,7 @@ class Task(object):
             headers=headers,
 #            params=params
         )
-        #defaults: function() {
-        #        var a = (new Date).getTime();
-        #        return {
-        #            title: null,
-        #            status: TaskStatus.UNCHECKED,
-        #            repeatingMethod: TASK_REPEAT.TASK_REPEAT_OFF,
-        #            shared: !1,
-        #            priority: TaskPriority.Normal,
-        #            creationDate: a,
-        #            taskExpanded: !1
-        #            }
-        #        }
+
         try:
             response_obj.raise_for_status()
         except requests.exceptions.HTTPError as error:
@@ -146,6 +160,6 @@ class Task(object):
             raise client_error
         finally: user.session.close()
 
-        task = Task(user, response_obj.json())
+        task = Task(user, response_obj.json()[0])
         return task
 
