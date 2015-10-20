@@ -137,9 +137,7 @@ class TestTask(TestCase):
     def test_task_creation_checks_required_fields(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/fake.json', record_mode='none'):
             with self.assertRaises(AttributeError):
-                Task.create(user=self.get_me(),
-                    status='UNCHECKED'
-                )
+                Task.create(user=self.get_me(), status='UNCHECKED')
 
     def test_task_creation_reraises_occured_errors(self):
         # Emulate Server Error bypassing internal validaitons for missed fields
@@ -154,79 +152,22 @@ class TestTask(TestCase):
                 )
         Task.required_attributes = staticmethod(original)
 
+    def test_new_task_could_be_deleted_permanently(self):
+        user = self.get_me()
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_for_delete.json'):
+            task = Task.create(user=user, title='Delete me', status='UNCHECKED')
 
-# timers validatons
-#categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
-#find_by_id
-# parentGlobalTaskId=None,
-#subtasks
-#notes & etc
+        with vcr.use_cassette('fixtures/vcr_cassettes/tasks_after_new_one_created.json'):
+            tasks = user.tasks(refresh=True)
+            self.assertTrue(task.id in map(lambda task: task['id'], tasks))
 
-#                parentGlobalTaskId=None,
-#                categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
-#                dueDate=1445331600000,#int((time.time() + 3600) * 1000),
-#                repeating=False,
-#                repeatingMethod='TASK_REPEAT_OFF',
-#                latitude=None,
-#                longitude=None,
-#                shared=False,
-#                expanded=False,
-#                subTasks=[],
-#                alert={ 'type': 'NONE' },
-#                note='',
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_destroy_valid.json'):
+            task.destroy()
 
+        with vcr.use_cassette('fixtures/vcr_cassettes/tasks_after_new_one_deleted.json'):
+            tasks = user.tasks(refresh=True)
+            self.assertFalse(task.id in map(lambda task: task['id'], tasks))
 
-#    def test_new_task_could_be_deleted_instanly(self):
-#        with vcr.use_cassette('fixtures/vcr_cassettes/create_fake_user_to_destroy.json',
-#            before_record_response=scrub_string(fake_password),
-#            filter_post_data_parameters=['password', 'j_password']
-#        ):
-#            user = User.create(name='fake', email=fake_email, password=fake_password)
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/user_destroy_valid.json',
-#            before_record_response=scrub_string(fake_password),
-#            filter_post_data_parameters=['password'],
-#        ):
-#            user.destroy()
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login_after_destroy.json',
-#            filter_post_data_parameters=['password', 'j_password'],
-#        ):
-#            with self.assertRaises(UnauthorizedError):
-#                Client(email=fake_email, password=fake_password)
-
-#    def test_existent_user_could_be_deleted(self):
-#        fake_email = 'unknown@xxx.yyy'
-#        fake_password = 'fake_password'
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/create_fake_user_to_destroy2.json',
-#            before_record_response=scrub_string(fake_password),
-#            filter_post_data_parameters=['password', 'j_password']
-#        ):
-#            User.create(name='fake', email=fake_email, password=fake_password)
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/fake_user_login.json',
-#            before_record_response=scrub_string(fake_password),
-#            filter_post_data_parameters=['j_password'],
-#            record_mode='new_episodes'
-#        ):
-#            user = Client(email=fake_email, password=fake_password).me()
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/user_destroy_valid2.json',
-#            before_record_response=scrub_string(fake_password),
-#            filter_post_data_parameters=['password'],
-#        ):
-#            user.destroy()
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login_after_destroy.json',
-#            filter_post_data_parameters=['password', 'j_password'],
-#        ):
-#            with self.assertRaises(UnauthorizedError):
-#                Client(email=fake_email, password=fake_password)
-#
-## test_user_Creation_logged_in
-#
-## Server Error tests
 
 
 if __name__ == '__main__':

@@ -77,6 +77,35 @@ class Task(object):
         self.is_dirty = False
         return self
 
+    def destroy(self):
+        """
+        Deletes the tasks by remote API call
+        """
+        headers = {
+            'Content-Type': 'application/json',
+        }
+
+        response_obj = self.session().delete(
+            CONSTANTS.get('TASKS_URL') + '/' + self.id,
+            json=self.data_dict,
+            headers=headers
+        )
+
+        try:
+            response_obj.raise_for_status()
+        except requests.exceptions.HTTPError as error:
+            if response_obj.status_code == 400:
+                client_error = errors.BadRequestError(response_obj.content)
+            elif response_obj.status_code == 409:
+                client_error = errors.ConflictError(response_obj.content)
+            else:
+                client_error = errors.InternalServerError(error)
+
+            client_error.__cause__ = None
+            raise client_error
+
+        return self
+
     def session(self):
         return self.user.session
 
@@ -133,17 +162,17 @@ class Task(object):
 
         json_data = fields.copy()
         json_data.update({ 'id': klass.generate_uid() })
-#        params = {
-#            'includeDeleted': 'false',
-#            'includeDone'   : 'false',
+        params = {
+            'includeDeleted': False,
+            'includeDone'   : False,
 #            'responseType'  : 'flat'
-#        }
+        }
 
         response_obj = user.session.post(
             CONSTANTS.get('TASKS_URL'),
             json=[json_data],
             headers=headers,
-#            params=params
+            params=params
         )
 
         try:
