@@ -74,7 +74,7 @@
                     ]
                 }, 
                 "method": "GET", 
-                "uri": "https://sm-prod2.any.do/me/tasks?includeDeleted=False&includeDone=False"
+                "uri": "https://sm-prod2.any.do/me/tasks?includeDeleted=false&includeDone=false"
             }
         }
     ], 

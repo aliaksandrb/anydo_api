@@ -75,7 +75,7 @@
                         "*/*"
                     ]
                 }, 
-                "uri": "https://sm-prod2.any.do/me/tasks?includeDone=False&includeDeleted=False"
+                "uri": "https://sm-prod2.any.do/me/tasks?includeDone=false&includeDeleted=false"
             }
         }
     ]

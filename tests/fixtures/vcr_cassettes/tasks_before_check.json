@@ -1,0 +1,82 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "GET", 
+                "body": null, 
+                "headers": {
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ]
+                }, 
+                "uri": "https://sm-prod2.any.do/me/tasks?includeDeleted=false&includeDone=false"
+            }, 
+            "response": {
+                "body": {
+                    "string": "[{\"subTasks\": [], \"title\": \"New Task\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"creationDate\": 1445355764000, \"alert\": null, \"globalTaskId\": \"O0LATkq1n2pfVbWhqtVBEQ==\", \"participants\": [], \"notifications\": [], \"lastUpdateDate\": 1445355764000, \"dueDate\": null, \"shared\": false, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"status\": \"UNCHECKED\", \"longitude\": null, \"id\": \"O0LATkq1n2pfVbWhqtVBEQ==\", \"parentGlobalTaskId\": null, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"note\": \"Hello world\", \"sharedMembers\": null}, {\"subTasks\": [], \"title\": \"Check me\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"creationDate\": 1445433348000, \"alert\": {\"repeatEndType\": \"REPEAT_END_NEVER\", \"repeatEndsOn\": null, \"repeatNextOccurrence\": null, \"offset\": 0, \"repeatMonthType\": null, \"repeatEndsAfterOccurrences\": null, \"customTime\": 0, \"repeatInterval\": null, \"repeatStartsOn\": null, \"type\": \"NONE\", \"repeatDays\": null}, \"globalTaskId\": \"8Gw_PERNKoMvxcH1NhHGtQ==\", \"participants\": [], \"notifications\": [], \"lastUpdateDate\": 1445433348000, \"dueDate\": null, \"shared\": false, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"status\": \"UNCHECKED\", \"longitude\": null, \"id\": \"8Gw_PERNKoMvxcH1NhHGtQ==\", \"parentGlobalTaskId\": null, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"note\": null, \"sharedMembers\": null}]"
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-length": [
+                        "1343"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "date": [
+                        "Wed, 21 Oct 2015 13:15:53 GMT"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-allow-methods": [
+                        "HEAD, POST, GET, PUT, OPTIONS, DELETE"
+                    ]
+                }
+            }
+        }
+    ], 
+    "version": 1
+}

@@ -1,0 +1,82 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ]
+                }, 
+                "body": null, 
+                "uri": "https://sm-prod2.any.do/me/tasks?includeDeleted=false&includeDone=false", 
+                "method": "GET"
+            }, 
+            "response": {
+                "headers": {
+                    "access-control-allow-methods": [
+                        "HEAD, GET, PUT, POST, OPTIONS, DELETE"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "content-length": [
+                        "1623"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "date": [
+                        "Wed, 21 Oct 2015 09:17:56 GMT"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ]
+                }, 
+                "body": {
+                    "string": "[{\"status\": \"UNCHECKED\", \"priority\": \"Normal\", \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"subTasks\": [], \"title\": \"Test Task\", \"assignedTo\": \"tolumis@postonline.me\", \"alert\": null, \"participants\": [], \"longitude\": null, \"globalTaskId\": \"tPW_gzV9EhaIyIR1M5nlnQ==\", \"note\": null, \"lastUpdateDate\": 1445355763000, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"parentGlobalTaskId\": null, \"sharedMembers\": null, \"dueDate\": null, \"notifications\": [], \"latitude\": null, \"shared\": false, \"creationDate\": 1445355763000, \"id\": \"tPW_gzV9EhaIyIR1M5nlnQ==\"}, {\"status\": \"UNCHECKED\", \"priority\": \"Normal\", \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"subTasks\": [], \"title\": \"New Task\", \"assignedTo\": \"tolumis@postonline.me\", \"alert\": null, \"participants\": [], \"longitude\": null, \"globalTaskId\": \"O0LATkq1n2pfVbWhqtVBEQ==\", \"note\": \"Hello world\", \"lastUpdateDate\": 1445355764000, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"parentGlobalTaskId\": null, \"sharedMembers\": null, \"dueDate\": null, \"notifications\": [], \"latitude\": null, \"shared\": false, \"creationDate\": 1445355764000, \"id\": \"O0LATkq1n2pfVbWhqtVBEQ==\"}, {\"status\": \"UNCHECKED\", \"priority\": \"Normal\", \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"subTasks\": [], \"title\": \"Delete me2\", \"assignedTo\": \"tolumis@postonline.me\", \"alert\": null, \"participants\": [], \"longitude\": null, \"globalTaskId\": \"uvrTSUQu4GpQgtAFz-MvGA==\", \"note\": null, \"lastUpdateDate\": 1445419075000, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"parentGlobalTaskId\": null, \"sharedMembers\": null, \"dueDate\": null, \"notifications\": [], \"latitude\": null, \"shared\": false, \"creationDate\": 1445419075000, \"id\": \"uvrTSUQu4GpQgtAFz-MvGA==\"}]"
+                }, 
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }
+            }
+        }
+    ], 
+    "version": 1
+}

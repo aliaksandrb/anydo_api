@@ -1,0 +1,85 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "PUT", 
+                "body": "{\"title\": \"New Task\", \"note\": \"Hello world\", \"assignedTo\": \"tolumis@postonline.me\", \"participants\": [], \"dueDate\": null, \"longitude\": null, \"alert\": null, \"status\": \"CHECKED\", \"shared\": false, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"subTasks\": [], \"sharedMembers\": null, \"latitude\": null, \"priority\": \"Normal\", \"notifications\": [], \"lastUpdateDate\": 1445355764000, \"globalTaskId\": \"O0LATkq1n2pfVbWhqtVBEQ==\", \"parentGlobalTaskId\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"id\": \"O0LATkq1n2pfVbWhqtVBEQ==\", \"creationDate\": 1445355764000}", 
+                "headers": {
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Content-Length": [
+                        "542"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ]
+                }, 
+                "uri": "https://sm-prod2.any.do/me/tasks/O0LATkq1n2pfVbWhqtVBEQ=="
+            }, 
+            "response": {
+                "body": {
+                    "string": "{\"alert\": null, \"longitude\": null, \"sharedMembers\": null, \"participants\": [], \"assignedTo\": \"tolumis@postonline.me\", \"dueDate\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"note\": \"Hello world\", \"id\": \"O0LATkq1n2pfVbWhqtVBEQ==\", \"creationDate\": 1445355764000, \"title\": \"New Task\", \"subTasks\": [], \"parentGlobalTaskId\": null, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"latitude\": null, \"notifications\": [], \"globalTaskId\": \"O0LATkq1n2pfVbWhqtVBEQ==\", \"status\": \"CHECKED\", \"lastUpdateDate\": 1445433354000, \"shared\": false, \"priority\": \"Normal\"}"
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-length": [
+                        "542"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "date": [
+                        "Wed, 21 Oct 2015 13:15:53 GMT"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-allow-methods": [
+                        "OPTIONS, POST, DELETE, HEAD, GET, PUT"
+                    ]
+                }
+            }
+        }
+    ], 
+    "version": 1
+}

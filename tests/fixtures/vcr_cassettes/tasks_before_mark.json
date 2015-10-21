@@ -1,0 +1,82 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "body": {
+                    "string": "[{\"dueDate\": null, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"sharedMembers\": null, \"subTasks\": [], \"globalTaskId\": \"tPW_gzV9EhaIyIR1M5nlnQ==\", \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"id\": \"tPW_gzV9EhaIyIR1M5nlnQ==\", \"latitude\": null, \"assignedTo\": \"tolumis@postonline.me\", \"notifications\": [], \"creationDate\": 1445355763000, \"note\": null, \"lastUpdateDate\": 1445431863000, \"longitude\": null, \"title\": \"Test Task\", \"priority\": \"Normal\", \"alert\": null, \"parentGlobalTaskId\": null, \"status\": \"UNCHECKED\", \"participants\": [], \"shared\": false}, {\"dueDate\": null, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"sharedMembers\": null, \"subTasks\": [], \"globalTaskId\": \"O0LATkq1n2pfVbWhqtVBEQ==\", \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"id\": \"O0LATkq1n2pfVbWhqtVBEQ==\", \"latitude\": null, \"assignedTo\": \"tolumis@postonline.me\", \"notifications\": [], \"creationDate\": 1445355764000, \"note\": \"Hello world\", \"lastUpdateDate\": 1445355764000, \"longitude\": null, \"title\": \"New Task\", \"priority\": \"Normal\", \"alert\": null, \"parentGlobalTaskId\": null, \"status\": \"UNCHECKED\", \"participants\": [], \"shared\": false}]"
+                }, 
+                "headers": {
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "content-length": [
+                        "1084"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "access-control-allow-methods": [
+                        "GET, POST, PUT, DELETE, HEAD, OPTIONS"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "date": [
+                        "Wed, 21 Oct 2015 12:53:32 GMT"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ]
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }
+            }, 
+            "request": {
+                "body": null, 
+                "uri": "https://sm-prod2.any.do/me/tasks?includeDeleted=false&includeDone=false", 
+                "method": "GET", 
+                "headers": {
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ]
+                }
+            }
+        }
+    ], 
+    "version": 1
+}
