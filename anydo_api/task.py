@@ -37,10 +37,10 @@ class Task(object):
 
     def __setitem__(self, attr, new_value):
         if attr in self.data_dict:
-            old_value = self.__dict__['data_dict'][attr]
+            old_value = self.data_dict[attr]
 
             if old_value != new_value:
-                self.__dict__['data_dict'][attr] = new_value
+                self.data_dict[attr] = new_value
                 self.is_dirty = True
         else:
             raise errors.AttributeError(attr + ' is not exist')

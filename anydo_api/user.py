@@ -16,6 +16,8 @@ class User(object):
     responsible for user management.
     """
 
+    __reserved_attrs = ('data_dict', 'session', 'is_dirty')
+
     def __init__(self, session, data_dict):
         self.data_dict = data_dict
         self.session = session
@@ -119,13 +121,23 @@ class User(object):
 
     def __setitem__(self, attr, new_value):
         if attr in self.data_dict:
-            old_value = self.__dict__['data_dict'][attr]
+            old_value = self.data_dict[attr]
 
             if old_value != new_value:
-                self.__dict__['data_dict'][attr] = new_value
+                self.data_dict[attr] = new_value
                 self.is_dirty = True
         else:
             raise errors.AttributeError(attr + ' is not exist')
+
+    def __setattr__(self, attr, new_value):
+        if attr not in self.__class__.__reserved_attrs and attr in self.data_dict:
+            old_value = self.data_dict[attr]
+
+            if old_value != new_value:
+                self.data_dict[attr] = new_value
+                self.__dict__['is_dirty'] = True
+        else:
+            super(User, self).__setattr__(attr, new_value)
 
     @classmethod
     def create(klass, name, email, password, emails=None, phone_numbers=[]):
