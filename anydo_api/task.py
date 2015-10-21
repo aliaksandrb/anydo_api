@@ -143,6 +143,31 @@ class Task(object):
         """
         return self.user.session
 
+    def subtasks(self):
+        """
+        Returns a list with subtasks of current task for same user.
+        """
+        return [task for task in self.user.tasks() if task['parentGlobalTaskId'] == self['id']]
+
+    def create_subtask(self, **fields):
+        """
+        Creates a new tasks from provided fields and makes it an subtask of current one.
+        """
+        subtask_attrs = fields.copy()
+        subtask_attrs.update({ 'parentGlobalTaskId': self['id'] })
+        subtask = Task.create(user=self.user, **subtask_attrs)
+        self.user.add_task(subtask)
+        return subtask
+
+    def add_subtask(self, subtask):
+        """
+        Adds subtask to current task.
+        Change synhronized remotly.
+        """
+        # Currently we don't support task reassignment from one user to another
+        subtask['parentGlobalTaskId'] = self['id']
+        subtask.save()
+
     @staticmethod
     def generate_uid():
         random_string = ''.join([chr(random.randint(0, 255)) for _ in range(0, 16)])

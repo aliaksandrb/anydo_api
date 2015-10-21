@@ -1,0 +1,85 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "response": {
+                "headers": {
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "content-length": [
+                        "562"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "date": [
+                        "Wed, 21 Oct 2015 16:03:46 GMT"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-methods": [
+                        "HEAD, OPTIONS, DELETE, PUT, GET, POST"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ]
+                }, 
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }, 
+                "body": {
+                    "string": "[{\"alert\": null, \"longitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"subTasks\": [], \"participants\": [], \"status\": \"UNCHECKED\", \"parentGlobalTaskId\": \"hW6wXut2kmwhWDks1xGnnA==\", \"globalTaskId\": \"L349PJJ50x19RoYT5O1BeQ==\", \"note\": null, \"title\": \"New subtask\", \"lastUpdateDate\": 1445443426000, \"shared\": false, \"id\": \"L349PJJ50x19RoYT5O1BeQ==\", \"creationDate\": 1445443426000, \"sharedMembers\": null, \"notifications\": [], \"latitude\": null, \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"assignedTo\": \"tolumis@postonline.me\", \"dueDate\": null, \"priority\": \"Normal\"}]"
+                }
+            }, 
+            "request": {
+                "headers": {
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Content-Length": [
+                        "110"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Accept": [
+                        "application/json"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ]
+                }, 
+                "body": "[{\"parentGlobalTaskId\": \"hW6wXut2kmwhWDks1xGnnA==\", \"title\": \"New subtask\", \"id\": \"L349PJJ50x19RoYT5O1BeQ==\"}]", 
+                "uri": "https://sm-prod2.any.do/me/tasks?includeDone=false&includeDeleted=false", 
+                "method": "POST"
+            }
+        }
+    ]
+}

@@ -220,34 +220,42 @@ class TestTask(TestCase):
         with vcr.use_cassette('fixtures/vcr_cassettes/task_create_valid.json'):
             new_task = Task.create(user=user, title='New Task')
 
-#        self.assertEqual(initial_size + 1, user.tasks())
         self.assertTrue(new_task in user.tasks())
-# timers validatons
-#categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
-#find_by_id
-# parentGlobalTaskId=None,
-#subtasks
-#notes & etc
-# task filters (done/deleted/checkd/all)
 
-#                parentGlobalTaskId=None,
-#                categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
-#                dueDate=1445331600000,#int((time.time() + 3600) * 1000),
-#                repeating=False,
-#                repeatingMethod='TASK_REPEAT_OFF',
-#                latitude=None,
-#                longitude=None,
-#                shared=False,
-#                expanded=False,
-#                subTasks=[],
-#                alert={ 'type': 'NONE' },
-#                note='',
+    def test_task_have_subtasks_that_are_tasks_too(self):
+        user = self.get_me()
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_new_parent.json'):
+            parent = Task.create(user=user, title='Parent')
 
+        self.assertEqual([], parent.subtasks())
 
-## test_user_Creation_logged_in
-#
-## Server Error tests
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_new_subtask.json'):
+            new_task = Task.create(user=parent.user, title='New subtask', parentGlobalTaskId=parent['id'])
 
+        self.assertEqual(new_task, parent.subtasks()[0])
+
+    def test_subtask_could_be_created_directly(self):
+        user = self.get_me()
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_new_parent.json'):
+            parent = Task.create(user=user, title='Parent')
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_new_subtask.json'):
+            new_task = parent.create_subtask(title='New subtask')
+
+        self.assertEqual(new_task, parent.subtasks()[0])
+
+    def test_subtask_could_be_added_as_another_task(self):
+        user = self.get_me()
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_new_parent.json'):
+            parent = Task.create(user=user, title='Parent')
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_new_subtask.json'):
+            subtask = parent.create_subtask(title='New subtask')
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_add_subtask.json'):
+            parent.add_subtask(subtask)
+
+        self.assertEqual(subtask, parent.subtasks()[0])
 
 if __name__ == '__main__':
     import sys
