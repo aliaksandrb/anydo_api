@@ -85,11 +85,11 @@ class User(object):
 
         return self
 
-    def tasks(self, refresh=False):
+    def tasks(self, refresh=False, include_deleted=False, include_done=False):
         if not 'tasks_list' in self.__dict__ or refresh:
             params = {
-                'includeDeleted': False,
-                'includeDone': False,
+                'includeDeleted': str(include_deleted).lower(),
+                'includeDone': str(include_done).lower(),
             }
 
             tasks_data = self.session.get(

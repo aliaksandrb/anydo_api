@@ -17,6 +17,8 @@ class Task(object):
     responsible for task management.
     """
 
+    __reserved_attrs = ('user', 'data_dict', 'is_dirty')
+
     def __init__(self, user, data_dict):
         self.user = user
         self.data_dict = data_dict
@@ -43,6 +45,16 @@ class Task(object):
         else:
             raise errors.AttributeError(attr + ' is not exist')
 
+    def __setattr__(self, attr, new_value):
+        if attr not in self.__class__.__reserved_attrs and attr in self.data_dict:
+            old_value = self.data_dict[attr]
+
+            if old_value != new_value:
+                self.data_dict[attr] = new_value
+                self.__dict__['is_dirty'] = True
+        else:
+            super(Task, self).__setattr__(attr, new_value)
+
     def save(self):
         """
         Pushes updated attributes to the server.
@@ -55,7 +67,7 @@ class Task(object):
                 'Accept-Encoding': 'deflate'
             }
 
-            response_obj = self.user.session.put(
+            response_obj = self.session().put(
                 CONSTANTS.get('TASKS_URL') + '/' + self.id,
                 json=self.data_dict,
                 headers=headers
@@ -74,7 +86,7 @@ class Task(object):
                 client_error.__cause__ = None
                 raise client_error
 
-        self.is_dirty = False
+            self.is_dirty = False
         return self
 
     def destroy(self):
@@ -106,7 +118,29 @@ class Task(object):
 
         return self
 
+    delete = destroy
+
+    def check(self):
+        """
+        Marks task as CHECKED.
+        Uses update functionality under the hood.
+        """
+        self.status = 'CHECKED'
+        self.is_dirty = True
+        self.save()
+
+    def done(self):
+        """
+        Marks task as DONE.
+        Uses update functionality under the hood.
+        """
+        self['status'] = 'DONE'
+        self.save()
+
     def session(self):
+        """
+        Chortcut to retrive user session for requests.
+        """
         return self.user.session
 
     @staticmethod
@@ -163,8 +197,8 @@ class Task(object):
         json_data = fields.copy()
         json_data.update({ 'id': klass.generate_uid() })
         params = {
-            'includeDeleted': False,
-            'includeDone'   : False,
+            'includeDeleted': 'false',
+            'includeDone'   : 'false',
 #            'responseType'  : 'flat'
         }
 
@@ -189,6 +223,6 @@ class Task(object):
             raise client_error
         finally: user.session.close()
 
-        task = Task(user, response_obj.json()[0])
+        task = Task(user, data_dict=response_obj.json()[0])
         return task
 
