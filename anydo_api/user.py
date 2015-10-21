@@ -108,6 +108,16 @@ class User(object):
 
         return self.tasks_list
 
+    def add_task(self, task):
+        """
+        Adds new task into internal storage.
+        """
+
+        if 'tasks_list' in self.__dict__:
+            self.tasks_list.append(task)
+        else:
+            self.tasks_list = [task]
+
     def __getitem__(self, key):
         return self.data_dict[key]
 

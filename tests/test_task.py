@@ -213,6 +213,15 @@ class TestTask(TestCase):
     def test_task_delete_is_an_alias_to_destroy(self):
         self.assertTrue(Task.delete == Task.destroy)
 
+    def test_no_need_to_refresh_tasks_after_creation(self):
+        user = self.get_me()
+        initial_size = len(user.tasks())
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_valid.json'):
+            new_task = Task.create(user=user, title='New Task')
+
+#        self.assertEqual(initial_size + 1, user.tasks())
+        self.assertTrue(new_task in user.tasks())
 # timers validatons
 #categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
 #find_by_id

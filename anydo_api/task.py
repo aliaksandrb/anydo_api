@@ -224,5 +224,6 @@ class Task(object):
         finally: user.session.close()
 
         task = Task(user, data_dict=response_obj.json()[0])
+        user.add_task(task)
         return task
 
