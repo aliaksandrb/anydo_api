@@ -17,8 +17,6 @@ import datetime
 from .base import TestCase
 from .test_helper import vcr, scrub_string
 
-from anydo_api.client import Client
-from anydo_api.user import User
 from anydo_api.task import Task
 from anydo_api.errors import *
 
@@ -215,7 +213,8 @@ class TestTask(TestCase):
 
     def test_no_need_to_refresh_tasks_after_creation(self):
         user = self.get_me()
-        initial_size = len(user.tasks())
+        with vcr.use_cassette('fixtures/vcr_cassettes/tasks.json'):
+            initial_size = len(user.tasks())
 
         with vcr.use_cassette('fixtures/vcr_cassettes/task_create_valid.json'):
             new_task = Task.create(user=user, title='New Task')
@@ -256,6 +255,40 @@ class TestTask(TestCase):
             parent.add_subtask(subtask)
 
         self.assertEqual(subtask, parent.subtasks()[0])
+
+    def test_task_has_notes(self):
+        task = self.__get_task()
+        self.assertEqual([], task.notes())
+
+    def test_text_notes_could_be_added_to_task(self):
+        user = self.get_me()
+        note = 'first one'
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_new_for_notes.json'):
+            task = Task.create(user=user, title='I have notes')
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_add_some_notes.json'):
+            task.add_note(note)
+
+        self.assertTrue(note in task.notes())
+
+
+# refrsh task / user ?
+# timers validatons
+#categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
+#find_by_id
+# task filters (done/deleted/checkd/all)
+
+#                categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
+#                dueDate=1445331600000,#int((time.time() + 3600) * 1000),
+#                repeating=False,
+#                repeatingMethod='TASK_REPEAT_OFF',
+#                latitude=None,
+#                longitude=None,
+#                shared=False,
+#                expanded=False,
+#                alert={ 'type': 'NONE' },
+#                note='',
 
 if __name__ == '__main__':
     import sys

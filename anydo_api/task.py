@@ -168,6 +168,26 @@ class Task(object):
         subtask['parentGlobalTaskId'] = self['id']
         subtask.save()
 
+    def notes(self):
+        """
+        Returns a parsed list of notes for the task.
+        """
+        if self.note:
+            return filter(None, self.note.split('\n'))
+        else:
+            return []
+
+    def add_note(self, text_note):
+        """
+        Adds a text note to current task.
+        Change synhronized remotly.
+        """
+        note = self['note'] or ''
+        if not note.endswith('\n'):
+            note = note + '\n'
+        self['note'] = note + text_note
+        self.save()
+
     @staticmethod
     def generate_uid():
         random_string = ''.join([chr(random.randint(0, 255)) for _ in range(0, 16)])
