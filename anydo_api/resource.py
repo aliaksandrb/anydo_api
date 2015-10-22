@@ -63,6 +63,8 @@ class Resource(object):
         """
 
         if self.is_dirty:
+
+            processed_data = self.__class__._process_data_before_save(self.data_dict)
             headers = {
                 'Content-Type' : 'application/json',
                 'Accept-Encoding': 'deflate'
@@ -70,8 +72,8 @@ class Resource(object):
 
             response_obj = self.session().put(
                 self.__class__._endpoint + '/' + self['id'],
-                json=self.data_dict,
-                headers=headers
+                json=processed_data,
+                headers=headers,
             )
 
             try:
@@ -206,6 +208,15 @@ class Resource(object):
         resource = klass._create_callback(response_obj.json(), user)
         return resource
 
+    @staticmethod
+    def _process_data_before_save(data_dict):
+        """
+        Changes the data send to the server via API before save in cases when needed.
+
+        Is not obligatory.
+        """
+
+        return data_dict
 
     @classmethod
     def _create_callback(klass, resource_json, user):
