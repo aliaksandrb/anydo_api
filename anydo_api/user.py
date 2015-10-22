@@ -26,7 +26,7 @@ class User(object):
     def save(self):
         """
         Pushes updated attributes to the server.
-        If nothing was changed we dont hit an API.
+        If nothing was changed we dont hit the API.
         """
 
         if self.is_dirty:
@@ -109,7 +109,7 @@ class User(object):
             ).json()
             self.session.close()
 
-            self.tasks_list = [ Task(user=self, data_dict=task) for task in tasks_data ]
+            self.tasks_list = [ Task(data_dict=task, user=self) for task in tasks_data ]
 
         self.tasks_list
 

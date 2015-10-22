@@ -12,4 +12,5 @@ class InternalServerError(ClientError): pass
 class ConflictError(ClientError): pass
 
 class AttributeError(ModelError): pass
+class NotImplemented(ModelError): pass
 
