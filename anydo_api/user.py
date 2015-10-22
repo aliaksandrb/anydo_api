@@ -87,7 +87,12 @@ class User(object):
 
         return self
 
-    def tasks(self, refresh=False, include_deleted=False, include_done=False):
+    def tasks(self, refresh=False,
+        include_deleted=False,
+        include_done=False,
+        include_checked=True,
+        include_unchecked=True
+    ):
         if not 'tasks_list' in self.__dict__ or refresh:
             params = {
                 'includeDeleted': str(include_deleted).lower(),
@@ -106,7 +111,14 @@ class User(object):
 
             self.tasks_list = [ Task(user=self, data_dict=task) for task in tasks_data ]
 
-        return self.tasks_list
+        self.tasks_list
+
+        return Task.filter_tasks(self.tasks_list,
+                include_deleted=include_deleted,
+                include_done=include_done,
+                include_checked=include_checked,
+                include_unchecked=include_unchecked
+        )
 
     def add_task(self, task):
         """

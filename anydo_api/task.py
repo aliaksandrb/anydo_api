@@ -8,7 +8,7 @@ import random
 import time
 
 from . import errors
-from .constants import CONSTANTS
+from .constants import CONSTANTS, TASK_STATUSES
 
 class Task(object):
     """
@@ -213,6 +213,24 @@ class Task(object):
         """
 
         return {'title'}
+
+    @staticmethod
+    def filter_tasks(tasks_list, **filters):
+        """
+        Filters tasks by their status.
+        Returns a new filtered list.
+        """
+
+        result = tasks_list[:]
+        statuses = list(TASK_STATUSES)
+
+        if not filters.get('include_deleted', False): statuses.remove('DELETED')
+        if not filters.get('include_done', False): statuses.remove('DONE')
+        if not filters.get('include_checked', False): statuses.remove('CHECKED')
+        if not filters.get('include_unchecked', False): statuses.remove('UNCHECKED')
+
+        result = filter(lambda task: task['status'] in statuses, result)
+        return list(result)
 
     @classmethod
     def check_for_missed_fields(klass, fields):

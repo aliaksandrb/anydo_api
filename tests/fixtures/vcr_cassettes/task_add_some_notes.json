@@ -1,0 +1,85 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Content-Length": [
+                        "548"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ]
+                }, 
+                "body": "{\"title\": \"I have notes\", \"dueDate\": null, \"parentGlobalTaskId\": null, \"latitude\": null, \"longitude\": null, \"globalTaskId\": \"gxsewNtR4zboyq3Fl0cOXQ==\", \"id\": \"gxsewNtR4zboyq3Fl0cOXQ==\", \"priority\": \"Normal\", \"shared\": false, \"notifications\": [], \"subTasks\": [], \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"participants\": [], \"sharedMembers\": null, \"assignedTo\": \"tolumis@postonline.me\", \"status\": \"UNCHECKED\", \"creationDate\": 1445506780000, \"note\": \"\\nfirst one\", \"lastUpdateDate\": 1445506780000, \"alert\": null, \"repeatingMethod\": \"TASK_REPEAT_OFF\"}", 
+                "uri": "https://sm-prod2.any.do/me/tasks/gxsewNtR4zboyq3Fl0cOXQ==", 
+                "method": "PUT"
+            }, 
+            "response": {
+                "headers": {
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-length": [
+                        "548"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "date": [
+                        "Thu, 22 Oct 2015 09:39:41 GMT"
+                    ], 
+                    "access-control-allow-methods": [
+                        "OPTIONS, DELETE, POST, GET, HEAD, PUT"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"shared\": false, \"status\": \"UNCHECKED\", \"creationDate\": 1445506780000, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"latitude\": null, \"sharedMembers\": null, \"lastUpdateDate\": 1445506781000, \"title\": \"I have notes\", \"notifications\": [], \"note\": \"\\nfirst one\", \"assignedTo\": \"tolumis@postonline.me\", \"parentGlobalTaskId\": null, \"id\": \"gxsewNtR4zboyq3Fl0cOXQ==\", \"alert\": null, \"longitude\": null, \"dueDate\": null, \"priority\": \"Normal\", \"participants\": [], \"globalTaskId\": \"gxsewNtR4zboyq3Fl0cOXQ==\", \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"subTasks\": []}"
+                }, 
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }
+            }
+        }
+    ], 
+    "version": 1
+}

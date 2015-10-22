@@ -1,0 +1,82 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ]
+                }, 
+                "body": null, 
+                "uri": "https://sm-prod2.any.do/me/tasks?includeDone=false&includeDeleted=true", 
+                "method": "GET"
+            }, 
+            "response": {
+                "body": {
+                    "string": "[{\"sharedMembers\": null, \"title\": \"Delete me\", \"note\": null, \"notifications\": [], \"status\": \"DELETED\", \"shared\": false, \"creationDate\": 1445355760000, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"dueDate\": null, \"participants\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"subTasks\": [], \"globalTaskId\": \"AB_3gfYr6nDFJYo0lcvlwg==\", \"alert\": null, \"parentGlobalTaskId\": null, \"id\": \"AB_3gfYr6nDFJYo0lcvlwg==\", \"longitude\": null, \"lastUpdateDate\": 1445355872000}, {\"sharedMembers\": null, \"title\": \"New Task\", \"note\": \"Hello world\", \"notifications\": [], \"status\": \"UNCHECKED\", \"shared\": false, \"creationDate\": 1445355764000, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"dueDate\": null, \"participants\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"subTasks\": [], \"globalTaskId\": \"O0LATkq1n2pfVbWhqtVBEQ==\", \"alert\": null, \"parentGlobalTaskId\": null, \"id\": \"O0LATkq1n2pfVbWhqtVBEQ==\", \"longitude\": null, \"lastUpdateDate\": 1445443055000}, {\"sharedMembers\": null, \"title\": \"Delete me2\", \"note\": null, \"notifications\": [], \"status\": \"DELETED\", \"shared\": false, \"creationDate\": 1445419075000, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"dueDate\": null, \"participants\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"subTasks\": [], \"globalTaskId\": \"uvrTSUQu4GpQgtAFz-MvGA==\", \"alert\": null, \"parentGlobalTaskId\": null, \"id\": \"uvrTSUQu4GpQgtAFz-MvGA==\", \"longitude\": null, \"lastUpdateDate\": 1445419077000}, {\"sharedMembers\": null, \"title\": \"Check me\", \"note\": \"ggggggg\\nhjf\\njgf\\nj\\nfg\\nj\\nfg\\nj\\n\", \"notifications\": [], \"status\": \"UNCHECKED\", \"shared\": false, \"creationDate\": 1445433348000, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"dueDate\": null, \"participants\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"subTasks\": [], \"globalTaskId\": \"8Gw_PERNKoMvxcH1NhHGtQ==\", \"alert\": {\"repeatEndType\": \"REPEAT_END_NEVER\", \"repeatInterval\": null, \"customTime\": 0, \"offset\": 0, \"repeatEndsAfterOccurrences\": null, \"repeatMonthType\": \"ON_DATE\", \"repeatDays\": null, \"repeatNextOccurrence\": null, \"repeatStartsOn\": null, \"repeatEndsOn\": null, \"type\": \"NONE\"}, \"parentGlobalTaskId\": null, \"id\": \"8Gw_PERNKoMvxcH1NhHGtQ==\", \"longitude\": null, \"lastUpdateDate\": 1445447790000}, {\"sharedMembers\": null, \"title\": \"SUB\", \"note\": null, \"notifications\": [], \"status\": \"UNCHECKED\", \"shared\": false, \"creationDate\": 1445441961000, \"latitude\": null, \"categoryId\": \"-oOpv8ti_5jsrn6_QkPpYg==\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"dueDate\": 1445443200000, \"participants\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"subTasks\": [{\"sharedMembers\": null, \"title\": \"Hello\", \"note\": null, \"status\": \"UNCHECKED\", \"shared\": false, \"creationDate\": 1445442015000, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"dueDate\": null, \"participants\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"globalTaskId\": \"RZxyKoun11nKrvZI7xjKrg==\", \"alert\": null, \"parentGlobalTaskId\": \"b7Dv1o2MLmcIfyPaQ6rAOg==\", \"id\": \"RZxyKoun11nKrvZI7xjKrg==\", \"longitude\": null, \"lastUpdateDate\": 1445442015000}, {\"sharedMembers\": null, \"title\": \"check me\", \"note\": null, \"status\": \"UNCHECKED\", \"shared\": false, \"creationDate\": 1445442040000, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"dueDate\": null, \"participants\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"globalTaskId\": \"92fmS_5JBiGB1gSgH7eaog==\", \"alert\": null, \"parentGlobalTaskId\": \"b7Dv1o2MLmcIfyPaQ6rAOg==\", \"id\": \"92fmS_5JBiGB1gSgH7eaog==\", \"longitude\": null, \"lastUpdateDate\": 1445442040000}], \"globalTaskId\": \"b7Dv1o2MLmcIfyPaQ6rAOg==\", \"alert\": {\"repeatEndType\": \"REPEAT_END_NEVER\", \"repeatInterval\": null, \"customTime\": 0, \"offset\": 0, \"repeatEndsAfterOccurrences\": null, \"repeatMonthType\": null, \"repeatDays\": null, \"repeatNextOccurrence\": null, \"repeatStartsOn\": null, \"repeatEndsOn\": null, \"type\": \"NONE\"}, \"parentGlobalTaskId\": null, \"id\": \"b7Dv1o2MLmcIfyPaQ6rAOg==\", \"longitude\": null, \"lastUpdateDate\": 1445441961000}, {\"sharedMembers\": null, \"title\": \"Parent\", \"note\": null, \"notifications\": [], \"status\": \"UNCHECKED\", \"shared\": false, \"creationDate\": 1445443250000, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"dueDate\": null, \"participants\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"subTasks\": [{\"sharedMembers\": null, \"title\": \"New subtask\", \"note\": null, \"status\": \"UNCHECKED\", \"shared\": false, \"creationDate\": 1445443332000, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"dueDate\": null, \"participants\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"globalTaskId\": \"pua84_WZX3PgsOclLhwJmQ==\", \"alert\": null, \"parentGlobalTaskId\": \"hW6wXut2kmwhWDks1xGnnA==\", \"id\": \"pua84_WZX3PgsOclLhwJmQ==\", \"longitude\": null, \"lastUpdateDate\": 1445443332000}, {\"sharedMembers\": null, \"title\": \"New subtask\", \"note\": null, \"status\": \"UNCHECKED\", \"shared\": false, \"creationDate\": 1445443426000, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"dueDate\": null, \"participants\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"globalTaskId\": \"L349PJJ50x19RoYT5O1BeQ==\", \"alert\": null, \"parentGlobalTaskId\": \"hW6wXut2kmwhWDks1xGnnA==\", \"id\": \"L349PJJ50x19RoYT5O1BeQ==\", \"longitude\": null, \"lastUpdateDate\": 1445506242000}], \"globalTaskId\": \"hW6wXut2kmwhWDks1xGnnA==\", \"alert\": null, \"parentGlobalTaskId\": null, \"id\": \"hW6wXut2kmwhWDks1xGnnA==\", \"longitude\": null, \"lastUpdateDate\": 1445506242000}, {\"sharedMembers\": null, \"title\": \"I have notes\", \"note\": \"\\nfirst one\", \"notifications\": [], \"status\": \"UNCHECKED\", \"shared\": false, \"creationDate\": 1445506780000, \"latitude\": null, \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"dueDate\": null, \"participants\": [], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"subTasks\": [], \"globalTaskId\": \"gxsewNtR4zboyq3Fl0cOXQ==\", \"alert\": null, \"parentGlobalTaskId\": null, \"id\": \"gxsewNtR4zboyq3Fl0cOXQ==\", \"longitude\": null, \"lastUpdateDate\": 1445506781000}]"
+                }, 
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }, 
+                "headers": {
+                    "access-control-allow-methods": [
+                        "HEAD, GET, PUT, OPTIONS, POST, DELETE"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "date": [
+                        "Thu, 22 Oct 2015 10:20:28 GMT"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-length": [
+                        "6428"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -23,6 +23,7 @@ class TestConstants(unittest.TestCase):
     def test_all_constants_defined(self):
         self.assertTrue(hasattr(self.consts, 'SERVER_API_URL'))
         self.assertTrue(hasattr(self.consts, 'CONSTANTS'))
+        self.assertTrue(hasattr(self.consts, 'TASK_STATUSES'))
 
         c_dict = self.consts.CONSTANTS
         self.assertTrue(c_dict.get('SERVER_API_URL'))

@@ -272,14 +272,50 @@ class TestTask(TestCase):
 
         self.assertTrue(note in task.notes())
 
+    def test_tasks_filtered_by_checked_status(self):
+        user = self.get_me()
 
-# refrsh task / user ?
+        with vcr.use_cassette('fixtures/vcr_cassettes/tasks_after_check.json'):
+            none_checked_tasks = user.tasks(
+                refresh=True,
+                include_done=False,
+                include_deleted=False,
+                include_checked=False
+            )
+
+            self.assertEqual(None, next((task for task in none_checked_tasks if task['status'] == 'CHECKED'), None))
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/tasks_after_check.json'):
+            checked_tasks = user.tasks(
+                refresh=True,
+                include_done=False,
+                include_deleted=False,
+                include_unchecked=False
+            )
+            self.assertEqual(None, next((task for task in checked_tasks if task['status'] == 'UNCHECKED'), None))
+
+    def test_tasks_filtered_by_done_status_without_refresh(self):
+        user = self.get_me()
+        with vcr.use_cassette('fixtures/vcr_cassettes/tasks_with_done.json'):
+            user.tasks(refresh=True, include_done=True)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/fake.json', record_mode='none'):
+            none_done_tasks = user.tasks(include_done=False)
+            self.assertEqual(None, next((task for task in none_done_tasks if task['status'] == 'DONE'), None))
+
+    def test_tasks_filtered_by_deleted_status_without_refresh(self):
+        user = self.get_me()
+        with vcr.use_cassette('fixtures/vcr_cassettes/tasks_with_deleted.json'):
+            user.tasks(refresh=True, include_deleted=True)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/fake.json', record_mode='none'):
+            none_deleted_tasks = user.tasks(include_deleted=False)
+            self.assertEqual(None, next((task for task in none_deleted_tasks if task['status'] == 'DELETED'), None))
+
+# refresh task / user ?
 # timers validatons
-#categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
-#find_by_id
-# task filters (done/deleted/checkd/all)
+# categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
 
-#                categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
 #                dueDate=1445331600000,#int((time.time() + 3600) * 1000),
 #                repeating=False,
 #                repeatingMethod='TASK_REPEAT_OFF',
@@ -288,7 +324,6 @@ class TestTask(TestCase):
 #                shared=False,
 #                expanded=False,
 #                alert={ 'type': 'NONE' },
-#                note='',
 
 if __name__ == '__main__':
     import sys

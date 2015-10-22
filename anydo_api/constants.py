@@ -10,3 +10,5 @@ CONSTANTS = {
     'USER_URL': SERVER_API_URL + '/user',
     'TASKS_URL': SERVER_API_URL + '/me/tasks',
 }
+
+TASK_STATUSES = ('CHECKED', 'UNCHECKED', 'DONE', 'DELETED')

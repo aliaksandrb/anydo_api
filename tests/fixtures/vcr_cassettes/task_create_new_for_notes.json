@@ -1,0 +1,85 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Content-Length": [
+                        "61"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Accept": [
+                        "application/json"
+                    ]
+                }, 
+                "body": "[{\"title\": \"I have notes\", \"id\": \"gxsewNtR4zboyq3Fl0cOXQ==\"}]", 
+                "uri": "https://sm-prod2.any.do/me/tasks?includeDone=false&includeDeleted=false", 
+                "method": "POST"
+            }, 
+            "response": {
+                "headers": {
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-length": [
+                        "541"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "date": [
+                        "Thu, 22 Oct 2015 09:39:40 GMT"
+                    ], 
+                    "access-control-allow-methods": [
+                        "HEAD, DELETE, GET, POST, PUT, OPTIONS"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ]
+                }, 
+                "body": {
+                    "string": "[{\"sharedMembers\": null, \"subTasks\": [], \"lastUpdateDate\": 1445506780000, \"title\": \"I have notes\", \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"assignedTo\": \"tolumis@postonline.me\", \"globalTaskId\": \"gxsewNtR4zboyq3Fl0cOXQ==\", \"shared\": false, \"latitude\": null, \"creationDate\": 1445506780000, \"note\": null, \"notifications\": [], \"longitude\": null, \"alert\": null, \"parentGlobalTaskId\": null, \"id\": \"gxsewNtR4zboyq3Fl0cOXQ==\", \"participants\": [], \"priority\": \"Normal\", \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"status\": \"UNCHECKED\", \"dueDate\": null}]"
+                }, 
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }
+            }
+        }
+    ], 
+    "version": 1
+}
