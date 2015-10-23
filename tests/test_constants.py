@@ -31,6 +31,7 @@ class TestConstants(unittest.TestCase):
         self.assertTrue(c_dict.get('ME_URL'))
         self.assertTrue(c_dict.get('USER_URL'))
         self.assertTrue(c_dict.get('TASKS_URL'))
+        self.assertTrue(c_dict.get('CATEGORIES_URL'))
 
 if __name__ == '__main__':
     import sys

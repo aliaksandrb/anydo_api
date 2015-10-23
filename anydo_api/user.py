@@ -8,6 +8,7 @@ from . import errors
 from .constants import CONSTANTS
 
 from .task import Task
+from .category import Category
 
 class User(object):
     """
@@ -120,6 +121,31 @@ class User(object):
                 include_unchecked=include_unchecked
         )
 
+    def categories(self, refresh=False, include_deleted=False):
+        if not 'categories_list' in self.__dict__ or refresh:
+            params = {
+                'includeDeleted': str(include_deleted).lower(),
+            }
+
+            categories_data = self.session.get(
+                CONSTANTS.get('CATEGORIES_URL'),
+                headers={
+                    'Content-Type': 'application/json',
+                    'Accept-Encoding': 'deflate'
+                },
+                params=params
+            ).json()
+            self.session.close()
+
+            self.categories_list = [ Category(data_dict=category, user=self) for category in categories_data ]
+
+        return self.categories_list
+#        return Task.filter_tasks(self.tasks_list,
+#                include_deleted=include_deleted,
+#                include_done=include_done,
+#                include_checked=include_checked,
+#                include_unchecked=include_unchecked
+#        )
     def add_task(self, task):
         """
         Adds new task into internal storage.

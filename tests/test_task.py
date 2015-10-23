@@ -27,7 +27,7 @@ class TestTask(TestCase):
         user = self.get_me()
         if refresh:
             with vcr.use_cassette('fixtures/vcr_cassettes/tasks_refreshed.json'):
-                task = user.tasks()[0]
+                task = user.tasks(refresh=True)[0]
         else:
             with vcr.use_cassette('fixtures/vcr_cassettes/tasks.json'):
                 task = user.tasks()[0]

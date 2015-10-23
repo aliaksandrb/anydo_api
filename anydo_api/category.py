@@ -37,17 +37,17 @@ class Category(Resource):
 #        print('----data to be sent', result)
 #        return result
 
-#    @staticmethod
-#    def required_attributes():
-#        """
-#        Returns a set of required fields for valid task creation.
-#        This tuple is checked to prevent unnecessary API calls.
-#
-#        Seems that :id and :title attributes are required for now, where
-#        :id is set automatically.
-#        """
-#
-#        return {'title'}
+    @staticmethod
+    def required_attributes():
+        """
+        Returns a set of required fields for valid task creation.
+        This tuple is checked to prevent unnecessary API calls.
+
+        Seems that :id and :title attributes are required for now, where
+        :id is set automatically.
+        """
+
+        return {'name'}
 #
 #    @staticmethod
 #    def filter_tasks(tasks_list, **filters):
@@ -68,9 +68,8 @@ class Category(Resource):
 #        return list(result)
 #
 #
-#    @classmethod
-#    def _create_callback(klass, resource_json, user):
-#      task = klass(data_dict=resource_json[0], user=user)
-#      user.add_task(task)
-#
-#      return task
+    @classmethod
+    def _create_callback(klass, resource_json, user):
+      category = klass(data_dict=resource_json[0], user=user)
+
+      return category
