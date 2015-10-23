@@ -1,0 +1,82 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "response": {
+                "body": {
+                    "string": "[{\"isDeleted\": false, \"name\": \"Personaltt\", \"isDefault\": true, \"sharedMembers\": null, \"default\": true, \"id\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"lastUpdateDate\": 1445605715000}, {\"isDeleted\": false, \"name\": \"SUBh\", \"isDefault\": false, \"sharedMembers\": null, \"default\": false, \"id\": \"-oOpv8ti_5jsrn6_QkPpYg==\", \"lastUpdateDate\": 1445608258000}, {\"isDeleted\": false, \"name\": \"sasha4\", \"isDefault\": false, \"sharedMembers\": null, \"default\": false, \"id\": \"-oOpv8ti_5jsrn6_QkPpYg=1\", \"lastUpdateDate\": 1445615815000}]"
+                }, 
+                "headers": {
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "date": [
+                        "Fri, 23 Oct 2015 16:07:42 GMT"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-allow-methods": [
+                        "PUT, POST, OPTIONS, HEAD, GET"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "content-length": [
+                        "504"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ]
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }
+            }, 
+            "request": {
+                "headers": {
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ]
+                }, 
+                "body": null, 
+                "uri": "https://sm-prod2.any.do/me/categories?includeDeleted=false", 
+                "method": "GET"
+            }
+        }
+    ]
+}

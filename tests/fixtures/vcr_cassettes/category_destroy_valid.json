@@ -1,0 +1,91 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "body": {
+                    "string": ""
+                }, 
+                "headers": {
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "content-length": [
+                        "0"
+                    ], 
+                    "date": [
+                        "Fri, 23 Oct 2015 16:29:47 GMT"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-allow-methods": [
+                        "POST, OPTIONS, PUT, HEAD, DELETE, GET"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "vary": [
+                        "Accept-Encoding"
+                    ], 
+                    "content-encoding": [
+                        "gzip"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ]
+                }, 
+                "status": {
+                    "message": "NO CONTENT", 
+                    "code": 204
+                }
+            }, 
+            "request": {
+                "body": "{\"name\": \"Delete me\", \"id\": \"MMUyWaW8alC8bq6ygZKUhA==\", \"isDeleted\": false, \"lastUpdateDate\": 1445617785000, \"isDefault\": false, \"sharedMembers\": null, \"default\": false}", 
+                "headers": {
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Content-Length": [
+                        "169"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Accept-Encoding": [
+                        "gzip, deflate"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ]
+                }, 
+                "method": "DELETE", 
+                "uri": "https://sm-prod2.any.do/me/categories/MMUyWaW8alC8bq6ygZKUhA=="
+            }
+        }
+    ], 
+    "version": 1
+}

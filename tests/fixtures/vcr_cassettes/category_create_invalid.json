@@ -1,0 +1,64 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "body": {
+                    "string": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">\n<title>500 Internal Server Error</title>\n<h1>Internal Server Error</h1>\n<p>The server encountered an internal error and was unable to complete your request.  Either the server is overloaded or there is an error in the application.</p>\n"
+                }, 
+                "headers": {
+                    "content-length": [
+                        "291"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "content-type": [
+                        "text/html"
+                    ], 
+                    "date": [
+                        "Fri, 23 Oct 2015 16:26:09 GMT"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ]
+                }, 
+                "status": {
+                    "message": "INTERNAL SERVER ERROR", 
+                    "code": 500
+                }
+            }, 
+            "request": {
+                "body": "[{\"isDefault\": false, \"id\": \"kcJMq7U0GxNS9oma-u5P2g==\"}]", 
+                "headers": {
+                    "Content-Length": [
+                        "56"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Accept": [
+                        "application/json"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ]
+                }, 
+                "method": "POST", 
+                "uri": "https://sm-prod2.any.do/me/categories?includeDeleted=false&includeDone=false"
+            }
+        }
+    ], 
+    "version": 1
+}

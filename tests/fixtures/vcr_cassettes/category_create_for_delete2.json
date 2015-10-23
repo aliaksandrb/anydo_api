@@ -1,0 +1,85 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "POST", 
+                "headers": {
+                    "Accept": [
+                        "application/json"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Content-Length": [
+                        "58"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ]
+                }, 
+                "uri": "https://sm-prod2.any.do/me/categories?includeDeleted=false&includeDone=false", 
+                "body": "[{\"id\": \"jtJgd2K7v24qhTpuuDZ_hQ==\", \"name\": \"Delete me2\"}]"
+            }, 
+            "response": {
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }, 
+                "headers": {
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "content-length": [
+                        "172"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "date": [
+                        "Fri, 23 Oct 2015 16:32:32 GMT"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "access-control-allow-methods": [
+                        "PUT, POST, OPTIONS, HEAD, GET"
+                    ]
+                }, 
+                "body": {
+                    "string": "[{\"lastUpdateDate\": 1445617952000, \"isDeleted\": false, \"default\": false, \"id\": \"jtJgd2K7v24qhTpuuDZ_hQ==\", \"name\": \"Delete me2\", \"isDefault\": false, \"sharedMembers\": null}]"
+                }
+            }
+        }
+    ], 
+    "version": 1
+}

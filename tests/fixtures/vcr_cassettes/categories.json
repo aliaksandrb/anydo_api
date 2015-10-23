@@ -1,0 +1,82 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "headers": {
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "content-length": [
+                        "503"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-allow-methods": [
+                        "OPTIONS, POST, HEAD, GET, PUT"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "date": [
+                        "Thu, 22 Oct 2015 13:14:20 GMT"
+                    ]
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "body": {
+                    "string": "[{\"sharedMembers\": null, \"isDeleted\": false, \"lastUpdateDate\": 1445255814000, \"id\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"isDefault\": true, \"default\": true, \"name\": \"Personal\"}, {\"sharedMembers\": null, \"isDeleted\": false, \"lastUpdateDate\": 1445441955000, \"id\": \"-oOpv8ti_5jsrn6_QkPpYg==\", \"isDefault\": false, \"default\": false, \"name\": \"SUB\"}, {\"sharedMembers\": null, \"isDeleted\": false, \"lastUpdateDate\": 1445519283000, \"id\": \"e1zedRTQlOiPzV7SoFezrA==\", \"isDefault\": false, \"default\": false, \"name\": \"xxyxyxyx\"}]"
+                }
+            }, 
+            "request": {
+                "method": "GET", 
+                "uri": "https://sm-prod2.any.do/me/categories?includeDeleted=false", 
+                "headers": {
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ]
+                }, 
+                "body": null
+            }
+        }
+    ], 
+    "version": 1
+}
