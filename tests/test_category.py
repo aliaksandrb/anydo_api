@@ -173,31 +173,36 @@ class TestCategory(TestCase):
     def test_category_delete_is_an_alias_to_destroy(self):
         self.assertTrue(Category.delete == Category.destroy)
 
-#    def test_category_could_be_marked_as_default(self):
-#        user = self.get_me()
-#        with vcr.use_cassette('fixtures/vcr_cassettes/tasks_before_mark.json'):
-#            task = user.tasks()[0]
-#            self.assertEqual('UNCHECKED', task['status'])
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/task_mark_done.json'):
-#            task.done()
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/tasks_after_done.json'):
-#            task = next((t for t in user.tasks(refresh=True, include_done=True) if t['id'] == task['id']), None)
-#            self.assertEqual('DONE', task['status'])
-#
+    def test_user_knows_about_default_category(self):
+        user = self.get_me()
+        with vcr.use_cassette('fixtures/vcr_cassettes/categories.json'):
+            category = user.default_category()
+        self.assertEqual(True, category.isDefault)
 
+    def test_category_could_be_marked_as_default(self):
+        user = self.get_me()
+        with vcr.use_cassette('fixtures/vcr_cassettes/categories_current_default.json'):
+            default_old = user.default_category()
 
-#    def test_no_need_to_refresh_tasks_after_creation(self):
-#        user = self.get_me()
-#        with vcr.use_cassette('fixtures/vcr_cassettes/tasks.json'):
-#            initial_size = len(user.tasks())
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_valid.json'):
-#            new_task = Task.create(user=user, title='New Task')
-#
-#        self.assertTrue(new_task in user.tasks())
-#
+        new_default = user.categories()[0] if user.categories()[0] != default_old else user.categories()[1]
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/category_new_default.json', record_mode='new_episodes'):
+            new_default.mark_default()
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/category_after_default_was_changed.json'):
+            user.categories(refresh=True)
+            self.assertFalse(new_default['id'] == default_old['id'])
+
+    def test_no_need_to_refresh_categories_after_creation(self):
+        user = self.get_me()
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/categories.json'):
+            initial_size = len(user.categories())
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/category_create_valid.json'):
+            category = Category.create(user=user, name='Test Category')
+
+        self.assertTrue(category in user.categories())
 
 #    def test_task_has_notes(self):
 #        task = self.__get_task()

@@ -156,6 +156,22 @@ class User(object):
         else:
             self.tasks_list = [task]
 
+    def add_category(self, category):
+        """
+        Adds new category into internal storage.
+        """
+
+        if 'categories_list' in self.__dict__:
+            self.categories_list.append(category)
+        else:
+            self.categories_list = [category]
+
+    def default_category(self):
+        """
+        Returns defaul category for user if exist
+        """
+        return next((cat for cat in self.categories() if cat.isDefault), None)
+
     def __getitem__(self, key):
         return self.data_dict[key]
 

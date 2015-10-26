@@ -22,9 +22,25 @@ class Category(Resource):
 
     def session(self):
         """
-        Chortcut to retrive user session for requests.
+        Shortcut to retrive user session for requests.
         """
         return self.user.session
+
+    def mark_default(self):
+        """
+        Shortcut to mark a category as default one locally.
+
+        Marks previous default one as not default
+        """
+        previous = self.user.default_category()
+        previous.default = False
+        previous.isDefault = False
+        previous.save()
+
+        self.default = True
+        self.isDefault = True
+        self.save()
+        return self
 
 #    @staticmethod
 #    def _process_data_before_save(data_dict):
@@ -71,5 +87,5 @@ class Category(Resource):
     @classmethod
     def _create_callback(klass, resource_json, user):
       category = klass(data_dict=resource_json[0], user=user)
-
+      user.add_category(category)
       return category

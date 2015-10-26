@@ -1,0 +1,82 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "GET", 
+                "uri": "https://sm-prod2.any.do/me/categories?includeDeleted=false", 
+                "body": null, 
+                "headers": {
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ]
+                }
+            }, 
+            "response": {
+                "body": {
+                    "string": "[{\"id\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"default\": true, \"lastUpdateDate\": 1445866069000, \"sharedMembers\": null, \"isDeleted\": false, \"name\": \"Home\", \"isDefault\": true}, {\"id\": \"-oOpv8ti_5jsrn6_QkPpYg==\", \"default\": false, \"lastUpdateDate\": 1445866069000, \"sharedMembers\": null, \"isDeleted\": false, \"name\": \"SUBh\", \"isDefault\": false}, {\"id\": \"-oOpv8ti_5jsrn6_QkPpYg=1\", \"default\": false, \"lastUpdateDate\": 1445616511000, \"sharedMembers\": null, \"isDeleted\": false, \"name\": \"sasha5\", \"isDefault\": false}, {\"id\": \"-oOpv8ti_5jsrn6_QzPpYg=1\", \"default\": false, \"lastUpdateDate\": 1445616926000, \"sharedMembers\": null, \"isDeleted\": false, \"name\": \"sasha5\", \"isDefault\": false}, {\"id\": \"xWhCmAw5xARaTpieae2HMg==\", \"default\": false, \"lastUpdateDate\": 1445864449000, \"sharedMembers\": null, \"isDeleted\": false, \"name\": \"Test Category\", \"isDefault\": false}, {\"id\": \"t3NomUCH9QHn2hDC-dpigA==\", \"default\": false, \"lastUpdateDate\": 1445617035000, \"sharedMembers\": null, \"isDeleted\": false, \"name\": \"Test Category\", \"isDefault\": false}, {\"id\": \"LU8hRQJokqAoPh-SIIZnSA==\", \"default\": false, \"lastUpdateDate\": 1445617052000, \"sharedMembers\": null, \"isDeleted\": false, \"name\": \"Test Category\", \"isDefault\": false}, {\"id\": \"-oOpz4ti_6jsrn6_QzPpYg=1\", \"default\": false, \"lastUpdateDate\": 1445617232000, \"sharedMembers\": null, \"isDeleted\": false, \"name\": \"sasha5\", \"isDefault\": false}, {\"id\": \"-oOpz4xi_6jsrn6_QzPpYg=1\", \"default\": false, \"lastUpdateDate\": 1445617438000, \"sharedMembers\": null, \"isDeleted\": false, \"name\": \"sasha5\", \"isDefault\": false}, {\"id\": \"-oOpz4xi_7jsrn6_QzPpYg=1\", \"default\": false, \"lastUpdateDate\": 1445864447000, \"sharedMembers\": null, \"isDeleted\": false, \"name\": \"sasha5\", \"isDefault\": false}, {\"id\": \"Jo9NM-IF0jk_WgpJ2QdtCQ==\", \"default\": false, \"lastUpdateDate\": 1445617515000, \"sharedMembers\": null, \"isDeleted\": false, \"name\": \"Test\", \"isDefault\": false}]"
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "content-length": [
+                        "1861"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-allow-methods": [
+                        "OPTIONS, POST, PUT, HEAD, GET"
+                    ], 
+                    "date": [
+                        "Mon, 26 Oct 2015 13:28:28 GMT"
+                    ]
+                }
+            }
+        }
+    ], 
+    "version": 1
+}

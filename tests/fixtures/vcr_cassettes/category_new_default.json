@@ -1,0 +1,165 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "PUT", 
+                "uri": "https://sm-prod2.any.do/me/categories/_SJ3OZLSxze2jAe23ZUEPg==", 
+                "body": "{\"name\": \"Home\", \"lastUpdateDate\": 1445866069000, \"id\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"default\": false, \"isDefault\": false, \"sharedMembers\": null, \"isDeleted\": false}", 
+                "headers": {
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Content-Length": [
+                        "164"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ]
+                }
+            }, 
+            "response": {
+                "body": {
+                    "string": "{\"sharedMembers\": null, \"name\": \"Home\", \"isDefault\": false, \"isDeleted\": false, \"lastUpdateDate\": 1445866109000, \"id\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"default\": false}"
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "content-length": [
+                        "164"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-allow-methods": [
+                        "GET, HEAD, OPTIONS, DELETE, PUT, POST"
+                    ], 
+                    "date": [
+                        "Mon, 26 Oct 2015 13:28:30 GMT"
+                    ]
+                }
+            }
+        }, 
+        {
+            "request": {
+                "method": "PUT", 
+                "uri": "https://sm-prod2.any.do/me/categories/-oOpv8ti_5jsrn6_QkPpYg==", 
+                "body": "{\"name\": \"SUBh\", \"lastUpdateDate\": 1445866069000, \"id\": \"-oOpv8ti_5jsrn6_QkPpYg==\", \"default\": true, \"isDefault\": true, \"sharedMembers\": null, \"isDeleted\": false}", 
+                "headers": {
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Content-Length": [
+                        "162"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ]
+                }
+            }, 
+            "response": {
+                "body": {
+                    "string": "{\"default\": true, \"lastUpdateDate\": 1445866110000, \"name\": \"SUBh\", \"sharedMembers\": null, \"isDefault\": true, \"id\": \"-oOpv8ti_5jsrn6_QkPpYg==\", \"isDeleted\": false}"
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "content-length": [
+                        "162"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-allow-methods": [
+                        "POST, OPTIONS, DELETE, HEAD, GET, PUT"
+                    ], 
+                    "date": [
+                        "Mon, 26 Oct 2015 13:28:30 GMT"
+                    ]
+                }
+            }
+        }
+    ], 
+    "version": 1
+}
