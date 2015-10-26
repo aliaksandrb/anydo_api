@@ -86,6 +86,12 @@ class Task(Resource):
         self['note'] = note + text_note
         self.save()
 
+    def category(self):
+        """
+        Returns a category object based mapped to selected task.
+        """
+        return next((cat for cat in self.user.categories() if cat['id'] == self['categoryId']), None)
+
     @staticmethod
     def required_attributes():
         """

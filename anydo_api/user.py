@@ -139,13 +139,12 @@ class User(object):
 
             self.categories_list = [ Category(data_dict=category, user=self) for category in categories_data ]
 
-        return self.categories_list
-#        return Task.filter_tasks(self.tasks_list,
-#                include_deleted=include_deleted,
-#                include_done=include_done,
-#                include_checked=include_checked,
-#                include_unchecked=include_unchecked
-#        )
+        result = self.categories_list
+        if not include_deleted:
+            result = list(filter(lambda cat: not cat['isDeleted'], result))
+
+        return result
+
     def add_task(self, task):
         """
         Adds new task into internal storage.
@@ -241,7 +240,6 @@ class User(object):
             raise client_error
         finally: session.close()
 
-       # catch possible exceptions
         from .client import Client
         user = Client(email=email, password=password).me()
         return user

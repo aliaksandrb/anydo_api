@@ -1,0 +1,82 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "GET", 
+                "body": null, 
+                "uri": "https://sm-prod2.any.do/me/categories?includeDeleted=true", 
+                "headers": {
+                    "Accept": [
+                        "*/*"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ]
+                }
+            }, 
+            "response": {
+                "body": {
+                    "string": "[{\"lastUpdateDate\": 1445866109000, \"isDeleted\": false, \"id\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"Home\", \"default\": false}, {\"lastUpdateDate\": 1445866110000, \"isDeleted\": false, \"id\": \"-oOpv8ti_5jsrn6_QkPpYg==\", \"isDefault\": true, \"sharedMembers\": null, \"name\": \"SUBh\", \"default\": true}, {\"lastUpdateDate\": 1445594337000, \"isDeleted\": true, \"id\": \"e1zedRTQlOiPzV7SoFezrA==\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"zzzzzzzdsfsdf\", \"default\": false}, {\"lastUpdateDate\": 1445521398000, \"isDeleted\": true, \"id\": \"AL6d5yQAo9Fiqix6hZstoQ==\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"home\", \"default\": false}, {\"lastUpdateDate\": 1445521405000, \"isDeleted\": true, \"id\": \"91bN6_34eSeTXlNneAs-vA==\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"home\", \"default\": false}, {\"lastUpdateDate\": 1445594344000, \"isDeleted\": true, \"id\": \"VdehnIBPUKXGi3lVU9LM1Q==\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"fjfgjfgj\", \"default\": false}, {\"lastUpdateDate\": 1445616511000, \"isDeleted\": false, \"id\": \"-oOpv8ti_5jsrn6_QkPpYg=1\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"sasha5\", \"default\": false}, {\"lastUpdateDate\": 1445616926000, \"isDeleted\": false, \"id\": \"-oOpv8ti_5jsrn6_QzPpYg=1\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"sasha5\", \"default\": false}, {\"lastUpdateDate\": 1445864449000, \"isDeleted\": false, \"id\": \"xWhCmAw5xARaTpieae2HMg==\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"Test Category\", \"default\": false}, {\"lastUpdateDate\": 1445617035000, \"isDeleted\": false, \"id\": \"t3NomUCH9QHn2hDC-dpigA==\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"Test Category\", \"default\": false}, {\"lastUpdateDate\": 1445617052000, \"isDeleted\": false, \"id\": \"LU8hRQJokqAoPh-SIIZnSA==\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"Test Category\", \"default\": false}, {\"lastUpdateDate\": 1445617232000, \"isDeleted\": false, \"id\": \"-oOpz4ti_6jsrn6_QzPpYg=1\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"sasha5\", \"default\": false}, {\"lastUpdateDate\": 1445617438000, \"isDeleted\": false, \"id\": \"-oOpz4xi_6jsrn6_QzPpYg=1\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"sasha5\", \"default\": false}, {\"lastUpdateDate\": 1445864447000, \"isDeleted\": false, \"id\": \"-oOpz4xi_7jsrn6_QzPpYg=1\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"sasha5\", \"default\": false}, {\"lastUpdateDate\": 1445617515000, \"isDeleted\": false, \"id\": \"Jo9NM-IF0jk_WgpJ2QdtCQ==\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"Test\", \"default\": false}, {\"lastUpdateDate\": 1445617787000, \"isDeleted\": true, \"id\": \"MMUyWaW8alC8bq6ygZKUhA==\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"Delete me\", \"default\": false}, {\"lastUpdateDate\": 1445617954000, \"isDeleted\": true, \"id\": \"jtJgd2K7v24qhTpuuDZ_hQ==\", \"isDefault\": false, \"sharedMembers\": null, \"name\": \"Delete me2\", \"default\": false}]"
+                }, 
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-allow-methods": [
+                        "GET, HEAD, PUT, POST, OPTIONS"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-length": [
+                        "2875"
+                    ], 
+                    "date": [
+                        "Mon, 26 Oct 2015 14:46:19 GMT"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ]
+                }
+            }
+        }
+    ], 
+    "version": 1
+}

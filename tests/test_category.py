@@ -40,6 +40,11 @@ class TestCategory(TestCase):
         with vcr.use_cassette('fixtures/vcr_cassettes/categories.json'):
             self.assertIsInstance(user.categories(), list)
 
+    def test_categories_do_not_include_deleted_by_defaut(self):
+        user = self.get_me()
+        with vcr.use_cassette('fixtures/vcr_cassettes/categories.json'):
+            self.assertIsNone(next((cat for cat in user.categories() if cat['isDeleted']), None))
+
     def test_user_categories_are_cached_and_not_require_additional_request(self):
         user = self.get_me()
         with vcr.use_cassette('fixtures/vcr_cassettes/categories.json', record_mode='once'):
@@ -204,51 +209,64 @@ class TestCategory(TestCase):
 
         self.assertTrue(category in user.categories())
 
-#    def test_task_has_notes(self):
-#        task = self.__get_task()
-#        self.assertEqual([], task.notes())
-#
-#    def test_text_notes_could_be_added_to_task(self):
-#        user = self.get_me()
-#        note = 'first one'
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_new_for_notes.json'):
-#            task = Task.create(user=user, title='I have notes')
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/task_add_some_notes.json'):
-#            task.add_note(note)
-#
-#        self.assertTrue(note in task.notes())
-#
-#    def test_tasks_filtered_by_done_status_without_refresh(self):
-#        user = self.get_me()
-#        with vcr.use_cassette('fixtures/vcr_cassettes/tasks_with_done.json'):
-#            user.tasks(refresh=True, include_done=True)
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/fake.json', record_mode='none'):
-#            none_done_tasks = user.tasks(include_done=False)
-#            self.assertEqual(None, next((task for task in none_done_tasks if task['status'] == 'DONE'), None))
-#
-#    def test_tasks_filtered_by_deleted_status_without_refresh(self):
-#        user = self.get_me()
-#        with vcr.use_cassette('fixtures/vcr_cassettes/tasks_with_deleted.json'):
-#            user.tasks(refresh=True, include_deleted=True)
-#
-#        with vcr.use_cassette('fixtures/vcr_cassettes/fake.json', record_mode='none'):
-#            none_deleted_tasks = user.tasks(include_deleted=False)
-#            self.assertEqual(None, next((task for task in none_deleted_tasks if task['status'] == 'DELETED'), None))
+    def test_category_has_tasks(self):
+        category = self.__get_category()
+        with vcr.use_cassette('fixtures/vcr_cassettes/tasks.json'):
+            self.assertTrue(len(category.tasks()) > 0)
 
-#default: false
-#id: "e1zedRTQlOiPzV7SoFezrA=="
-#isDefault: false
-#isDeleted: false
-#lastUpdateDate: 1445519283000
-#name: "zzzzzzz"
-#sharedMembers: null
+    def test_category_could_be_added_to_category(self):
+        category = self.__get_category()
 
-#TEST
-#  "default": false,
-#  "isDefault": false,
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_valid.json'):
+            task = Task.create(user=category.user,
+                title='Task For Category',
+                priority='Normal',
+                status='UNCHECKED'
+            )
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/category_move_task_to_category.json'):
+            category.add_task(task)
+
+        self.assertEqual(category, task.category())
+        self.assertTrue(task in category.tasks())
+
+    def test_category_could_be_removed_from_not_default_category(self):
+        with vcr.use_cassette('fixtures/vcr_cassettes/categories.json'):
+            categories = self.get_me().categories()
+        category = categories[0] if not categories[0].isDefault else categories[1]
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_valid.json'):
+            task = Task.create(user=category.user,
+                title='Task For Category',
+                priority='Normal',
+                status='UNCHECKED'
+            )
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/category_move_task_to_category.json'):
+            category.add_task(task)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/category_remove_task_from_category.json'):
+            category.remove_task(task)
+
+        self.assertNotEqual(category, task.category())
+        self.assertEqual(category.user.default_category(), task.category())
+        self.assertFalse(task in category.tasks())
+
+    def test_categories_could_be_filtered_by_deleted_status_with_refresh(self):
+        user = self.get_me()
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/category_deleted_ones.json'):
+            deleted = user.categories(refresh=True, include_deleted=True)
+
+        self.assertTrue(len(deleted) > 0)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/fake.json', record_mode='none'):
+            deleted2 = user.categories(include_deleted=True)
+
+        self.assertEqual(deleted, deleted2)
+        self.assertTrue(len([cat for cat in deleted2 if cat['isDeleted']]) > 0)
+
+
 if __name__ == '__main__':
     import sys
     sys.exit(unittest.main())

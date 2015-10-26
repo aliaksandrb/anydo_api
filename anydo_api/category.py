@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from . import errors
 from .resource import Resource
 from .constants import CONSTANTS
 
@@ -42,16 +43,33 @@ class Category(Resource):
         self.save()
         return self
 
-#    @staticmethod
-#    def _process_data_before_save(data_dict):
-#        """
-#        Changes the data send to the server via API before save in cases when needed.
-#        """
-#        result = data_dict.copy()
-#        del result['lastUpdateDate']
-#        del result['id']
-#        print('----data to be sent', result)
-#        return result
+    def tasks(self):
+        """
+        Returns a list of the user tasks that belongs to selected category
+        """
+        tasks = self.user.tasks()
+        return [task for task in tasks if task.categoryId == self['id']]
+
+    def add_task(self, task):
+        """
+        Adds new task into category.
+        Updates task and pushes changes remotly.
+        """
+        task.categoryId = self['id']
+        task.save()
+
+    def remove_task(self, task):
+        """
+        Removes a task from the category and move to default one.
+        Updates task and pushes changes remotly.
+
+        If category already default do nothing.
+        """
+        if task.category().isDefault:
+            raise errors.ModelError('Can not remove task from default category')
+
+        task.categoryId = self.user.default_category()['id']
+        task.save()
 
     @staticmethod
     def required_attributes():
@@ -64,26 +82,7 @@ class Category(Resource):
         """
 
         return {'name'}
-#
-#    @staticmethod
-#    def filter_tasks(tasks_list, **filters):
-#        """
-#        Filters tasks by their status.
-#        Returns a new filtered list.
-#        """
-#
-#        result = tasks_list[:]
-#        statuses = list(TASK_STATUSES)
-#
-#        if not filters.get('include_deleted', False): statuses.remove('DELETED')
-#        if not filters.get('include_done', False): statuses.remove('DONE')
-#        if not filters.get('include_checked', False): statuses.remove('CHECKED')
-#        if not filters.get('include_unchecked', False): statuses.remove('UNCHECKED')
-#
-#        result = filter(lambda task: task['status'] in statuses, result)
-#        return list(result)
-#
-#
+
     @classmethod
     def _create_callback(klass, resource_json, user):
       category = klass(data_dict=resource_json[0], user=user)
