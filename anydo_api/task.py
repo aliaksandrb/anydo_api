@@ -86,11 +86,69 @@ class Task(Resource):
         self['note'] = note + text_note
         self.save()
 
+    def members(self):
+        """
+        Returns a list of dicts {username:email} representing the task members, including owner.
+        If the task is not share returns only owner info.
+        """
+        objects_list = self['sharedMembers']
+        if objects_list:
+            return [{ member['target']: member['name'] } for member in objects_list]
+        else:
+            return [{ self.user['email']: self.user['name'] }]
+
+    def share_with(self, new_member, message=None):
+        """
+        Share a task with new member.
+        Pushes changes to server.
+        Updates task members list and new member tasks list
+        """
+        headers = {
+            'Content-Type'   : 'application/json',
+            'Accept'         : 'application/json',
+            'Accept-Encoding': 'deflate',
+        }
+
+        json_data = {
+            'invitees': [{ 'email': new_member['email'] }],
+            'message': message
+        }
+
+        session = self.session()
+        response_obj = session.post(
+            self.__class__._endpoint + '/' + self['id'] + '/share',
+            json=json_data,
+            headers=headers,
+        )
+
+        try:
+            response_obj.raise_for_status()
+        except requests.exceptions.HTTPError as error:
+            if response_obj.status_code == 400:
+                client_error = errors.BadRequestError(response_obj.content)
+            elif response_obj.status_code == 409:
+                client_error = errors.ConflictError(response_obj.content)
+            else:
+                client_error = errors.InternalServerError(error)
+
+            client_error.__cause__ = None
+            raise client_error
+        finally: session.close()
+
+        self.data_dict = response_obj.json()
+        return self
+
     def category(self):
         """
         Returns a category object based mapped to selected task.
         """
         return next((cat for cat in self.user.categories() if cat['id'] == self['categoryId']), None)
+
+    def parent(self):
+        """
+        Returns parent task object for subtask and None for first-level task.
+        """
+        return next((task for task in self.user.tasks() if task['id'] == self['parentGlobalTaskId']), None)
 
     @staticmethod
     def required_attributes():

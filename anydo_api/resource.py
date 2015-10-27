@@ -88,6 +88,7 @@ class Resource(object):
 
                 client_error.__cause__ = None
                 raise client_error
+            finally: self.session().close()
 
             self.is_dirty = False
         return self
@@ -118,6 +119,7 @@ class Resource(object):
 
             client_error.__cause__ = None
             raise client_error
+        finally: self.session().close()
 
         return self
 
@@ -128,6 +130,38 @@ class Resource(object):
         Chortcut to retrive object session for requests.
         """
         raise errors.NotImplemented('Need to be implemented in the class descendant')
+
+    def refresh(self):
+        """
+        Reload reource data from remote service.
+        """
+        headers = {
+            'Content-Type'   : 'application/json',
+            'Accept'         : 'application/json',
+            'Accept-Encoding': 'deflate',
+        }
+
+        response_obj = self.session().get(
+            self.__class__._endpoint + '/' + self['id'],
+            headers=headers
+        )
+
+        try:
+            response_obj.raise_for_status()
+        except requests.exceptions.HTTPError as error:
+            if response_obj.status_code == 400:
+                client_error = errors.BadRequestError(response_obj.content)
+            elif response_obj.status_code == 409:
+                client_error = errors.ConflictError(response_obj.content)
+            else:
+                client_error = errors.InternalServerError(error)
+
+            client_error.__cause__ = None
+            raise client_error
+        finally: self.session().close()
+
+        self.data_dict = response_obj.json()
+        return self
 
     @staticmethod
     def generate_uid():

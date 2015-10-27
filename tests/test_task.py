@@ -18,6 +18,7 @@ from .base import TestCase
 from .test_helper import vcr, scrub_string
 
 from anydo_api.task import Task
+from anydo_api.user import User
 from anydo_api.errors import *
 
 
@@ -312,18 +313,88 @@ class TestTask(TestCase):
             none_deleted_tasks = user.tasks(include_deleted=False)
             self.assertEqual(None, next((task for task in none_deleted_tasks if task['status'] == 'DELETED'), None))
 
-# refresh task / user ?
-# timers validatons
-# categoryId='_SJ3OZLSxze2jAe23ZUEPg==',
+    def test_subtask_knows_about_its_parent(self):
+        user = self.get_me()
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_new_parent.json'):
+            parent = Task.create(user=user, title='Parent')
 
-#                dueDate=1445331600000,#int((time.time() + 3600) * 1000),
-#                repeating=False,
-#                repeatingMethod='TASK_REPEAT_OFF',
-#                latitude=None,
-#                longitude=None,
-#                shared=False,
-#                expanded=False,
-#                alert={ 'type': 'NONE' },
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_new_subtask.json'):
+            new_task = Task.create(user=parent.user, title='New subtask', parentGlobalTaskId=parent['id'])
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/fake.json', record_mode='none'):
+            self.assertEqual(parent, new_task.parent())
+            self.assertEqual(None, parent.parent())
+
+    def test_task_knows_its_members(self):
+        task = self.__get_task()
+        old_member = task.user
+
+        self.assertEqual([{ old_member['email']: old_member['name'] }], task.members())
+
+    def test_user_knows_about_its_pending_tasks(self):
+        task = self.__get_task()
+
+        fake_email = 'fake@xxx.zzz'
+        fake_password = 'fake_password'
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_user_for_share.json',
+            before_record_response=scrub_string(fake_password),
+            filter_post_data_parameters=['password', 'j_password']
+        ):
+            new_member = User.create(name='fake', email=fake_email, password=fake_password)
+
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_share_with_user.json'):
+            task.share_with(new_member)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_user_pending_tasks.json'):
+            self.assertTrue(len(new_member.pending_tasks_ids()) == 1)
+            self.assertEqual(task['title'], new_member.pending_tasks()[0]['title'])
+
+    def test_task_could_be_approved_by_user(self):
+        old_member = self.get_me()
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_for_sharing.json'):
+            task = Task.create(user=old_member,
+                title='Shared Task',
+                category='Personal',
+                priority='Normal',
+                status='UNCHECKED'
+            )
+
+        fake_email = 'unknown@xxx.xxx'
+        fake_password = 'fake_password'
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_create_user_for_sharing_and_approve.json',
+            before_record_response=scrub_string(fake_password),
+            filter_post_data_parameters=['password', 'j_password']
+        ):
+            new_member = User.create(name='fake', email=fake_email, password=fake_password)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_share_with_user_to_approve.json'):
+            task.share_with(new_member)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_user_pending_tasks_before_approve.json'):
+            self.assertTrue(len(new_member.pending_tasks_ids(refresh=True)) == 1)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_user_approve_pending_task.json'):
+            new_member.approve_pending_task(pending_task_id=new_member.pending_tasks_ids()[0])
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_user_pending_tasks_after_approve.json'):
+            self.assertTrue(len(new_member.pending_tasks_ids(refresh=True)) == 0)
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/task_members_after_refresh.json'):
+            task.refresh()
+
+            self.assertEqual([
+                { old_member['email']: old_member['name'] },
+                { new_member['email']: new_member['name'] }],
+                task.members()
+            )
+
+        with vcr.use_cassette('fixtures/vcr_cassettes/tasks_of_new_member.json'):
+            shared_task = new_member.tasks(refresh=True)[0]
+            self.assertEqual(task['title'], shared_task['title'])
+
+# timers validatons
+# dueDate=1445331600000,#int((time.time() + 3600) * 1000),
 
 if __name__ == '__main__':
     import sys

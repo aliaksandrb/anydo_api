@@ -17,6 +17,7 @@ class User(object):
     responsible for user management.
     """
 
+    _endpoint = CONSTANTS.get('ME_URL')
     __reserved_attrs = ('data_dict', 'session', 'is_dirty')
 
     def __init__(self, session, data_dict):
@@ -170,6 +171,84 @@ class User(object):
         Returns defaul category for user if exist
         """
         return next((cat for cat in self.categories() if cat.isDefault), None)
+
+    def pending_tasks(self, refresh=False):
+        """
+        Returns a list of dicts representing a pending task that was shared with current user.
+        Empty list otherwise.
+        """
+        if not '_pending_tasks' in self.__dict__ or refresh:
+            headers = {
+                'Content-Type'   : 'application/json',
+                'Accept'         : 'application/json',
+                'Accept-Encoding': 'deflate',
+            }
+
+            response_obj = self.session.get(
+                self.__class__._endpoint + '/pending',
+                headers=headers
+            )
+
+            try:
+                response_obj.raise_for_status()
+            except requests.exceptions.HTTPError as error:
+                if response_obj.status_code == 400:
+                    client_error = errors.BadRequestError(response_obj.content)
+                elif response_obj.status_code == 409:
+                    client_error = errors.ConflictError(response_obj.content)
+                else:
+                    client_error = errors.InternalServerError(error)
+
+                client_error.__cause__ = None
+                raise client_error
+            finally: self.session.close()
+
+            self._pending_tasks = response_obj.json()['pendingTasks']
+
+        return self._pending_tasks or []
+
+    def pending_tasks_ids(self, refresh=False):
+        """
+        Returns a list of pending tasks ids shared with user.
+        Empty list otherwise.
+        """
+        return [task['id'] for task in self.pending_tasks(refresh=refresh)]
+
+    def approve_pending_task(self, pending_task_id=None, pending_task=None):
+        """
+        Approves pending task via API call.
+        Accept pending_task_id or pending_task dict (in format of pending_tasks.
+        """
+        task_id = pending_task_id or pending_task['id']
+        if not task_id:
+            raise errors.AttributeError('Eather :pending_task_id or :pending_task argument is required.')
+
+        headers = {
+            'Content-Type'   : 'application/json',
+            'Accept'         : 'application/json',
+            'Accept-Encoding': 'deflate',
+        }
+
+        response_obj = self.session.post(
+            self.__class__._endpoint + '/pending/' + task_id + '/accept',
+            headers=headers
+        )
+
+        try:
+            response_obj.raise_for_status()
+        except requests.exceptions.HTTPError as error:
+            if response_obj.status_code == 400:
+                client_error = errors.BadRequestError(response_obj.content)
+            elif response_obj.status_code == 409:
+                client_error = errors.ConflictError(response_obj.content)
+            else:
+                client_error = errors.InternalServerError(error)
+
+            client_error.__cause__ = None
+            raise client_error
+        finally: self.session.close()
+
+        return response_obj.json()
 
     def __getitem__(self, key):
         return self.data_dict[key]
