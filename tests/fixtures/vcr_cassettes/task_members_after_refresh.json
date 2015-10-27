@@ -1,0 +1,82 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Accept": [
+                        "application/json"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ]
+                }, 
+                "body": null, 
+                "uri": "https://sm-prod2.any.do/me/tasks/UZ2G-mxK5QzV-CCfAQSnLQ==", 
+                "method": "GET"
+            }, 
+            "response": {
+                "headers": {
+                    "access-control-allow-methods": [
+                        "HEAD, GET, OPTIONS, POST, DELETE, PUT"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "content-length": [
+                        "897"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "date": [
+                        "Tue, 27 Oct 2015 13:49:47 GMT"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"creationDate\": 1445952925000, \"globalTaskId\": \"UZ2G-mxK5QzV-CCfAQSnLQ==\", \"subTasks\": [], \"alert\": null, \"participants\": [], \"shared\": false, \"parentGlobalTaskId\": null, \"title\": \"Shared Task\", \"status\": \"UNCHECKED\", \"assignedTo\": \"tolumis@postonline.me\", \"priority\": \"Normal\", \"categoryId\": \"-oOpv8ti_5jsrn6_QkPpYg==\", \"latitude\": null, \"lastUpdateDate\": 1445952932000, \"note\": null, \"dueDate\": null, \"notifications\": [], \"sharedMembers\": [{\"via\": \"EMAIL\", \"invitedByName\": null, \"invitedByEmail\": null, \"status\": \"CREATOR\", \"target\": \"tolumis@postonline.me\", \"name\": \"kulibaba\", \"message\": null}, {\"via\": \"EMAIL\", \"invitedByName\": \"kulibaba\", \"invitedByEmail\": \"tolumis@postonline.me\", \"status\": \"ACCEPTED\", \"approvedDate\": 1445952932000, \"target\": \"unknown@xxx.xxx\", \"name\": \"fake\", \"message\": null}], \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"id\": \"UZ2G-mxK5QzV-CCfAQSnLQ==\", \"longitude\": null}"
+                }, 
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }
+            }
+        }
+    ], 
+    "version": 1
+}

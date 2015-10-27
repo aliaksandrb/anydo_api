@@ -1,0 +1,85 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "headers": {
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "date": [
+                        "Tue, 27 Oct 2015 13:35:25 GMT"
+                    ], 
+                    "access-control-allow-methods": [
+                        "PUT, HEAD, GET, POST, DELETE, OPTIONS"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-length": [
+                        "540"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ]
+                }, 
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }, 
+                "body": {
+                    "string": "[{\"assignedTo\": \"tolumis@postonline.me\", \"notifications\": [], \"alert\": null, \"globalTaskId\": \"UZ2G-mxK5QzV-CCfAQSnLQ==\", \"participants\": [], \"priority\": \"Normal\", \"dueDate\": null, \"longitude\": null, \"shared\": false, \"id\": \"UZ2G-mxK5QzV-CCfAQSnLQ==\", \"parentGlobalTaskId\": null, \"note\": null, \"lastUpdateDate\": 1445952925000, \"title\": \"Shared Task\", \"sharedMembers\": null, \"subTasks\": [], \"latitude\": null, \"categoryId\": \"-oOpv8ti_5jsrn6_QkPpYg==\", \"creationDate\": 1445952925000, \"status\": \"UNCHECKED\", \"repeatingMethod\": \"TASK_REPEAT_OFF\"}]"
+                }
+            }, 
+            "request": {
+                "method": "POST", 
+                "uri": "https://sm-prod2.any.do/me/tasks?includeDeleted=false&includeDone=false", 
+                "headers": {
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Content-Length": [
+                        "129"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Accept": [
+                        "application/json"
+                    ]
+                }, 
+                "body": "[{\"priority\": \"Normal\", \"id\": \"UZ2G-mxK5QzV-CCfAQSnLQ==\", \"title\": \"Shared Task\", \"status\": \"UNCHECKED\", \"category\": \"Personal\"}]"
+            }
+        }
+    ], 
+    "version": 1
+}

@@ -1,0 +1,85 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "response": {
+                "headers": {
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-length": [
+                        "2049"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "date": [
+                        "Tue, 27 Oct 2015 13:42:20 GMT"
+                    ], 
+                    "access-control-allow-methods": [
+                        "DELETE, OPTIONS, POST"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ]
+                }, 
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }, 
+                "body": {
+                    "string": "{\"globalTaskId\": \"gd4lkPooSZTn7MZE2q8u0Q==\", \"title\": \"New First\", \"dueDate\": 1445256000000, \"id\": \"gd4lkPooSZTn7MZE2q8u0Q==\", \"notifications\": [], \"subTasks\": [{\"globalTaskId\": \"aFcP1jxgxI32PWK-Dl1Xcg==\", \"title\": \"New subtask\", \"dueDate\": null, \"id\": \"aFcP1jxgxI32PWK-Dl1Xcg==\", \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"shared\": false, \"creationDate\": 1445442983000, \"sharedMembers\": null, \"priority\": \"Normal\", \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"status\": \"UNCHECKED\", \"parentGlobalTaskId\": \"gd4lkPooSZTn7MZE2q8u0Q==\", \"participants\": [], \"assignedTo\": \"tolumis@postonline.me\", \"latitude\": null, \"alert\": null, \"lastUpdateDate\": 1445442983000, \"note\": null, \"longitude\": null}], \"categoryId\": \"_SJ3OZLSxze2jAe23ZUEPg==\", \"shared\": false, \"creationDate\": 1445255241000, \"sharedMembers\": [{\"name\": \"kulibaba\", \"message\": null, \"invitedByEmail\": null, \"via\": \"EMAIL\", \"status\": \"CREATOR\", \"target\": \"tolumis@postonline.me\", \"invitedByName\": null}, {\"name\": \"unknown@xxx.yyy\", \"message\": null, \"invitedByEmail\": \"tolumis@postonline.me\", \"via\": \"EMAIL\", \"status\": \"PENDING\", \"target\": \"unknown@xxx.yyy\", \"invitedByName\": \"kulibaba\"}, {\"name\": \"fake\", \"approvedDate\": 1445950072000, \"message\": null, \"invitedByEmail\": \"tolumis@postonline.me\", \"via\": \"EMAIL\", \"status\": \"ACCEPTED\", \"target\": \"unknown@xxx.zzz\", \"invitedByName\": \"kulibaba\"}, {\"name\": \"fake@xxx.zzz\", \"message\": null, \"invitedByEmail\": \"tolumis@postonline.me\", \"via\": \"EMAIL\", \"status\": \"PENDING\", \"target\": \"fake@xxx.zzz\", \"invitedByName\": \"kulibaba\"}], \"priority\": \"Normal\", \"repeatingMethod\": \"TASK_REPEAT_OFF\", \"status\": \"DONE\", \"parentGlobalTaskId\": null, \"participants\": [], \"assignedTo\": \"tolumis@postonline.me\", \"latitude\": null, \"alert\": {\"repeatStartsOn\": null, \"repeatEndsAfterOccurrences\": null, \"type\": \"NONE\", \"offset\": 0, \"repeatInterval\": null, \"repeatNextOccurrence\": null, \"repeatDays\": null, \"repeatEndType\": \"REPEAT_END_NEVER\", \"customTime\": 0, \"repeatMonthType\": \"ON_DATE\", \"repeatEndsOn\": null}, \"lastUpdateDate\": 1445953338000, \"note\": null, \"longitude\": null}"
+                }
+            }, 
+            "request": {
+                "headers": {
+                    "Content-Length": [
+                        "58"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Accept": [
+                        "application/json"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dG9sdW1pc0Bwb3N0b25saW5lLm1lOjE3NjAyMDI5Mjk0NTg6ZWFkMzUwYWNjMjRkMmU4MjY3ZTE1MmI0YTFmMzkwYTI"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ]
+                }, 
+                "uri": "https://sm-prod2.any.do/me/tasks/gd4lkPooSZTn7MZE2q8u0Q==/share", 
+                "method": "POST", 
+                "body": "{\"message\": null, \"invitees\": [{\"email\": \"fake@xxx.zzz\"}]}"
+            }
+        }
+    ]
+}

@@ -1,0 +1,82 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "body": {
+                    "string": "{\"pendingTasks\": [], \"pendingCategories\": []}"
+                }, 
+                "headers": {
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "date": [
+                        "Tue, 27 Oct 2015 13:41:17 GMT"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "access-control-allow-methods": [
+                        "HEAD, GET, OPTIONS"
+                    ], 
+                    "content-length": [
+                        "45"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "access-control-allow-credentials": [
+                        "true"
+                    ]
+                }
+            }, 
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dW5rbm93bkB4eHgueHh4OjE3NjEzMTI5MjY5MDU6NDc4MGNkNDgwNWMxOGNmYTgyZWI2ZjViYjM1NGRlY2U"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Accept": [
+                        "application/json"
+                    ]
+                }, 
+                "method": "GET", 
+                "uri": "https://sm-prod2.any.do/me/pending"
+            }
+        }
+    ]
+}

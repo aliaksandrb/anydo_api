@@ -1,0 +1,82 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "headers": {
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "content-type": [
+                        "application/json"
+                    ], 
+                    "date": [
+                        "Tue, 27 Oct 2015 13:35:31 GMT"
+                    ], 
+                    "access-control-allow-methods": [
+                        "GET, HEAD, OPTIONS"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-length": [
+                        "206"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ]
+                }, 
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }, 
+                "body": {
+                    "string": "{\"pendingTasks\": [{\"title\": \"Shared Task\", \"message\": null, \"id\": \"8BS2LIUEOYgDSDIggp7Zug==\", \"invitedBy\": {\"name\": \"kulibaba\", \"picture\": null, \"email\": \"tolumis@postonline.me\"}}], \"pendingCategories\": []}"
+                }
+            }, 
+            "request": {
+                "method": "GET", 
+                "uri": "https://sm-prod2.any.do/me/pending", 
+                "headers": {
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dW5rbm93bkB4eHgueHh4OjE3NjEzMTI5MjY5MDU6NDc4MGNkNDgwNWMxOGNmYTgyZWI2ZjViYjM1NGRlY2U"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Accept": [
+                        "application/json"
+                    ]
+                }, 
+                "body": null
+            }
+        }
+    ], 
+    "version": 1
+}

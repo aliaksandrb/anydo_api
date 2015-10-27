@@ -1,0 +1,85 @@
+{
+    "interactions": [
+        {
+            "response": {
+                "headers": {
+                    "access-control-allow-credentials": [
+                        "true"
+                    ], 
+                    "connection": [
+                        "keep-alive"
+                    ], 
+                    "content-type": [
+                        "text/html; charset=utf-8"
+                    ], 
+                    "date": [
+                        "Tue, 27 Oct 2015 13:35:32 GMT"
+                    ], 
+                    "access-control-allow-methods": [
+                        "POST, OPTIONS"
+                    ], 
+                    "access-control-allow-origin": [
+                        "*"
+                    ], 
+                    "access-control-expose-headers": [
+                        "X-Anydo-Auth,X-Platform"
+                    ], 
+                    "access-control-allow-headers": [
+                        "Content-Type,X-Anydo-Auth,X-Platform"
+                    ], 
+                    "via": [
+                        "1.1 vegur"
+                    ], 
+                    "content-length": [
+                        "884"
+                    ], 
+                    "access-control-max-age": [
+                        "21600"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "server": [
+                        "gunicorn/19.0.0"
+                    ]
+                }, 
+                "status": {
+                    "code": 200, 
+                    "message": "OK"
+                }, 
+                "body": {
+                    "string": "{\"participants\": [], \"sharedMembers\": [{\"message\": null, \"invitedByEmail\": null, \"name\": \"kulibaba\", \"invitedByName\": null, \"status\": \"CREATOR\", \"via\": \"EMAIL\", \"target\": \"tolumis@postonline.me\"}, {\"message\": null, \"approvedDate\": 1445952931881, \"invitedByEmail\": \"tolumis@postonline.me\", \"name\": \"fake\", \"invitedByName\": \"kulibaba\", \"status\": \"ACCEPTED\", \"via\": \"EMAIL\", \"target\": \"unknown@xxx.xxx\"}], \"priority\": \"Normal\", \"shared\": false, \"note\": null, \"categoryId\": \"H69oCnhRmdQMyl0KF-soxQ==\", \"creationDate\": 1445952932000, \"latitude\": null, \"assignedTo\": \"tolumis@postonline.me\", \"lastUpdateDate\": 1445952931929, \"parentGlobalTaskId\": null, \"subTasks\": [], \"title\": \"Shared Task\", \"repeatingMethod\": null, \"status\": \"UNCHECKED\", \"id\": \"C1Morru-B5ooN6Itu6xNeg==\", \"alert\": null, \"notifications\": [], \"longitude\": null, \"globalTaskId\": \"C1Morru-B5ooN6Itu6xNeg==\", \"dueDate\": null}"
+                }
+            }, 
+            "request": {
+                "method": "POST", 
+                "uri": "https://sm-prod2.any.do/me/pending/8BS2LIUEOYgDSDIggp7Zug==/accept", 
+                "headers": {
+                    "Cookie": [
+                        "SPRING_SECURITY_REMEMBER_ME_COOKIE=dW5rbm93bkB4eHgueHh4OjE3NjEzMTI5MjY5MDU6NDc4MGNkNDgwNWMxOGNmYTgyZWI2ZjViYjM1NGRlY2U"
+                    ], 
+                    "Connection": [
+                        "keep-alive"
+                    ], 
+                    "Content-Type": [
+                        "application/json"
+                    ], 
+                    "Accept-Encoding": [
+                        "deflate"
+                    ], 
+                    "Content-Length": [
+                        "0"
+                    ], 
+                    "User-Agent": [
+                        "python-requests/2.8.0"
+                    ], 
+                    "Accept": [
+                        "application/json"
+                    ]
+                }, 
+                "body": null
+            }
+        }
+    ], 
+    "version": 1
+}
