@@ -159,32 +159,12 @@ class User(Resource):
         if not task_id:
             raise errors.AttributeError('Eather :pending_task_id or :pending_task argument is required.')
 
-        headers = {
-            'Content-Type'   : 'application/json',
-            'Accept'         : 'application/json',
-            'Accept-Encoding': 'deflate',
-        }
-
-        response_obj = self.session().post(
-            self.__class__._endpoint + '/pending/' + task_id + '/accept',
-            headers=headers
+        response_obj = request.post(
+            url=self.__class__._endpoint + '/pending/' + task_id + '/accept',
+            session=self.session()
         )
 
-        try:
-            response_obj.raise_for_status()
-        except requests.exceptions.HTTPError as error:
-            if response_obj.status_code == 400:
-                client_error = errors.BadRequestError(response_obj.content)
-            elif response_obj.status_code == 409:
-                client_error = errors.ConflictError(response_obj.content)
-            else:
-                client_error = errors.InternalServerError(error)
-
-            client_error.__cause__ = None
-            raise client_error
-        finally: self.session().close()
-
-        return response_obj.json()
+        return response_obj
 
     @staticmethod
     def required_attributes():
@@ -202,10 +182,6 @@ class User(Resource):
         """
         klass.check_for_missed_fields(fields)
 
-        headers = {
-            'Content-Type' : 'application/json',
-        }
-
         json_data = {
             'name': fields.get('name'),
             'username': fields.get('email'),
@@ -214,26 +190,10 @@ class User(Resource):
             'phoneNumbers': fields.get('phone_numbers', [])
         }
 
-        session = requests.Session()
-        response_obj = session.post(
-            klass.__alternate_endpoint,
-            json=json_data,
-            headers=headers
+        request.post(
+            url=klass.__alternate_endpoint,
+            json=json_data
         )
-
-        try:
-            response_obj.raise_for_status()
-        except requests.exceptions.HTTPError as error:
-            if response_obj.status_code == 400:
-                client_error = errors.BadRequestError(response_obj.content)
-            elif response_obj.status_code == 409:
-                client_error = errors.ConflictError(response_obj.content)
-            else:
-                client_error = errors.InternalServerError(error)
-
-            client_error.__cause__ = None
-            raise client_error
-        finally: session.close()
 
         from .client import Client
         user = Client(email=fields.get('email'), password=fields.get('password')).me()

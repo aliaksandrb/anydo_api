@@ -39,25 +39,15 @@ class Client(object):
             '_spring_security_remember_me': 'on'
         }
 
-        headers = {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept-Encoding': 'deflate'
-        }
-
+        headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
         session = requests.Session()
 
-        response_obj = session.post(
-            CONSTANTS.get('LOGIN_URL'),
+        response_obj = request.post(
+            url=CONSTANTS.get('LOGIN_URL'),
+            session=session,
+            headers=headers,
             data=credentials,
-            headers=headers
+            response_json=False
         )
-
-        try:
-            response_obj.raise_for_status()
-        except requests.exceptions.HTTPError as error:
-            client_error = UnauthorizedError(error)
-            client_error.__cause__ = None
-            raise client_error
-        finally: session.close()
 
         return session

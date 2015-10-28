@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from . import request
 from .resource import Resource
 from .constants import CONSTANTS, TASK_STATUSES
 
@@ -103,39 +104,19 @@ class Task(Resource):
         Pushes changes to server.
         Updates task members list and new member tasks list
         """
-        headers = {
-            'Content-Type'   : 'application/json',
-            'Accept'         : 'application/json',
-            'Accept-Encoding': 'deflate',
-        }
-
         json_data = {
             'invitees': [{ 'email': new_member['email'] }],
             'message': message
         }
 
-        session = self.session()
-        response_obj = session.post(
-            self.__class__._endpoint + '/' + self['id'] + '/share',
+        response_obj = request.post(
+            url=self.__class__._endpoint + '/' + self['id'] + '/share',
             json=json_data,
-            headers=headers,
+            session=self.session()
         )
 
-        try:
-            response_obj.raise_for_status()
-        except requests.exceptions.HTTPError as error:
-            if response_obj.status_code == 400:
-                client_error = errors.BadRequestError(response_obj.content)
-            elif response_obj.status_code == 409:
-                client_error = errors.ConflictError(response_obj.content)
-            else:
-                client_error = errors.InternalServerError(error)
+        self.data_dict = response_obj
 
-            client_error.__cause__ = None
-            raise client_error
-        finally: session.close()
-
-        self.data_dict = response_obj.json()
         return self
 
     def category(self):

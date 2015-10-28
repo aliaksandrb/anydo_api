@@ -183,43 +183,22 @@ class Resource(object):
         """
         klass.check_for_missed_fields(fields)
 
-        headers = {
-            'Content-Type'   : 'application/json',
-            'Accept'         : 'application/json',
-            'Accept-Encoding': 'deflate',
-        }
-
         json_data = fields.copy()
         json_data.update({ 'id': klass.generate_uid() })
+
         params = {
             'includeDeleted': 'false',
             'includeDone'   : 'false',
-#            'responseType'  : 'flat'
         }
 
-        response_obj = user.session().post(
-            klass._endpoint,
+        response_obj = request.post(
+            url=klass._endpoint,
+            session=user.session(),
             json=[json_data],
-            headers=headers,
             params=params
         )
 
-        try:
-            response_obj.raise_for_status()
-        except requests.exceptions.HTTPError as error:
-            if response_obj.status_code == 400:
-                client_error = errors.BadRequestError(response_obj.content)
-            elif response_obj.status_code == 409:
-                client_error = errors.ConflictError(response_obj.content)
-            else:
-                client_error = errors.InternalServerError(error)
-
-            client_error.__cause__ = None
-            raise client_error
-        finally: user.session().close()
-
-        resource = klass._create_callback(response_obj.json(), user)
-        return resource
+        return klass._create_callback(response_obj, user)
 
     @staticmethod
     def _process_data_before_save(data_dict):
