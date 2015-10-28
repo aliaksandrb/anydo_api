@@ -1,16 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import requests
-import json
-
+from . import request
 from . import errors
 from .constants import CONSTANTS
-
-from . import request
 from .resource import Resource
 from .task import Task
 from .category import Category
+
+__all__ = ['User']
 
 class User(Resource):
     """
@@ -128,12 +126,6 @@ class User(Resource):
         Empty list otherwise.
         """
         if not '_pending_tasks' in self.__dict__ or refresh:
-            headers = {
-                'Content-Type'   : 'application/json',
-                'Accept'         : 'application/json',
-                'Accept-Encoding': 'deflate',
-            }
-
             response_obj = request.get(
                 url=self.__class__._endpoint + '/pending',
                 session=self.session()

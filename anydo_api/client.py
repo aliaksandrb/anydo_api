@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import requests
-import json
 
-from .errors import *
 from . import request
+from .errors import *
 from .constants import CONSTANTS
 from .user import User
+
+__all__ = ['Client']
 
 class Client(object):
     """

@@ -5,6 +5,8 @@ from . import request
 from .resource import Resource
 from .constants import CONSTANTS, TASK_STATUSES
 
+__all__ = ['Task']
+
 class Task(Resource):
     """
     `Task` is the class representing user task object.
