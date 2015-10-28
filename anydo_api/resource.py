@@ -64,34 +64,16 @@ class Resource(object):
         """
 
         if self.is_dirty:
-
             processed_data = self.__class__._process_data_before_save(self.data_dict)
-            headers = {
-                'Content-Type' : 'application/json',
-                'Accept-Encoding': 'deflate'
-            }
 
-            response_obj = self.session().put(
-                alternate_endpoint or self.__class__._endpoint + '/' + self['id'],
+            response_obj = request.put(
+                url=alternate_endpoint or self.__class__._endpoint + '/' + self['id'],
                 json=processed_data,
-                headers=headers,
+                session=self.session()
             )
 
-            try:
-                response_obj.raise_for_status()
-            except requests.exceptions.HTTPError as error:
-                if response_obj.status_code == 400:
-                    client_error = errors.BadRequestError(response_obj.content)
-                elif response_obj.status_code == 409:
-                    client_error = errors.ConflictError(response_obj.content)
-                else:
-                    client_error = errors.InternalServerError(error)
-
-                client_error.__cause__ = None
-                raise client_error
-            finally: self.session().close()
-
             self.is_dirty = False
+
         return self
 
     def destroy(self, alternate_endpoint=None):

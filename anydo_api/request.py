@@ -59,5 +59,7 @@ def get(url, **options):
 def post(url, **options):
     return __base_request(method='post', url=url, **options)
 
-def put():pass
+def put(url, **options):
+    return __base_request(method='put', url=url, **options)
+
 def delete():pass
