@@ -24,7 +24,7 @@ class Client(object):
             self.session.close()
             data.update({ 'password': self.password })
             self.password = None
-            self.user = User(session=self.session, data_dict=data)
+            self.user = User(data_dict=data, session=self.session)
 
         return self.user
 

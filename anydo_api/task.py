@@ -11,8 +11,8 @@ class Task(Resource):
     responsible for task management.
     """
 
-    _reserved_attrs = ('user', 'data_dict', 'is_dirty')
     _endpoint = CONSTANTS.get('TASKS_URL')
+    _reserved_attrs = ('user', 'data_dict', 'is_dirty')
 
     def __init__(self, data_dict, user):
         super(Task, self).__init__(data_dict)
@@ -39,7 +39,7 @@ class Task(Resource):
         """
         Chortcut to retrive user session for requests.
         """
-        return self.user.session
+        return self.user.session()
 
     def subtasks(self):
         """

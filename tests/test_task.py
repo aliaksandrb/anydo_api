@@ -11,8 +11,6 @@ Tests for `Task` class.
 import unittest
 import json
 import vcr as vcr_module
-import time
-import datetime
 
 from .base import TestCase
 from .test_helper import vcr, scrub_string
@@ -392,9 +390,6 @@ class TestTask(TestCase):
         with vcr.use_cassette('fixtures/vcr_cassettes/tasks_of_new_member.json'):
             shared_task = new_member.tasks(refresh=True)[0]
             self.assertEqual(task['title'], shared_task['title'])
-
-# timers validatons
-# dueDate=1445331600000,#int((time.time() + 3600) * 1000),
 
 if __name__ == '__main__':
     import sys

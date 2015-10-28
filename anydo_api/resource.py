@@ -56,7 +56,7 @@ class Resource(object):
         else:
             super(Resource, self).__setattr__(attr, new_value)
 
-    def save(self):
+    def save(self, alternate_endpoint=None):
         """
         Pushes updated attributes to the server.
         If nothing was changed we dont hit an API.
@@ -71,7 +71,7 @@ class Resource(object):
             }
 
             response_obj = self.session().put(
-                self.__class__._endpoint + '/' + self['id'],
+                alternate_endpoint or self.__class__._endpoint + '/' + self['id'],
                 json=processed_data,
                 headers=headers,
             )
@@ -93,7 +93,7 @@ class Resource(object):
             self.is_dirty = False
         return self
 
-    def destroy(self):
+    def destroy(self, alternate_endpoint=None):
         """
         Deletes the tasks by remote API call
         """
@@ -102,7 +102,7 @@ class Resource(object):
         }
 
         response_obj = self.session().delete(
-            self.__class__._endpoint + '/' + self.id,
+            alternate_endpoint or self.__class__._endpoint + '/' + self.id,
             json=self.data_dict,
             headers=headers
         )
@@ -201,7 +201,6 @@ class Resource(object):
         """
         Creates new resource via API call.
         """
-
         klass.check_for_missed_fields(fields)
 
         headers = {
@@ -218,7 +217,7 @@ class Resource(object):
 #            'responseType'  : 'flat'
         }
 
-        response_obj = user.session.post(
+        response_obj = user.session().post(
             klass._endpoint,
             json=[json_data],
             headers=headers,
@@ -237,7 +236,7 @@ class Resource(object):
 
             client_error.__cause__ = None
             raise client_error
-        finally: user.session.close()
+        finally: user.session().close()
 
         resource = klass._create_callback(response_obj.json(), user)
         return resource

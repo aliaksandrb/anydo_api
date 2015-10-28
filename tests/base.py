@@ -5,7 +5,6 @@ import unittest
 
 from . import test_helper
 from anydo_api.client import Client
-from anydo_api.user import User
 
 __all__ = ['TestCase']
 

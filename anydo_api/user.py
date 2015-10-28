@@ -7,10 +7,11 @@ import json
 from . import errors
 from .constants import CONSTANTS
 
+from .resource import Resource
 from .task import Task
 from .category import Category
 
-class User(object):
+class User(Resource):
     """
     `User` is the class representing User object.
     It wraps user-related JSON into class instances and
@@ -18,76 +19,29 @@ class User(object):
     """
 
     _endpoint = CONSTANTS.get('ME_URL')
-    __reserved_attrs = ('data_dict', 'session', 'is_dirty')
+    _reserved_attrs = ('data_dict', 'session_obj', 'is_dirty')
+    __alternate_endpoint = CONSTANTS.get('USER_URL')
 
-    def __init__(self, session, data_dict):
-        self.data_dict = data_dict
-        self.session = session
-        self.is_dirty = False
+    def __init__(self, data_dict, session):
+        super(User, self).__init__(data_dict)
+        self.session_obj = session
 
     def save(self):
         """
         Pushes updated attributes to the server.
         If nothing was changed we dont hit the API.
         """
+        super(User, self).save(alternate_endpoint=CONSTANTS.get('ME_URL'))
 
-        if self.is_dirty:
-            headers = {
-                'Content-Type' : 'application/json',
-            }
-
-            response_obj = self.session.put(
-                CONSTANTS.get('ME_URL'),
-                json=self.data_dict,
-                headers=headers
-            )
-
-            try:
-                response_obj.raise_for_status()
-            except requests.exceptions.HTTPError as error:
-                if response_obj.status_code == 400:
-                    client_error = errors.BadRequestError(response_obj.content)
-                elif response_obj.status_code == 409:
-                    client_error = errors.ConflictError(response_obj.content)
-                else:
-                    client_error = errors.InternalServerError(error)
-
-                client_error.__cause__ = None
-                raise client_error
-
-        self.is_dirty = False
-        return self
+    def session(self):
+        return self.session_obj
 
     def destroy(self):
         """
         Hits the API to destroy the user.
+        Passes a changed alternate endpoint as it is differ from the class one.
         """
-
-        headers = {
-            'Content-Type': 'application/json',
-            'AnyDO-Puid': str(self.data_dict['id'])
-        }
-
-        response_obj = self.session.delete(
-            CONSTANTS.get('USER_URL'),
-            json={ 'email': self.email, 'password': self.password },
-            headers=headers
-        )
-
-        try:
-            response_obj.raise_for_status()
-        except requests.exceptions.HTTPError as error:
-            if response_obj.status_code == 400:
-                client_error = errors.BadRequestError(response_obj.content)
-            elif response_obj.status_code == 409:
-                client_error = errors.ConflictError(response_obj.content)
-            else:
-                client_error = errors.InternalServerError(error)
-
-            client_error.__cause__ = None
-            raise client_error
-
-        return self
+        super(User, self).destroy(alternate_endpoint=self.__alternate_endpoint)
 
     def tasks(self, refresh=False,
         include_deleted=False,
@@ -95,13 +49,17 @@ class User(object):
         include_checked=True,
         include_unchecked=True
     ):
+        """
+        Returns a remote or chached task list for user.
+        """
+
         if not 'tasks_list' in self.__dict__ or refresh:
             params = {
                 'includeDeleted': str(include_deleted).lower(),
                 'includeDone': str(include_done).lower(),
             }
 
-            tasks_data = self.session.get(
+            tasks_data = self.session().get(
                 CONSTANTS.get('TASKS_URL'),
                 headers={
                     'Content-Type': 'application/json',
@@ -109,7 +67,7 @@ class User(object):
                 },
                 params=params
             ).json()
-            self.session.close()
+            self.session().close()
 
             self.tasks_list = [ Task(data_dict=task, user=self) for task in tasks_data ]
 
@@ -128,7 +86,7 @@ class User(object):
                 'includeDeleted': str(include_deleted).lower(),
             }
 
-            categories_data = self.session.get(
+            categories_data = self.session().get(
                 CONSTANTS.get('CATEGORIES_URL'),
                 headers={
                     'Content-Type': 'application/json',
@@ -136,7 +94,7 @@ class User(object):
                 },
                 params=params
             ).json()
-            self.session.close()
+            self.session().close()
 
             self.categories_list = [ Category(data_dict=category, user=self) for category in categories_data ]
 
@@ -184,7 +142,7 @@ class User(object):
                 'Accept-Encoding': 'deflate',
             }
 
-            response_obj = self.session.get(
+            response_obj = self.session().get(
                 self.__class__._endpoint + '/pending',
                 headers=headers
             )
@@ -201,7 +159,7 @@ class User(object):
 
                 client_error.__cause__ = None
                 raise client_error
-            finally: self.session.close()
+            finally: self.session().close()
 
             self._pending_tasks = response_obj.json()['pendingTasks']
 
@@ -229,7 +187,7 @@ class User(object):
             'Accept-Encoding': 'deflate',
         }
 
-        response_obj = self.session.post(
+        response_obj = self.session().post(
             self.__class__._endpoint + '/pending/' + task_id + '/accept',
             headers=headers
         )
@@ -246,61 +204,41 @@ class User(object):
 
             client_error.__cause__ = None
             raise client_error
-        finally: self.session.close()
+        finally: self.session().close()
 
         return response_obj.json()
 
-    def __getitem__(self, key):
-        return self.data_dict[key]
+    @staticmethod
+    def required_attributes():
+        """
+        Returns a set of required fields for valid user creation.
+        This tuple is checked to prevent unnecessary API calls.
+        """
 
-    def __getattr__(self, attr):
-        try:
-            result = self.data_dict[attr]
-        except KeyError:
-            raise errors.AttributeError(attr + ' is not exist')
-
-        return result
-
-    def __setitem__(self, attr, new_value):
-        if attr in self.data_dict:
-            old_value = self.data_dict[attr]
-
-            if old_value != new_value:
-                self.data_dict[attr] = new_value
-                self.is_dirty = True
-        else:
-            raise errors.AttributeError(attr + ' is not exist')
-
-    def __setattr__(self, attr, new_value):
-        if attr not in self.__class__.__reserved_attrs and attr in self.data_dict:
-            old_value = self.data_dict[attr]
-
-            if old_value != new_value:
-                self.data_dict[attr] = new_value
-                self.__dict__['is_dirty'] = True
-        else:
-            super(User, self).__setattr__(attr, new_value)
+        return {'name', 'email', 'password'}
 
     @classmethod
-    def create(klass, name, email, password, emails=None, phone_numbers=[]):
+    def create(klass, **fields):
         """
         Creates new user by required parameters
         """
+        klass.check_for_missed_fields(fields)
+
         headers = {
             'Content-Type' : 'application/json',
         }
 
         json_data = {
-            'name': name,
-            'username': email,
-            'password': password,
-            'emails': emails or email,
-            'phoneNumbers': phone_numbers
+            'name': fields.get('name'),
+            'username': fields.get('email'),
+            'password': fields.get('password'),
+            'emails': fields.get('emails', fields.get('email')),
+            'phoneNumbers': fields.get('phone_numbers', [])
         }
 
         session = requests.Session()
         response_obj = session.post(
-            CONSTANTS.get('USER_URL'),
+            klass.__alternate_endpoint,
             json=json_data,
             headers=headers
         )
@@ -320,6 +258,6 @@ class User(object):
         finally: session.close()
 
         from .client import Client
-        user = Client(email=email, password=password).me()
+        user = Client(email=fields.get('email'), password=fields.get('password')).me()
         return user
 

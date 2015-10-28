@@ -165,10 +165,6 @@ class TestUser(TestCase):
             with self.assertRaises(UnauthorizedError):
                 Client(email=fake_email, password=fake_password)
 
-# test_user_Creation_logged_in
-
-# Server Error tests
-
 if __name__ == '__main__':
     import sys
     sys.exit(unittest.main())

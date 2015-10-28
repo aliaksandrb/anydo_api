@@ -25,7 +25,7 @@ class Category(Resource):
         """
         Shortcut to retrive user session for requests.
         """
-        return self.user.session
+        return self.user.session()
 
     def mark_default(self):
         """
