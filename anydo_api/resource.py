@@ -80,29 +80,12 @@ class Resource(object):
         """
         Deletes the tasks by remote API call
         """
-        headers = {
-            'Content-Type': 'application/json',
-        }
 
-        response_obj = self.session().delete(
-            alternate_endpoint or self.__class__._endpoint + '/' + self.id,
+        request.delete(
+            url=alternate_endpoint or self.__class__._endpoint + '/' + self.id,
             json=self.data_dict,
-            headers=headers
+            session=self.session()
         )
-
-        try:
-            response_obj.raise_for_status()
-        except requests.exceptions.HTTPError as error:
-            if response_obj.status_code == 400:
-                client_error = errors.BadRequestError(response_obj.content)
-            elif response_obj.status_code == 409:
-                client_error = errors.ConflictError(response_obj.content)
-            else:
-                client_error = errors.InternalServerError(error)
-
-            client_error.__cause__ = None
-            raise client_error
-        finally: self.session().close()
 
         return self
 

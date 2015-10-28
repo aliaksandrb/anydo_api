@@ -51,7 +51,10 @@ def __base_request(method, url, session=None, **options):
         raise client_error
     finally: session.close()
 
-    return response.json() if response_json else response
+    if response_json and method != 'delete':
+        return response.json()
+    else:
+        return response
 
 def get(url, **options):
     return __base_request(method='get', url=url, **options)
@@ -62,4 +65,5 @@ def post(url, **options):
 def put(url, **options):
     return __base_request(method='put', url=url, **options)
 
-def delete():pass
+def delete(url, **options):
+    return __base_request(method='delete', url=url, **options)
