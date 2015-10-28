@@ -5,6 +5,7 @@ import requests
 import json
 
 from .errors import *
+from . import request
 from .constants import CONSTANTS
 from .user import User
 
@@ -20,7 +21,10 @@ class Client(object):
 
     def me(self, refresh=False):
         if not 'user' in self.__dict__ or refresh:
-            data = self.session.get(CONSTANTS.get('ME_URL')).json()
+            data = request.get(
+                url=CONSTANTS.get('ME_URL'),
+                session=self.session
+            )
             self.session.close()
             data.update({ 'password': self.password })
             self.password = None

@@ -7,6 +7,7 @@ import json
 from . import errors
 from .constants import CONSTANTS
 
+from . import request
 from .resource import Resource
 from .task import Task
 from .category import Category
@@ -59,15 +60,11 @@ class User(Resource):
                 'includeDone': str(include_done).lower(),
             }
 
-            tasks_data = self.session().get(
-                CONSTANTS.get('TASKS_URL'),
-                headers={
-                    'Content-Type': 'application/json',
-                    'Accept-Encoding': 'deflate'
-                },
+            tasks_data = request.get(
+                url=CONSTANTS.get('TASKS_URL'),
+                session=self.session(),
                 params=params
-            ).json()
-            self.session().close()
+            )
 
             self.tasks_list = [ Task(data_dict=task, user=self) for task in tasks_data ]
 
@@ -86,15 +83,10 @@ class User(Resource):
                 'includeDeleted': str(include_deleted).lower(),
             }
 
-            categories_data = self.session().get(
-                CONSTANTS.get('CATEGORIES_URL'),
-                headers={
-                    'Content-Type': 'application/json',
-                    'Accept-Encoding': 'deflate'
-                },
+            categories_data = request.get(
+                url=CONSTANTS.get('CATEGORIES_URL'),
                 params=params
-            ).json()
-            self.session().close()
+            )
 
             self.categories_list = [ Category(data_dict=category, user=self) for category in categories_data ]
 
@@ -142,26 +134,12 @@ class User(Resource):
                 'Accept-Encoding': 'deflate',
             }
 
-            response_obj = self.session().get(
-                self.__class__._endpoint + '/pending',
-                headers=headers
+            response_obj = request.get(
+                url=self.__class__._endpoint + '/pending',
+                session=self.session()
             )
 
-            try:
-                response_obj.raise_for_status()
-            except requests.exceptions.HTTPError as error:
-                if response_obj.status_code == 400:
-                    client_error = errors.BadRequestError(response_obj.content)
-                elif response_obj.status_code == 409:
-                    client_error = errors.ConflictError(response_obj.content)
-                else:
-                    client_error = errors.InternalServerError(error)
-
-                client_error.__cause__ = None
-                raise client_error
-            finally: self.session().close()
-
-            self._pending_tasks = response_obj.json()['pendingTasks']
+            self._pending_tasks = response_obj['pendingTasks']
 
         return self._pending_tasks or []
 

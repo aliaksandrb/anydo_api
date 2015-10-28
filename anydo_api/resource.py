@@ -7,6 +7,7 @@ import base64
 import random
 
 from . import errors
+from . import request
 from .constants import CONSTANTS
 
 __all__ = ['Resource']
@@ -135,32 +136,11 @@ class Resource(object):
         """
         Reload reource data from remote service.
         """
-        headers = {
-            'Content-Type'   : 'application/json',
-            'Accept'         : 'application/json',
-            'Accept-Encoding': 'deflate',
-        }
-
-        response_obj = self.session().get(
-            self.__class__._endpoint + '/' + self['id'],
-            headers=headers
+        self.data_dict = request.get(
+            url=self.__class__._endpoint + '/' + self['id'],
+            session=self.session()
         )
 
-        try:
-            response_obj.raise_for_status()
-        except requests.exceptions.HTTPError as error:
-            if response_obj.status_code == 400:
-                client_error = errors.BadRequestError(response_obj.content)
-            elif response_obj.status_code == 409:
-                client_error = errors.ConflictError(response_obj.content)
-            else:
-                client_error = errors.InternalServerError(error)
-
-            client_error.__cause__ = None
-            raise client_error
-        finally: self.session().close()
-
-        self.data_dict = response_obj.json()
         return self
 
     @staticmethod
