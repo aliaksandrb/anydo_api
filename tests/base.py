@@ -12,6 +12,9 @@ class TestCase(unittest.TestCase):
     """Test case base class for all tests."""
 
     def setUp(self, *args, **kwargs):
+        """
+        Loads the credentials required for API calls from external file.
+        """
         super(TestCase, self).setUp(*args, **kwargs)
 
         credentials = test_helper.credentials_file()
@@ -27,6 +30,9 @@ class TestCase(unittest.TestCase):
         del self.email
 
     def get_session(self):
+        """
+        Returns a cached authenticated session.
+        """
         with test_helper.vcr.use_cassette(
             'fixtures/vcr_cassettes/valid_login.json',
             filter_post_data_parameters=['j_password']
@@ -35,6 +41,9 @@ class TestCase(unittest.TestCase):
         return session
 
     def get_me(self):
+        """
+        Returns a authenticated user object.
+        """
         with test_helper.vcr.use_cassette(
             'fixtures/vcr_cassettes/me.json',
             filter_post_data_parameters=['j_password']

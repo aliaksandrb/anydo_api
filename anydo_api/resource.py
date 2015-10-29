@@ -91,7 +91,7 @@ class Resource(object):
 
     def session(self):
         """
-        Chortcut to retrive object session for requests.
+        Shortcut to retrive object session for requests.
         """
         raise errors.NotImplemented('Need to be implemented in the class descendant')
 
@@ -108,6 +108,9 @@ class Resource(object):
 
     @staticmethod
     def generate_uid():
+        """
+        Unique global id generator for new resources.
+        """
         random_string = ''.join([chr(random.randint(0, 255)) for _ in range(0, 16)])
         try:
             random_string = random_string.encode('utf-8')

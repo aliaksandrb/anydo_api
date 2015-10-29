@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Current API entry point
 SERVER_API_URL = 'https://sm-prod2.any.do'
 
+# API endpoints
 CONSTANTS = {
     'SERVER_API_URL': SERVER_API_URL,
     'LOGIN_URL'     : SERVER_API_URL + '/j_spring_security_check',
@@ -12,4 +14,5 @@ CONSTANTS = {
     'CATEGORIES_URL': SERVER_API_URL + '/me/categories'
 }
 
+# Possible task statuses
 TASK_STATUSES = ('CHECKED', 'UNCHECKED', 'DONE', 'DELETED')

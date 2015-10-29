@@ -21,6 +21,9 @@ class Client(object):
         self.password = password
 
     def me(self, refresh=False):
+        """
+        Returns a user object currently logged in.
+        """
         if not 'user' in self.__dict__ or refresh:
             data = request.get(
                 url=CONSTANTS.get('ME_URL'),
@@ -34,6 +37,11 @@ class Client(object):
         return self.user
 
     def __log_in(self, email, password):
+        """
+        Authentication base on `email` and `password`.
+
+        Returns an actual session, used internally for all following requests to API.
+        """
         credentials = {
             'j_username': email,
             'j_password': password,

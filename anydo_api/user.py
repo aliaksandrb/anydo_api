@@ -33,6 +33,9 @@ class User(Resource):
         super(User, self).save(alternate_endpoint=CONSTANTS.get('ME_URL'))
 
     def session(self):
+        """
+        Shortcut to retrive object session for requests.
+        """
         return self.session_obj
 
     def destroy(self):
@@ -76,6 +79,9 @@ class User(Resource):
         )
 
     def categories(self, refresh=False, include_deleted=False):
+        """
+        Returns a remote or chached categories list for user.
+        """
         if not 'categories_list' in self.__dict__ or refresh:
             params = {
                 'includeDeleted': str(include_deleted).lower(),

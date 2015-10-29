@@ -10,6 +10,9 @@ vcr = vcr.VCR(
 )
 
 def credentials_file():
+    """
+    Loads and parces a credentials required for authentication from external file.
+    """
     credentials_file = 'test_credentials.json'
 
     try:
@@ -32,12 +35,15 @@ def credentials_file():
     return credentials
 
 def scrub_string(string, replacement='******'):
+    """
+    Decorator for scrubbing sensative data like passwords or auth-keys.
+    """
     def before_record_response(response):
         try:
             text = response['body']['string'].decode('utf-8')
         except (KeyError, TypeError, UnicodeDecodeError):
             # pass
-            # skip binary answers for now
+            # skip binary answers for now, as they are not json serializable.
             response['body']['string'] = ''
         else:
             if text:
