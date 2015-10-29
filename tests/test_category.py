@@ -19,7 +19,7 @@ from .test_helper import vcr, scrub_string
 
 from anydo_api.task import Task
 from anydo_api.category import Category
-from anydo_api.errors import *
+from anydo_api import errors
 
 
 class TestCategory(TestCase):
@@ -109,7 +109,7 @@ class TestCategory(TestCase):
 
     def test_can_not_set_unmapped_attributes(self):
         category = self.__get_category()
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(errors.ModelAttributeError):
             category['suppa-duppa'] = 1
 
     def test_unchanged_data_dont_hit_an_api(self):
@@ -129,7 +129,7 @@ class TestCategory(TestCase):
 
     def test_category_creation_checks_required_fields(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/fake.json', record_mode='none'):
-            with self.assertRaises(AttributeError):
+            with self.assertRaises(errors.ModelAttributeError):
                 Category.create(user=self.get_me(), isDefault=False)
 
     def test_category_creation_reraises_occured_errors(self):
@@ -139,7 +139,7 @@ class TestCategory(TestCase):
         Category.required_attributes = staticmethod(fake)
 
         with vcr.use_cassette('fixtures/vcr_cassettes/category_create_invalid.json'):
-            with self.assertRaises(InternalServerError):
+            with self.assertRaises(errors.InternalServerError):
                 Category.create(user=self.get_me(), isDefault=False)
         Category.required_attributes = staticmethod(original)
 

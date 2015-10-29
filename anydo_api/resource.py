@@ -1,12 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+`anydo_api.resource`
+
+`Resource` class.
+"""
 
 import base64
 import random
 
 from . import errors
 from . import request
-from .constants import CONSTANTS
 
 __all__ = ['Resource']
 
@@ -19,6 +23,7 @@ class Resource(object):
     """
 
     _reserved_attrs = ('data_dict', 'is_dirty')
+    _endpoint = ''
 
     def __init__(self, data_dict):
         self.data_dict = data_dict
@@ -31,7 +36,7 @@ class Resource(object):
         try:
             result = self.data_dict[attr]
         except KeyError:
-            raise errors.AttributeError(attr + ' is not exist')
+            raise errors.ModelAttributeError(attr + ' is not exist')
 
         return result
 
@@ -43,10 +48,10 @@ class Resource(object):
                 self.data_dict[attr] = new_value
                 self.is_dirty = True
         else:
-            raise errors.AttributeError(attr + ' is not exist')
+            raise errors.ModelAttributeError(attr + ' is not exist')
 
     def __setattr__(self, attr, new_value):
-        if attr not in self.__class__._reserved_attrs and attr in self.data_dict:
+        if attr not in self.get_reserved_attrs() and attr in self.data_dict:
             old_value = self.data_dict[attr]
 
             if old_value != new_value:
@@ -62,10 +67,10 @@ class Resource(object):
         """
 
         if self.is_dirty:
-            processed_data = self.__class__._process_data_before_save(self.data_dict)
+            processed_data = self._process_data_before_save(self.data_dict)
 
-            response_obj = request.put(
-                url=alternate_endpoint or self.__class__._endpoint + '/' + self['id'],
+            request.put(
+                url=alternate_endpoint or self.get_endpoint() + '/' + self['id'],
                 json=processed_data,
                 session=self.session()
             )
@@ -80,7 +85,7 @@ class Resource(object):
         """
 
         request.delete(
-            url=alternate_endpoint or self.__class__._endpoint + '/' + self.id,
+            url=alternate_endpoint or self.get_endpoint() + '/' + self.id,
             json=self.data_dict,
             session=self.session()
         )
@@ -89,22 +94,35 @@ class Resource(object):
 
     delete = destroy
 
+    #pylint: disable=no-self-use
     def session(self):
         """
         Shortcut to retrive object session for requests.
         """
-        raise errors.NotImplemented('Need to be implemented in the class descendant')
+        raise errors.MethodNotImplementedError('Need to be implemented in the class descendant')
 
     def refresh(self):
         """
         Reload reource data from remote service.
         """
         self.data_dict = request.get(
-            url=self.__class__._endpoint + '/' + self['id'],
+            url=self.get_endpoint() + '/' + self['id'],
             session=self.session()
         )
 
         return self
+
+    def get_endpoint(self):
+        """
+        Returns instance endpoint for API calls.
+        """
+        return self._endpoint
+
+    def get_reserved_attrs(self):
+        """
+        Returns a tuple with reserved attributes, protected for internal usage.
+        """
+        return self._reserved_attrs
 
     @staticmethod
     def generate_uid():
@@ -114,12 +132,14 @@ class Resource(object):
         random_string = ''.join([chr(random.randint(0, 255)) for _ in range(0, 16)])
         try:
             random_string = random_string.encode('utf-8')
-        except UnicodeDecodeError: pass
+        except UnicodeDecodeError:
+            pass
 
         result = base64.urlsafe_b64encode(random_string)
         try:
             result = result.decode('utf-8')
-        except UnicodeDecodeError: pass
+        except UnicodeDecodeError:
+            pass
 
         return result
 
@@ -129,28 +149,28 @@ class Resource(object):
         Returns a set of required fields for valid resource creation.
         This tuple is checked to prevent unnecessary API calls.
         """
-        raise errors.NotImplemented('Need to be implemented in the class descendant')
+        raise errors.MethodNotImplementedError('Need to be implemented in the class descendant')
 
     @classmethod
-    def check_for_missed_fields(klass, fields):
+    def check_for_missed_fields(cls, fields):
         """
         Checks task attributes for missed required.
         Raises exception with a list of all missed.
         """
 
-        missed = klass.required_attributes() - set(fields.keys())
+        missed = cls.required_attributes() - set(fields.keys())
         if len(missed) > 0:
-            raise errors.AttributeError('Missing required fields: {}!'.format(missed))
+            raise errors.ModelAttributeError('Missing required fields: {}!'.format(missed))
 
     @classmethod
-    def create(klass, user, **fields):
+    def create(cls, user, **fields):
         """
         Creates new resource via API call.
         """
-        klass.check_for_missed_fields(fields)
+        cls.check_for_missed_fields(fields)
 
         json_data = fields.copy()
-        json_data.update({ 'id': klass.generate_uid() })
+        json_data.update({'id': cls.generate_uid()})
 
         params = {
             'includeDeleted': 'false',
@@ -158,13 +178,13 @@ class Resource(object):
         }
 
         response_obj = request.post(
-            url=klass._endpoint,
+            url=cls._endpoint,
             session=user.session(),
             json=[json_data],
             params=params
         )
 
-        return klass._create_callback(response_obj, user)
+        return cls._create_callback(response_obj, user)
 
     @staticmethod
     def _process_data_before_save(data_dict):
@@ -176,12 +196,13 @@ class Resource(object):
 
         return data_dict
 
+    #pylint: disable=unused-argument
     @classmethod
-    def _create_callback(klass, resource_json, user):
+    def _create_callback(cls, resource_json, user):
         """
         Callback method that is called automaticly after each successfull creation
         via remote API
 
         Returns an instance of the appropriate class.
         """
-        raise errors.NotImplemented('Need to be implemented in the class descendant')
+        raise errors.MethodNotImplementedError('Need to be implemented in the class descendant')

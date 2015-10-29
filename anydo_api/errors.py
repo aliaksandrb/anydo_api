@@ -1,16 +1,63 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+`anydo_api.errors`
 
-class Error(Exception): pass
+`Errors` module.
 
-class ClientError(Error): pass
-class ModelError(Error): pass
+Custom names for library dependent exceptions.
+"""
 
-class UnauthorizedError(ClientError): pass
-class BadRequestError(ClientError): pass
-class InternalServerError(ClientError): pass
-class ConflictError(ClientError): pass
+class Error(Exception):
+    """
+    Base error class for library namespacing.
+    """
+    pass
 
-class AttributeError(ModelError): pass
-class NotImplemented(ModelError): pass
+class ClientError(Error):
+    """
+    API Client related errors.
+    """
+    pass
 
+class ModelError(Error):
+    """
+    Resource models related errors.
+    """
+    pass
+
+class UnauthorizedError(ClientError):
+    """
+    Invalid credentials error.
+    """
+    pass
+
+class BadRequestError(ClientError):
+    """
+    BadRequest error remap.
+    """
+    pass
+
+class InternalServerError(ClientError):
+    """
+    InternalServerError error remap.
+    """
+    pass
+
+class ConflictError(ClientError):
+    """
+    Conflic error in case when user already exists.
+    """
+    pass
+
+class ModelAttributeError(ModelError):
+    """
+    Model attribute is missed error.
+    """
+    pass
+
+class MethodNotImplementedError(ModelError):
+    """
+    NotImplemented error remap for abstract Resource class.
+    """
+    pass

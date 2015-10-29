@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+`anydo_api.task`
+
+`Task` class.
+"""
 
 from . import request
 from .resource import Resource
@@ -26,7 +31,7 @@ class Task(Resource):
         Marks task as CHECKED.
         Uses update functionality under the hood.
         """
-        self.status = 'CHECKED'
+        self['status'] = 'CHECKED'
         self.is_dirty = True
         self.save()
 
@@ -55,7 +60,7 @@ class Task(Resource):
         Creates a new tasks from provided fields and makes it an subtask of current one.
         """
         subtask_attrs = fields.copy()
-        subtask_attrs.update({ 'parentGlobalTaskId': self['id'] })
+        subtask_attrs.update({'parentGlobalTaskId': self['id']})
         subtask = Task.create(user=self.user, **subtask_attrs)
         self.user.add_task(subtask)
         return subtask
@@ -74,7 +79,7 @@ class Task(Resource):
         Returns a parsed list of notes for the task.
         """
         if self.note:
-            return filter(None, self.note.split('\n'))
+            return [note for note in self.note.split('\n') if note]
         else:
             return []
 
@@ -96,9 +101,9 @@ class Task(Resource):
         """
         objects_list = self['sharedMembers']
         if objects_list:
-            return [{ member['target']: member['name'] } for member in objects_list]
+            return [{member['target']: member['name']} for member in objects_list]
         else:
-            return [{ self.user['email']: self.user['name'] }]
+            return [{self.user['email']: self.user['name']}]
 
     def share_with(self, new_member, message=None):
         """
@@ -107,12 +112,12 @@ class Task(Resource):
         Updates task members list and new member tasks list
         """
         json_data = {
-            'invitees': [{ 'email': new_member['email'] }],
+            'invitees': [{'email': new_member['email']}],
             'message': message
         }
 
         response_obj = request.post(
-            url=self.__class__._endpoint + '/' + self['id'] + '/share',
+            url=self.get_endpoint() + '/' + self['id'] + '/share',
             json=json_data,
             session=self.session()
         )
@@ -125,13 +130,19 @@ class Task(Resource):
         """
         Returns a category object based mapped to selected task.
         """
-        return next((cat for cat in self.user.categories() if cat['id'] == self['categoryId']), None)
+        return next(
+            (cat for cat in self.user.categories() if cat['id'] == self['categoryId']),
+            None
+        )
 
     def parent(self):
         """
         Returns parent task object for subtask and None for first-level task.
         """
-        return next((task for task in self.user.tasks() if task['id'] == self['parentGlobalTaskId']), None)
+        return next(
+            (task for task in self.user.tasks() if task['id'] == self['parentGlobalTaskId']),
+            None
+        )
 
     @staticmethod
     def required_attributes():
@@ -155,24 +166,28 @@ class Task(Resource):
         result = tasks_list[:]
         statuses = list(TASK_STATUSES)
 
-        if not filters.get('include_deleted', False): statuses.remove('DELETED')
-        if not filters.get('include_done', False): statuses.remove('DONE')
-        if not filters.get('include_checked', False): statuses.remove('CHECKED')
-        if not filters.get('include_unchecked', False): statuses.remove('UNCHECKED')
+        if not filters.get('include_deleted', False):
+            statuses.remove('DELETED')
+        if not filters.get('include_done', False):
+            statuses.remove('DONE')
+        if not filters.get('include_checked', False):
+            statuses.remove('CHECKED')
+        if not filters.get('include_unchecked', False):
+            statuses.remove('UNCHECKED')
 
-        result = filter(lambda task: task['status'] in statuses, result)
+        result = [task for task in result if task['status'] in statuses]
         return list(result)
 
 
     @classmethod
-    def _create_callback(klass, resource_json, user):
-      """
-      Callback method that is called automaticly after each successfull creation
-      via remote API
+    def _create_callback(cls, resource_json, user):
+        """
+        Callback method that is called automaticly after each successfull creation
+        via remote API
 
-      Returns an task instance.
-      """
-      task = klass(data_dict=resource_json[0], user=user)
-      user.add_task(task)
+        Returns an task instance.
+        """
+        task = cls(data_dict=resource_json[0], user=user)
+        user.add_task(task)
 
-      return task
+        return task

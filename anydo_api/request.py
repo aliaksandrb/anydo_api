@@ -1,15 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+anydo_api.request
+
+Helper functions for HTTP API calls.
+Wrapped `requests` methods with default headers and options.
+"""
 
 import requests
-import json
 
 from . import errors
 
 __all__ = ['get', 'post', 'put', 'delete']
 
 try:
-    __SERVER_ERRORS = xrange(500, 600)
+    __SERVER_ERRORS = xrange(500, 600) # pylint: disable=undefined-variable
 except NameError:
     __SERVER_ERRORS = range(500, 600)
 
@@ -92,7 +97,7 @@ def __base_request(method, url, session=None, **options):
     """
     response_json = options.pop('response_json') if 'response_json' in options else True
     session = options.pop('session') if 'session' in options else requests.Session()
-    request_arguments=__prepare_request_arguments(**options)
+    request_arguments = __prepare_request_arguments(**options)
 
     if method == 'get':
         adapter = requests.packages.urllib3.util.Retry(total=2, status_forcelist=__SERVER_ERRORS)

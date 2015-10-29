@@ -17,7 +17,8 @@ from .test_helper import vcr, scrub_string
 
 from anydo_api.task import Task
 from anydo_api.user import User
-from anydo_api.errors import *
+from anydo_api.client import Client
+from anydo_api import errors
 
 
 class TestTask(TestCase):
@@ -95,7 +96,7 @@ class TestTask(TestCase):
 
     def test_can_not_set_unmapped_attributes(self):
         task = self.__get_task()
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(errors.ModelAttributeError):
             task['suppa-duppa'] = 1
 
     def test_unchanged_data_dont_hit_an_api(self):
@@ -133,7 +134,7 @@ class TestTask(TestCase):
 
     def test_task_creation_checks_required_fields(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/fake.json', record_mode='none'):
-            with self.assertRaises(AttributeError):
+            with self.assertRaises(errors.ModelAttributeError):
                 Task.create(user=self.get_me(), status='UNCHECKED')
 
     def test_task_creation_reraises_occured_errors(self):
@@ -143,7 +144,7 @@ class TestTask(TestCase):
         Task.required_attributes = staticmethod(fake)
 
         with vcr.use_cassette('fixtures/vcr_cassettes/task_create_invalid.json'):
-            with self.assertRaises(InternalServerError):
+            with self.assertRaises(errors.InternalServerError):
                 Task.create(user=self.get_me(),
                     status='UNCHECKED',
                 )
@@ -338,7 +339,7 @@ class TestTask(TestCase):
             before_record_response=scrub_string(fake_password),
             filter_post_data_parameters=['password', 'j_password']
         ):
-            new_member = User.create(name='fake', email=fake_email, password=fake_password)
+            new_member = Client.create_user(name='fake', email=fake_email, password=fake_password)
 
 
         with vcr.use_cassette('fixtures/vcr_cassettes/task_share_with_user.json'):
@@ -364,7 +365,7 @@ class TestTask(TestCase):
             before_record_response=scrub_string(fake_password),
             filter_post_data_parameters=['password', 'j_password']
         ):
-            new_member = User.create(name='fake', email=fake_email, password=fake_password)
+            new_member = Client.create_user(name='fake', email=fake_email, password=fake_password)
 
         with vcr.use_cassette('fixtures/vcr_cassettes/task_share_with_user_to_approve.json'):
             task.share_with(new_member)

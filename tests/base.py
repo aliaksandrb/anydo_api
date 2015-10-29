@@ -48,5 +48,5 @@ class TestCase(unittest.TestCase):
             'fixtures/vcr_cassettes/me.json',
             filter_post_data_parameters=['j_password']
         ):
-            return self.get_session().me()
+            return self.get_session().get_user()
 

@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+`anydo_api.category`
+
+`Category` class.
+"""
 
 from . import errors
 from .resource import Resource
@@ -38,8 +43,8 @@ class Category(Resource):
         previous.isDefault = False
         previous.save()
 
-        self.default = True
-        self.isDefault = True
+        self['default'] = True
+        self['isDefault'] = True
         self.save()
         return self
 
@@ -80,17 +85,16 @@ class Category(Resource):
         Seems that :id and :title attributes are required for now, where
         :id is set automatically.
         """
-
         return {'name'}
 
     @classmethod
-    def _create_callback(klass, resource_json, user):
-      """
-      Callback method that is called automaticly after each successfull creation
-      via remote API
+    def _create_callback(cls, resource_json, user):
+        """
+        Callback method that is called automaticly after each successfull creation
+        via remote API
 
-      Returns an category instance.
-      """
-      category = klass(data_dict=resource_json[0], user=user)
-      user.add_category(category)
-      return category
+        Returns an category instance.
+        """
+        category = cls(data_dict=resource_json[0], user=user)
+        user.add_category(category)
+        return category

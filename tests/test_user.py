@@ -16,15 +16,15 @@ from .test_helper import vcr, scrub_string
 
 from anydo_api.client import Client
 from anydo_api.user import User
-from anydo_api.errors import *
+from anydo_api import errors
 
 
 class TestUser(TestCase):
 
     def test_user_creation_reraises_occured_errors(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/invalid_create_user.json'):
-            with self.assertRaises(BadRequestError):
-                User.create(name='*', email='*', password='*')
+            with self.assertRaises(errors.BadRequestError):
+                Client.create_user(name='*', email='*', password='*')
 
     def test_valid_user_creation_returns_user_intance(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/valid_create_user.json',
@@ -32,15 +32,15 @@ class TestUser(TestCase):
             filter_post_data_parameters=['password', 'j_password'],
             record_mode='new_episodes'
         ):
-            user = User.create(name=self.username, email=self.email, password=self.password)
+            user = Client.create_user(name=self.username, email=self.email, password=self.password)
             self.assertIsInstance(user, User)
 
     def test_duplicate_user_creation_raises_conflict(self):
         with vcr.use_cassette('fixtures/vcr_cassettes/duplicate_user.json',
             filter_post_data_parameters=['password']
         ):
-            with self.assertRaises(ConflictError):
-                User.create(name=self.username, email=self.email, password=self.password)
+            with self.assertRaises(errors.ConflictError):
+                Client.create_user(name=self.username, email=self.email, password=self.password)
 
     def test_user_has_appropriate_attributes(self):
         with vcr.use_cassette(
@@ -77,7 +77,7 @@ class TestUser(TestCase):
         with vcr.use_cassette(
             'fixtures/vcr_cassettes/me_updated.json',
         ):
-            user = self.get_session().me(refresh=True)
+            user = self.get_session().get_user(refresh=True)
             self.assertEqual(new_name, user['name'])
 
     def test_user_could_be_updated_successfully_by_attribute(self):
@@ -95,12 +95,12 @@ class TestUser(TestCase):
         with vcr.use_cassette(
             'fixtures/vcr_cassettes/me_updated.json',
         ):
-            user = self.get_session().me(refresh=True)
+            user = self.get_session().get_user(refresh=True)
             self.assertEqual(new_name, user.name)
 
     def test_can_not_set_unmapped_attributes(self):
         user = self.get_me()
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(errors.ModelAttributeError):
             user['suppa-duppa'] = 1
 
 
@@ -122,7 +122,7 @@ class TestUser(TestCase):
             before_record_response=scrub_string(fake_password),
             filter_post_data_parameters=['password', 'j_password']
         ):
-            user = User.create(name='fake', email=fake_email, password=fake_password)
+            user = Client.create_user(name='fake', email=fake_email, password=fake_password)
 
         with vcr.use_cassette('fixtures/vcr_cassettes/user_destroy_valid.json',
             before_record_response=scrub_string(fake_password),
@@ -133,7 +133,7 @@ class TestUser(TestCase):
         with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login_after_destroy.json',
             filter_post_data_parameters=['password', 'j_password'],
         ):
-            with self.assertRaises(UnauthorizedError):
+            with self.assertRaises(errors.UnauthorizedError):
                 Client(email=fake_email, password=fake_password)
 
     def test_existent_user_could_be_deleted(self):
@@ -144,14 +144,14 @@ class TestUser(TestCase):
             before_record_response=scrub_string(fake_password),
             filter_post_data_parameters=['password', 'j_password']
         ):
-            User.create(name='fake', email=fake_email, password=fake_password)
+            Client.create_user(name='fake', email=fake_email, password=fake_password)
 
         with vcr.use_cassette('fixtures/vcr_cassettes/fake_user_login.json',
             before_record_response=scrub_string(fake_password),
             filter_post_data_parameters=['j_password'],
             record_mode='new_episodes'
         ):
-            user = Client(email=fake_email, password=fake_password).me()
+            user = Client(email=fake_email, password=fake_password).get_user()
 
         with vcr.use_cassette('fixtures/vcr_cassettes/user_destroy_valid2.json',
             before_record_response=scrub_string(fake_password),
@@ -162,7 +162,7 @@ class TestUser(TestCase):
         with vcr.use_cassette('fixtures/vcr_cassettes/invalid_login_after_destroy.json',
             filter_post_data_parameters=['password', 'j_password'],
         ):
-            with self.assertRaises(UnauthorizedError):
+            with self.assertRaises(errors.UnauthorizedError):
                 Client(email=fake_email, password=fake_password)
 
 if __name__ == '__main__':

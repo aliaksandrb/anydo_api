@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+anydo_api.client
+
+`Client` class.
+"""
 
 import requests
 
 from . import request
-from .errors import *
 from .constants import CONSTANTS
 from .user import User
 
@@ -12,25 +16,26 @@ __all__ = ['Client']
 
 class Client(object):
     """
-    `Client` is the main interface for communication with an API.
-    Responsible for authentication.
+    `Client` is the interface for communication with an API.
+    Responsible for authentication and session management.
     """
 
     def __init__(self, email, password):
-        self.session = self.__log_in(email, password)
+        self.__log_in(email, password)
         self.password = password
+        self.user = None
 
-    def me(self, refresh=False):
+    def get_user(self, refresh=False):
         """
         Returns a user object currently logged in.
         """
-        if not 'user' in self.__dict__ or refresh:
+        if not self.user or refresh:
             data = request.get(
                 url=CONSTANTS.get('ME_URL'),
                 session=self.session
             )
-            self.session.close()
-            data.update({ 'password': self.password })
+
+            data.update({'password': self.password})
             self.password = None
             self.user = User(data_dict=data, session=self.session)
 
@@ -48,15 +53,38 @@ class Client(object):
             '_spring_security_remember_me': 'on'
         }
 
-        headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
-        session = requests.Session()
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+        self.session = requests.Session()
 
-        response_obj = request.post(
+        request.post(
             url=CONSTANTS.get('LOGIN_URL'),
-            session=session,
+            session=self.session,
             headers=headers,
             data=credentials,
             response_json=False
         )
 
-        return session
+        return self.session
+
+    @classmethod
+    def create_user(cls, **fields):
+        """
+        Creates new user by required parameters.
+        """
+        User.check_for_missed_fields(fields)
+
+        json_data = {
+            'name': fields.get('name'),
+            'username': fields.get('email'),
+            'password': fields.get('password'),
+            'emails': fields.get('emails', fields.get('email')),
+            'phoneNumbers': fields.get('phone_numbers', [])
+        }
+
+        request.post(
+            url=CONSTANTS.get('USER_URL'),
+            json=json_data
+        )
+
+        user = Client(email=fields.get('email'), password=fields.get('password')).get_user()
+        return user
