@@ -8,6 +8,11 @@ from . import errors
 
 __all__ = ['get', 'post', 'put', 'delete']
 
+try:
+    __SERVER_ERRORS = xrange(500, 600)
+except NameError:
+    __SERVER_ERRORS = range(500, 600)
+
 def get(url, **options):
     """
     Simple GET request wrapper.
@@ -46,6 +51,7 @@ def __prepare_request_arguments(**options):
     }
 
     params = options.pop('params') if 'params' in options else ''
+    timeout = options.pop('timeout') if 'timeout' in options else 5 # don't hung the client to long
 
     if 'headers' in options:
         headers.update(options.pop('headers'))
@@ -53,6 +59,7 @@ def __prepare_request_arguments(**options):
     request_arguments = {
         'headers': headers,
         'params' : params,
+        'timeout': timeout,
     }
 
     request_arguments.update(options)
@@ -73,7 +80,7 @@ def __check_response_for_errors(response):
             client_error = errors.ConflictError(response.content)
         else:
             client_error = errors.InternalServerError(error)
-
+        # should we skip original cause of exception or not?
         client_error.__cause__ = None
         raise client_error
 
@@ -86,6 +93,12 @@ def __base_request(method, url, session=None, **options):
     response_json = options.pop('response_json') if 'response_json' in options else True
     session = options.pop('session') if 'session' in options else requests.Session()
     request_arguments=__prepare_request_arguments(**options)
+
+    if method == 'get':
+        adapter = requests.packages.urllib3.util.Retry(total=2, status_forcelist=__SERVER_ERRORS)
+
+        session.mount('http://', requests.adapters.HTTPAdapter(max_retries=adapter))
+        session.mount('https://', requests.adapters.HTTPAdapter(max_retries=adapter))
 
     response = getattr(session, method)(url, **request_arguments)
     session.close()
