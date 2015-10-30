@@ -23,7 +23,7 @@ class Client(object):
 
     def __init__(self, email, password):
         """Constructor for Client."""
-        self.__log_in(email, password)
+        self.session = self.__log_in(email, password)
         self.password = password
         self.user = None
 

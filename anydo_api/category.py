@@ -69,7 +69,7 @@ class Category(Resource):
         Updates task and pushes changes remotly.
         If category already default do nothing.
         """
-        if task.category().isDefault:
+        if task.category()['isDefault']:
             raise errors.ModelError('Can not remove task from default category')
 
         task.categoryId = self.user.default_category()['id']

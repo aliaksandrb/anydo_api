@@ -85,7 +85,8 @@ def __base_request(method, url, session=None, **options):
     Forward other arguments into `request` object from the `request` library.
     """
     response_json = options.pop('response_json') if 'response_json' in options else True
-    session = options.pop('session') if 'session' in options else requests.Session()
+    if not session:
+        session = requests.Session()
     request_arguments = __prepare_request_arguments(**options)
 
     if method == 'get':

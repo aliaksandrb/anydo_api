@@ -75,7 +75,7 @@ class Resource(object):
             processed_data = self._process_data_before_save(self.data_dict)
 
             request.put(
-                url=alternate_endpoint or self.get_endpoint() + '/' + self['id'],
+                url=alternate_endpoint or (self.get_endpoint() + '/' + self['id']),
                 json=processed_data,
                 session=self.session()
             )
@@ -87,7 +87,7 @@ class Resource(object):
     def destroy(self, alternate_endpoint=None):
         """Delete the tasks by remote API call."""
         request.delete(
-            url=alternate_endpoint or self.get_endpoint() + '/' + self.id,
+            url=alternate_endpoint or (self.get_endpoint() + '/' + self['id']),
             json=self.data_dict,
             session=self.session()
         )
@@ -101,10 +101,10 @@ class Resource(object):
         """Shortcut to retrive object session for requests."""
         raise errors.MethodNotImplementedError('Need to be implemented in the class descendant')
 
-    def refresh(self):
-        """Reload reource data from remote service."""
+    def refresh(self, alternate_endpoint=None):
+        """Reload resource data from remote service."""
         self.data_dict = request.get(
-            url=self.get_endpoint() + '/' + self['id'],
+            url=alternate_endpoint or (self.get_endpoint() + '/' + self['id']),
             session=self.session()
         )
 

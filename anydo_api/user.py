@@ -41,7 +41,7 @@ class User(Resource):
 
         If nothing was changed we dont hit the API.
         """
-        super(User, self).save(alternate_endpoint=CONSTANTS.get('ME_URL'))
+        super(User, self).save(alternate_endpoint=self.get_endpoint())
 
     def session(self):
         """Shortcut to retrive object session for requests."""
@@ -54,6 +54,16 @@ class User(Resource):
         Pass a changed alternate endpoint as it is differ from the class one.
         """
         super(User, self).destroy(alternate_endpoint=self.__alternate_endpoint)
+
+    delete = destroy
+
+    def refresh(self, alternate_endpoint=None):
+        """
+        Reload resource data from remote API.
+
+        Pass a changed alternate endpoint as it is differ from the class one.
+        """
+        super(User, self).refresh(alternate_endpoint=self.get_endpoint())
 
     # pylint: disable=too-many-arguments
     def tasks(self,
@@ -84,7 +94,7 @@ class User(Resource):
                                  include_unchecked=include_unchecked)
 
     def categories(self, refresh=False, include_deleted=False):
-        """Return a remote or chached categories list for user."""
+        """Return a remote or cached categories list for user."""
         if not self.categories_list or refresh:
             params = {
                 'includeDeleted': str(include_deleted).lower(),
@@ -92,6 +102,7 @@ class User(Resource):
 
             categories_data = request.get(
                 url=CONSTANTS.get('CATEGORIES_URL'),
+                session=self.session(),
                 params=params
             )
 
