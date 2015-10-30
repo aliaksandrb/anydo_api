@@ -3,34 +3,23 @@
 
 import vcr
 import json
+import os
 
 vcr = vcr.VCR(
     serializer='json',
     cassette_library_dir='tests',
 )
 
-def credentials_file():
-    """
-    Loads and parces a credentials required for authentication from external file.
-    """
-    credentials_file = 'test_credentials.json'
+def credentials_values():
+    """Load from environment valid AnyDo credentials required for authentication."""
+    credentials = {
+        'username': os.environ.get('ANYDO_USERNAME'),
+        'password': os.environ.get('ANYDO_PASSWORD'),
+        'email': os.environ.get('ANYDO_EMAIL')
+    }
 
-    try:
-        with open(credentials_file) as f:
-            credentials = json.load(f)
-    except FileNotFoundError as e:
-        error = FileNotFoundError('{} file is required for remote API testing'
-            .format(credentials_file))
-        error.__cause__ = e
-        raise error
-    except ValueError as e:
-        error = ValueError('{} file is bad formatted'.format(credentials_file))
-        error.__cause__ = e
-        raise error
-
-    if len([item for item in credentials.items() if item[0] in ('username', 'password', 'email')
-                                                    and item[1] != '']) < 3:
-        raise ValueError('{} file has missed required keys or values'.format(credentials_file))
+    if not all(list(credentials.values())):
+        raise ValueError('Missed required credentials in current environment!')
 
     return credentials
 

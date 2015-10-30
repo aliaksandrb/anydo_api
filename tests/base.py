@@ -12,12 +12,10 @@ class TestCase(unittest.TestCase):
     """Test case base class for all tests."""
 
     def setUp(self, *args, **kwargs):
-        """
-        Loads the credentials required for API calls from external file.
-        """
+        """Load from environment valid AnyDo credentials required for authentication."""
         super(TestCase, self).setUp(*args, **kwargs)
 
-        credentials = test_helper.credentials_file()
+        credentials = test_helper.credentials_values()
         self.username = credentials['username']
         self.password = credentials['password']
         self.email    = credentials['email']
