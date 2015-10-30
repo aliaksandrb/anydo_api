@@ -8,6 +8,9 @@ anydo_api unofficial AnyDo API client for Python (v0.0.1 aplha)
 .. image:: https://img.shields.io/pypi/v/anydo_api.svg
         :target: https://pypi.python.org/pypi/anydo_api
 
+.. image:: https://readthedocs.org/projects/anydo-api/badge/?version=latest
+        :target: http://anydo-api.readthedocs.org/en/latest/
+
 This simple client library provides access to basic features of `AnyDo <http://www.any.do/>`_ task manager in a
 easy and object-oriented style.
 
@@ -207,4 +210,4 @@ Generic guide for contributions is placed `here <https://github.com/aliaksandrb/
 Thanks!
 
 * MIT license
-* Automaticaly generated documentation: https://anydo_api.readthedocs.org.
+* Automaticaly generated documentation: http://anydo-api.readthedocs.org/en/latest/.
