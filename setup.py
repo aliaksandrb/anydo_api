@@ -29,7 +29,7 @@ extras_require = {
 setup(
     name='anydo_api',
     version='0.0.1',
-    description="Unofficial AnyDo API wrapper for Python",
+    description="Unofficial AnyDo API client in object-oriented style.",
     long_description=readme + '\n\n' + history,
     author="Aliaksandr Buhayeu",
     author_email='aliaksandr.buhayeu@gmail.com',
@@ -42,18 +42,21 @@ setup(
     include_package_data=True,
     install_requires=requirements,
     extras_require=extras_require,
-    license="ISCL",
+    license="MIT",
     zip_safe=False,
-    keywords='anydo, anydo_api, api',
+    keywords='anydo, anydo_api, anydo_client',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: ISC License (ISCL)',
+        'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         "Programming Language :: Python :: 2",
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
+        'Topic :: Software Development :: Libraries',
+        'Topic :: Utilities'
+
     ],
     test_suite='tests',
     tests_require=test_requirements
