@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-`anydo_api.user`
+`anydo_api.user`.
 
 `User` class.
 """
@@ -13,11 +13,12 @@ from .resource import Resource
 from .task import Task
 from .category import Category
 
-__all__ = ['User']
+__all__ = ('User')
 
 class User(Resource):
     """
     `User` is the class representing User object.
+
     It wraps user-related JSON into class instances and
     responsible for user management.
     """
@@ -27,6 +28,7 @@ class User(Resource):
     __alternate_endpoint = CONSTANTS.get('USER_URL')
 
     def __init__(self, data_dict, session):
+        """Constructor for User."""
         super(User, self).__init__(data_dict)
         self.session_obj = session
         self.categories_list = None
@@ -35,21 +37,21 @@ class User(Resource):
 
     def save(self, alternate_endpoint=None):
         """
-        Pushes updated attributes to the server.
+        Pushe updated attributes to the server.
+
         If nothing was changed we dont hit the API.
         """
         super(User, self).save(alternate_endpoint=CONSTANTS.get('ME_URL'))
 
     def session(self):
-        """
-        Shortcut to retrive object session for requests.
-        """
+        """Shortcut to retrive object session for requests."""
         return self.session_obj
 
     def destroy(self, alternate_endpoint=None):
         """
-        Hits the API to destroy the user.
-        Passes a changed alternate endpoint as it is differ from the class one.
+        Hit the API to destroy the user.
+
+        Pass a changed alternate endpoint as it is differ from the class one.
         """
         super(User, self).destroy(alternate_endpoint=self.__alternate_endpoint)
 
@@ -60,10 +62,7 @@ class User(Resource):
               include_done=False,
               include_checked=True,
               include_unchecked=True):
-        """
-        Returns a remote or chached task list for user.
-        """
-
+        """Return a remote or chached task list for user."""
         if not self.tasks_list or refresh:
             params = {
                 'includeDeleted': str(include_deleted).lower(),
@@ -85,9 +84,7 @@ class User(Resource):
                                  include_unchecked=include_unchecked)
 
     def categories(self, refresh=False, include_deleted=False):
-        """
-        Returns a remote or chached categories list for user.
-        """
+        """Return a remote or chached categories list for user."""
         if not self.categories_list or refresh:
             params = {
                 'includeDeleted': str(include_deleted).lower(),
@@ -109,34 +106,27 @@ class User(Resource):
         return result
 
     def add_task(self, task):
-        """
-        Adds new task into internal storage.
-        """
-
+        """Add new task into internal storage."""
         if self.tasks_list:
             self.tasks_list.append(task)
         else:
             self.tasks_list = [task]
 
     def add_category(self, category):
-        """
-        Adds new category into internal storage.
-        """
-
+        """Add new category into internal storage."""
         if self.categories_list:
             self.categories_list.append(category)
         else:
             self.categories_list = [category]
 
     def default_category(self):
-        """
-        Returns defaul category for user if exist
-        """
+        """Return default category for user if exist."""
         return next((cat for cat in self.categories() if cat.isDefault), None)
 
     def pending_tasks(self, refresh=False):
         """
-        Returns a list of dicts representing a pending task that was shared with current user.
+        Return a list of dicts representing a pending task that was shared with current user.
+
         Empty list otherwise.
         """
         if not self._pending_tasks or refresh:
@@ -151,14 +141,16 @@ class User(Resource):
 
     def pending_tasks_ids(self, refresh=False):
         """
-        Returns a list of pending tasks ids shared with user.
+        Return a list of pending tasks ids shared with user.
+
         Empty list otherwise.
         """
         return [task['id'] for task in self.pending_tasks(refresh=refresh)]
 
     def approve_pending_task(self, pending_task_id=None, pending_task=None):
         """
-        Approves pending task via API call.
+        Approve pending task via API call.
+
         Accept pending_task_id or pending_task dict (in format of pending_tasks.
         """
         task_id = pending_task_id or pending_task['id']
@@ -177,9 +169,9 @@ class User(Resource):
     @staticmethod
     def required_attributes():
         """
-        Returns a set of required fields for valid user creation.
+        Return a set of required fields for valid user creation.
+
         This tuple is checked to prevent unnecessary API calls.
         """
-
         return {'name', 'email', 'password'}
 

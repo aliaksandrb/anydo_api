@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-`anydo_api.constants`
+`anydo_api.constants`.
 
 `Constants` module.
 
 All default enpoints and possible options are placed here.
 """
+
+__all__ = ('SERVER_API_URL', 'CONSTANTS', 'TASK_STATUSES')
+
 # Current API entry point
 SERVER_API_URL = 'https://sm-prod2.any.do'
 

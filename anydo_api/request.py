@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-anydo_api.request
+anydo_api.request.
 
 Helper functions for HTTP API calls.
 Wrapped `requests` methods with default headers and options.
@@ -11,7 +11,7 @@ import requests
 
 from . import errors
 
-__all__ = ['get', 'post', 'put', 'delete']
+__all__ = ('get', 'post', 'put', 'delete')
 
 try:
     __SERVER_ERRORS = xrange(500, 600) # pylint: disable=undefined-variable
@@ -19,34 +19,24 @@ except NameError:
     __SERVER_ERRORS = range(500, 600)
 
 def get(url, **options):
-    """
-    Simple GET request wrapper.
-    """
+    """Simple GET request wrapper."""
     return __base_request(method='get', url=url, **options)
 
 def post(url, **options):
-    """
-    Simple POST request wrapper.
-    """
+    """Simple POST request wrapper."""
     return __base_request(method='post', url=url, **options)
 
 def put(url, **options):
-    """
-    Simple PUT request wrapper.
-    """
+    """Simple PUT request wrapper."""
     return __base_request(method='put', url=url, **options)
 
 def delete(url, **options):
-    """
-    Simple DELETE request wrapper.
-    """
+    """Simple DELETE request wrapper."""
     return __base_request(method='delete', url=url, **options)
 
 
 def __prepare_request_arguments(**options):
-    """
-    Returns a dict representing default request arguments.
-    """
+    """Return a dict representing default request arguments."""
     options = options.copy()
 
     headers = {
@@ -71,9 +61,7 @@ def __prepare_request_arguments(**options):
     return request_arguments
 
 def __check_response_for_errors(response):
-    """
-    Raises and exception in case of HTTP error during API call, mapped to custom errors.
-    """
+    """Raise and exception in case of HTTP error during API call, mapped to custom errors."""
     try:
         response.raise_for_status()
     except requests.exceptions.HTTPError as error:
@@ -92,8 +80,9 @@ def __check_response_for_errors(response):
 def __base_request(method, url, session=None, **options):
     """
     Base request wrapper.
-    Makes request according to the `method` passed, with default options applied.
-    Forwards other arguments into `request` object from the `request` library.
+
+    Make request according to the `method` passed, with default options applied.
+    Forward other arguments into `request` object from the `request` library.
     """
     response_json = options.pop('response_json') if 'response_json' in options else True
     session = options.pop('session') if 'session' in options else requests.Session()

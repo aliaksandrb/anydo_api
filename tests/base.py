@@ -6,7 +6,7 @@ import unittest
 from . import test_helper
 from anydo_api.client import Client
 
-__all__ = ['TestCase']
+__all__ = ('TestCase')
 
 class TestCase(unittest.TestCase):
     """Test case base class for all tests."""

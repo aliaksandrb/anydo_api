@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-anydo_api.client
+anydo_api.client.
 
 `Client` class.
 """
@@ -12,23 +12,23 @@ from . import request
 from .constants import CONSTANTS
 from .user import User
 
-__all__ = ['Client']
+__all__ = ('Client')
 
 class Client(object):
     """
     `Client` is the interface for communication with an API.
+
     Responsible for authentication and session management.
     """
 
     def __init__(self, email, password):
+        """Constructor for Client."""
         self.__log_in(email, password)
         self.password = password
         self.user = None
 
     def get_user(self, refresh=False):
-        """
-        Returns a user object currently logged in.
-        """
+        """Return a user object currently logged in."""
         if not self.user or refresh:
             data = request.get(
                 url=CONSTANTS.get('ME_URL'),
@@ -45,7 +45,7 @@ class Client(object):
         """
         Authentication base on `email` and `password`.
 
-        Returns an actual session, used internally for all following requests to API.
+        Return an actual session, used internally for all following requests to API.
         """
         credentials = {
             'j_username': email,
@@ -68,9 +68,7 @@ class Client(object):
 
     @classmethod
     def create_user(cls, **fields):
-        """
-        Creates new user by required parameters.
-        """
+        """Create new user by required parameters."""
         User.check_for_missed_fields(fields)
 
         json_data = {

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-`anydo_api.category`
+`anydo_api.category`.
 
 `Category` class.
 """
@@ -10,11 +10,12 @@ from . import errors
 from .resource import Resource
 from .constants import CONSTANTS
 
-__all__ = ['Category']
+__all__ = ('Category')
 
 class Category(Resource):
     """
     `Category` is the class representing user category object.
+
     It wraps task-related JSON into class instances and
     responsible for categories management.
     """
@@ -23,20 +24,19 @@ class Category(Resource):
     _endpoint = CONSTANTS.get('CATEGORIES_URL')
 
     def __init__(self, data_dict, user):
+        """Constructor for Category."""
         super(Category, self).__init__(data_dict)
         self.user = user
 
     def session(self):
-        """
-        Shortcut to retrive user session for requests.
-        """
+        """Shortcut to retrive user session for requests."""
         return self.user.session()
 
     def mark_default(self):
         """
         Shortcut to mark a category as default one locally.
 
-        Marks previous default one as not default
+        Mark previous default one as not default.
         """
         previous = self.user.default_category()
         previous.default = False
@@ -49,25 +49,24 @@ class Category(Resource):
         return self
 
     def tasks(self):
-        """
-        Returns a list of the user tasks that belongs to selected category
-        """
+        """Return a list of the user tasks that belongs to selected category."""
         tasks = self.user.tasks()
         return [task for task in tasks if task.categoryId == self['id']]
 
     def add_task(self, task):
         """
-        Adds new task into category.
-        Updates task and pushes changes remotly.
+        Add new task into category.
+
+        Update task and pushes changes remotly.
         """
         task.categoryId = self['id']
         task.save()
 
     def remove_task(self, task):
         """
-        Removes a task from the category and move to default one.
-        Updates task and pushes changes remotly.
+        Remove a task from the category and move to default one.
 
+        Updates task and pushes changes remotly.
         If category already default do nothing.
         """
         if task.category().isDefault:
@@ -79,7 +78,8 @@ class Category(Resource):
     @staticmethod
     def required_attributes():
         """
-        Returns a set of required fields for valid task creation.
+        Return a set of required fields for valid task creation.
+
         This tuple is checked to prevent unnecessary API calls.
 
         Seems that :id and :title attributes are required for now, where
@@ -90,10 +90,9 @@ class Category(Resource):
     @classmethod
     def _create_callback(cls, resource_json, user):
         """
-        Callback method that is called automaticly after each successfull creation
-        via remote API
+        Callback method that is called automaticly after each successfull creation via remote API.
 
-        Returns an category instance.
+        Return an category instance.
         """
         category = cls(data_dict=resource_json[0], user=user)
         user.add_category(category)

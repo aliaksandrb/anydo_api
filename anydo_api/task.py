@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-`anydo_api.task`
+`anydo_api.task`.
 
 `Task` class.
 """
@@ -10,26 +10,28 @@ from . import request
 from .resource import Resource
 from .constants import CONSTANTS, TASK_STATUSES
 
-__all__ = ['Task']
+__all__ = ('Task')
 
 class Task(Resource):
     """
     `Task` is the class representing user task object.
-    It wraps task-related JSON into class instances and
-    responsible for task management.
+
+    It wraps task-related JSON into class instances and responsible for task management.
     """
 
     _endpoint = CONSTANTS.get('TASKS_URL')
     _reserved_attrs = ('user', 'data_dict', 'is_dirty')
 
     def __init__(self, data_dict, user):
+        """Constructor for Task."""
         super(Task, self).__init__(data_dict)
         self.user = user
 
     def check(self):
         """
-        Marks task as CHECKED.
-        Uses update functionality under the hood.
+        Mark task as CHECKED.
+
+        Using update functionality under the hood.
         """
         self['status'] = 'CHECKED'
         self.is_dirty = True
@@ -37,28 +39,23 @@ class Task(Resource):
 
     def done(self):
         """
-        Marks task as DONE.
-        Uses update functionality under the hood.
+        Mark task as DONE.
+
+        Using update functionality under the hood.
         """
         self['status'] = 'DONE'
         self.save()
 
     def session(self):
-        """
-        Chortcut to retrive user session for requests.
-        """
+        """Shortcut to retrive user session for requests."""
         return self.user.session()
 
     def subtasks(self):
-        """
-        Returns a list with subtasks of current task for same user.
-        """
+        """Return a list with subtasks of current task for same user."""
         return [task for task in self.user.tasks() if task['parentGlobalTaskId'] == self['id']]
 
     def create_subtask(self, **fields):
-        """
-        Creates a new tasks from provided fields and makes it an subtask of current one.
-        """
+        """Create a new tasks from provided fields and makes it an subtask of current one."""
         subtask_attrs = fields.copy()
         subtask_attrs.update({'parentGlobalTaskId': self['id']})
         subtask = Task.create(user=self.user, **subtask_attrs)
@@ -67,7 +64,8 @@ class Task(Resource):
 
     def add_subtask(self, subtask):
         """
-        Adds subtask to current task.
+        Add subtask to current task.
+
         Change synhronized remotly.
         """
         # Currently we don't support task reassignment from one user to another
@@ -75,17 +73,15 @@ class Task(Resource):
         subtask.save()
 
     def notes(self):
-        """
-        Returns a parsed list of notes for the task.
-        """
+        """Return a parsed list of notes for the task."""
         if self.note:
             return [note for note in self.note.split('\n') if note]
         else:
             return []
 
     def add_note(self, text_note):
-        """
-        Adds a text note to current task.
+        """Add a text note to current task.
+
         Change synhronized remotly.
         """
         note = self['note'] or ''
@@ -96,7 +92,8 @@ class Task(Resource):
 
     def members(self):
         """
-        Returns a list of dicts {username:email} representing the task members, including owner.
+        Return a list of dicts {username:email} representing the task members, including owner.
+
         If the task is not share returns only owner info.
         """
         objects_list = self['sharedMembers']
@@ -108,8 +105,9 @@ class Task(Resource):
     def share_with(self, new_member, message=None):
         """
         Share a task with new member.
+
         Pushes changes to server.
-        Updates task members list and new member tasks list
+        Updates task members list and new member tasks list.
         """
         json_data = {
             'invitees': [{'email': new_member['email']}],
@@ -127,18 +125,14 @@ class Task(Resource):
         return self
 
     def category(self):
-        """
-        Returns a category object based mapped to selected task.
-        """
+        """Return a category object based mapped to selected task."""
         return next(
             (cat for cat in self.user.categories() if cat['id'] == self['categoryId']),
             None
         )
 
     def parent(self):
-        """
-        Returns parent task object for subtask and None for first-level task.
-        """
+        """Return parent task object for subtask and None for first-level task."""
         return next(
             (task for task in self.user.tasks() if task['id'] == self['parentGlobalTaskId']),
             None
@@ -147,22 +141,22 @@ class Task(Resource):
     @staticmethod
     def required_attributes():
         """
-        Returns a set of required fields for valid task creation.
+        Return a set of required fields for valid task creation.
+
         This tuple is checked to prevent unnecessary API calls.
 
         Seems that :id and :title attributes are required for now, where
         :id is set automatically.
         """
-
         return {'title'}
 
     @staticmethod
     def filter_tasks(tasks_list, **filters):
         """
-        Filters tasks by their status.
+        Filter tasks by their status.
+
         Returns a new filtered list.
         """
-
         result = tasks_list[:]
         statuses = list(TASK_STATUSES)
 
@@ -182,10 +176,9 @@ class Task(Resource):
     @classmethod
     def _create_callback(cls, resource_json, user):
         """
-        Callback method that is called automaticly after each successfull creation
-        via remote API
+        Callback method that is called automaticly after each successfull creation via remote API.
 
-        Returns an task instance.
+        Return an task instance.
         """
         task = cls(data_dict=resource_json[0], user=user)
         user.add_task(task)

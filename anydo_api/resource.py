@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-`anydo_api.resource`
+`anydo_api.resource`.
 
 `Resource` class.
 """
@@ -12,13 +12,13 @@ import random
 from . import errors
 from . import request
 
-__all__ = ['Resource']
+__all__ = ('Resource')
 
 class Resource(object):
     """
     `Resource` is the class representing common wrapper around AnyDo json objects.
-    It wraps task-related JSON into class instances with access interface.
 
+    It wraps task-related JSON into class instances with access interface.
     All actual models are inherit it.
     """
 
@@ -26,13 +26,16 @@ class Resource(object):
     _endpoint = ''
 
     def __init__(self, data_dict):
+        """Constructor for generic Resource."""
         self.data_dict = data_dict
         self.is_dirty = False
 
     def __getitem__(self, key):
+        """Access to resource data by indexes."""
         return self.data_dict[key]
 
     def __getattr__(self, attr):
+        """Access to resource data by attributes."""
         try:
             result = self.data_dict[attr]
         except KeyError:
@@ -41,6 +44,7 @@ class Resource(object):
         return result
 
     def __setitem__(self, attr, new_value):
+        """Set resource data values by indexes."""
         if attr in self.data_dict:
             old_value = self.data_dict[attr]
 
@@ -51,6 +55,7 @@ class Resource(object):
             raise errors.ModelAttributeError(attr + ' is not exist')
 
     def __setattr__(self, attr, new_value):
+        """Assign resource data values as attribute values."""
         if attr not in self.get_reserved_attrs() and attr in self.data_dict:
             old_value = self.data_dict[attr]
 
@@ -62,10 +67,10 @@ class Resource(object):
 
     def save(self, alternate_endpoint=None):
         """
-        Pushes updated attributes to the server.
+        Push updated attributes to the server.
+
         If nothing was changed we dont hit an API.
         """
-
         if self.is_dirty:
             processed_data = self._process_data_before_save(self.data_dict)
 
@@ -80,10 +85,7 @@ class Resource(object):
         return self
 
     def destroy(self, alternate_endpoint=None):
-        """
-        Deletes the tasks by remote API call
-        """
-
+        """Delete the tasks by remote API call."""
         request.delete(
             url=alternate_endpoint or self.get_endpoint() + '/' + self.id,
             json=self.data_dict,
@@ -96,15 +98,11 @@ class Resource(object):
 
     #pylint: disable=no-self-use
     def session(self):
-        """
-        Shortcut to retrive object session for requests.
-        """
+        """Shortcut to retrive object session for requests."""
         raise errors.MethodNotImplementedError('Need to be implemented in the class descendant')
 
     def refresh(self):
-        """
-        Reload reource data from remote service.
-        """
+        """Reload reource data from remote service."""
         self.data_dict = request.get(
             url=self.get_endpoint() + '/' + self['id'],
             session=self.session()
@@ -113,22 +111,16 @@ class Resource(object):
         return self
 
     def get_endpoint(self):
-        """
-        Returns instance endpoint for API calls.
-        """
+        """Return instance endpoint for API calls."""
         return self._endpoint
 
     def get_reserved_attrs(self):
-        """
-        Returns a tuple with reserved attributes, protected for internal usage.
-        """
+        """Return a tuple with reserved attributes, protected for internal usage."""
         return self._reserved_attrs
 
     @staticmethod
     def generate_uid():
-        """
-        Unique global id generator for new resources.
-        """
+        """Generate unique global id generator for new resources."""
         random_string = ''.join([chr(random.randint(0, 255)) for _ in range(0, 16)])
         try:
             random_string = random_string.encode('utf-8')
@@ -146,7 +138,8 @@ class Resource(object):
     @staticmethod
     def required_attributes():
         """
-        Returns a set of required fields for valid resource creation.
+        Return a set of required fields for valid resource creation.
+
         This tuple is checked to prevent unnecessary API calls.
         """
         raise errors.MethodNotImplementedError('Need to be implemented in the class descendant')
@@ -154,19 +147,17 @@ class Resource(object):
     @classmethod
     def check_for_missed_fields(cls, fields):
         """
-        Checks task attributes for missed required.
+        Check task attributes for missed required.
+
         Raises exception with a list of all missed.
         """
-
         missed = cls.required_attributes() - set(fields.keys())
         if len(missed) > 0:
             raise errors.ModelAttributeError('Missing required fields: {}!'.format(missed))
 
     @classmethod
     def create(cls, user, **fields):
-        """
-        Creates new resource via API call.
-        """
+        """Create new resource via API call."""
         cls.check_for_missed_fields(fields)
 
         json_data = fields.copy()
@@ -189,20 +180,18 @@ class Resource(object):
     @staticmethod
     def _process_data_before_save(data_dict):
         """
-        Changes the data send to the server via API before save in cases when needed.
+        Change the data send to the server via API before save in cases when needed.
 
         Is not obligatory.
         """
-
         return data_dict
 
     #pylint: disable=unused-argument
     @classmethod
     def _create_callback(cls, resource_json, user):
         """
-        Callback method that is called automaticly after each successfull creation
-        via remote API
+        Callback method that is called automaticly after each successfull creation via remote API.
 
-        Returns an instance of the appropriate class.
+        Return an instance of the appropriate class.
         """
         raise errors.MethodNotImplementedError('Need to be implemented in the class descendant')
