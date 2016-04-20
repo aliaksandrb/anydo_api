@@ -11,12 +11,12 @@ Tests for `Client` class.
 import unittest
 import vcr as vcr_module
 
-from . import base
-from .test_helper import vcr
+from tests import base
+from tests.test_helper import vcr
 
+from anydo_api import errors
 from anydo_api.client import Client
 from anydo_api.user import User
-from anydo_api import errors
 
 
 class TestClient(base.TestCase):

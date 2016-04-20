@@ -9,8 +9,8 @@
 import base64
 import random
 
-from . import errors
-from . import request
+from anydo_api import errors
+from anydo_api import request
 
 __all__ = ('Resource')
 

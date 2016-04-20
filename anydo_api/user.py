@@ -6,12 +6,12 @@
 `User` class.
 """
 
-from . import request
-from . import errors
-from .constants import CONSTANTS
-from .resource import Resource
-from .task import Task
-from .category import Category
+from anydo_api import request
+from anydo_api import errors
+from anydo_api.category import Category
+from anydo_api.constants import CONSTANTS
+from anydo_api.resource import Resource
+from anydo_api.task import Task
 
 __all__ = ('User')
 

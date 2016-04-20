@@ -9,7 +9,7 @@ Wrapped `requests` methods with default headers and options.
 
 import requests
 
-from . import errors
+from anydo_api import errors
 
 __all__ = ('get', 'post', 'put', 'delete')
 
@@ -62,17 +62,18 @@ def __prepare_request_arguments(**options):
 
 def __check_response_for_errors(response):
     """Raise and exception in case of HTTP error during API call, mapped to custom errors."""
+    # bug in PyLint, seems not merged in 1.5.5 yet https://github.com/PyCQA/pylint/pull/742
     try:
         response.raise_for_status()
     except requests.exceptions.HTTPError as error:
         if response.status_code == 400:
-            client_error = errors.BadRequestError(response.content)
+            client_error = errors.BadRequestError(response.content)  # pylint: disable=redefined-variable-type
         elif response.status_code == 401:
-            client_error = errors.UnauthorizedError(response.content)
+            client_error = errors.UnauthorizedError(response.content)  # pylint: disable=redefined-variable-type
         elif response.status_code == 409:
-            client_error = errors.ConflictError(response.content)
+            client_error = errors.ConflictError(response.content)  # pylint: disable=redefined-variable-type
         else:
-            client_error = errors.InternalServerError(error)
+            client_error = errors.InternalServerError(error)  # pylint: disable=redefined-variable-type
         # should we skip original cause of exception or not?
         client_error.__cause__ = None
         raise client_error

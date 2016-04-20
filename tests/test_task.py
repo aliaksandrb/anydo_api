@@ -12,13 +12,13 @@ import unittest
 import json
 import vcr as vcr_module
 
-from .base import TestCase
-from .test_helper import vcr, scrub_string
+from tests.base import TestCase
+from tests.test_helper import vcr, scrub_string
 
+from anydo_api import errors
 from anydo_api.task import Task
 from anydo_api.user import User
 from anydo_api.client import Client
-from anydo_api import errors
 
 
 class TestTask(TestCase):

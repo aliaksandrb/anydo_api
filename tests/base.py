@@ -3,7 +3,7 @@
 
 import unittest
 
-from . import test_helper
+from tests import test_helper
 from anydo_api.client import Client
 
 __all__ = ('TestCase')

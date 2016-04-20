@@ -6,9 +6,9 @@
 `Task` class.
 """
 
-from . import request
-from .resource import Resource
-from .constants import CONSTANTS, TASK_STATUSES
+from anydo_api import request
+from anydo_api.constants import CONSTANTS, TASK_STATUSES
+from anydo_api.resource import Resource
 
 __all__ = ('Task')
 

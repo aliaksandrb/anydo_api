@@ -6,9 +6,9 @@
 `Category` class.
 """
 
-from . import errors
-from .resource import Resource
-from .constants import CONSTANTS
+from anydo_api import errors
+from anydo_api.constants import CONSTANTS
+from anydo_api.resource import Resource
 
 __all__ = ('Category')
 

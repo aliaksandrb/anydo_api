@@ -37,8 +37,7 @@ setup(
     packages=[
         'anydo_api',
     ],
-    package_dir={'anydo_api':
-                 'anydo_api'},
+    package_dir={'anydo_api': 'anydo_api'},
     include_package_data=True,
     install_requires=requirements,
     extras_require=extras_require,

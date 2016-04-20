@@ -8,9 +8,9 @@ anydo_api.client.
 
 import requests
 
-from . import request
-from .constants import CONSTANTS
-from .user import User
+from anydo_api import request
+from anydo_api.constants import CONSTANTS
+from anydo_api.user import User
 
 __all__ = ('Client')
 

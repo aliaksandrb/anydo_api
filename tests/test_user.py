@@ -11,12 +11,12 @@ Tests for `User` class.
 import unittest
 import json
 
-from .base import TestCase
-from .test_helper import vcr, scrub_string
+from tests.base import TestCase
+from tests.test_helper import vcr, scrub_string
 
+from anydo_api import errors
 from anydo_api.client import Client
 from anydo_api.user import User
-from anydo_api import errors
 
 
 class TestUser(TestCase):
