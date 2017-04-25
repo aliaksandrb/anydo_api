@@ -76,8 +76,8 @@ class Task(Resource):
         """Return a parsed list of notes for the task."""
         if self.note:
             return [note for note in self.note.split('\n') if note]
-        else:
-            return []
+
+        return []
 
     def add_note(self, text_note):
         """Add a text note to current task.
@@ -99,8 +99,8 @@ class Task(Resource):
         objects_list = self['sharedMembers']
         if objects_list:
             return [{member['target']: member['name']} for member in objects_list]
-        else:
-            return [{self.user['email']: self.user['name']}]
+
+        return [{self.user['email']: self.user['name']}]
 
     def share_with(self, new_member, message=None):
         """

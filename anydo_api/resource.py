@@ -8,6 +8,7 @@
 
 import base64
 import random
+import six
 
 from anydo_api import errors
 from anydo_api import request
@@ -121,12 +122,7 @@ class Resource(object):
     @staticmethod
     def generate_uid():
         """Generate unique global id generator for new resources."""
-        random_string = ''.join([chr(random.randint(0, 255)) for _ in range(0, 16)])
-        try:
-            random_string = random_string.encode('utf-8')
-        except UnicodeDecodeError:
-            pass
-
+        random_string = six.b('').join([six.int2byte(random.randint(0, 255)) for _ in range(0, 16)])
         result = base64.urlsafe_b64encode(random_string)
         try:
             result = result.decode('utf-8')
@@ -152,7 +148,8 @@ class Resource(object):
         Raises exception with a list of all missed.
         """
         missed = cls.required_attributes() - set(fields.keys())
-        if len(missed) > 0:
+        size = len(missed)
+        if size > 0:
             raise errors.ModelAttributeError('Missing required fields: {}!'.format(missed))
 
     @classmethod

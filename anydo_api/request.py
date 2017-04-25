@@ -67,13 +67,13 @@ def __check_response_for_errors(response):
         response.raise_for_status()
     except requests.exceptions.HTTPError as error:
         if response.status_code == 400:
-            client_error = errors.BadRequestError(response.content)  # pylint: disable=redefined-variable-type
+            client_error = errors.BadRequestError(response.content)
         elif response.status_code == 401:
-            client_error = errors.UnauthorizedError(response.content)  # pylint: disable=redefined-variable-type
+            client_error = errors.UnauthorizedError(response.content)
         elif response.status_code == 409:
-            client_error = errors.ConflictError(response.content)  # pylint: disable=redefined-variable-type
+            client_error = errors.ConflictError(response.content)
         else:
-            client_error = errors.InternalServerError(error)  # pylint: disable=redefined-variable-type
+            client_error = errors.InternalServerError(error)
         # should we skip original cause of exception or not?
         client_error.__cause__ = None
         raise client_error

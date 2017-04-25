@@ -185,4 +185,3 @@ class User(Resource):
         This tuple is checked to prevent unnecessary API calls.
         """
         return {'name', 'email', 'password'}
-

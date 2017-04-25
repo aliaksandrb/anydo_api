@@ -15,7 +15,8 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read().replace('.. :changelog:', '')
 
 requirements = [
-    'requests>=2.8.0'
+    'requests>=2.8.0',
+    'six>=1.10.0'
 ]
 
 test_requirements = [
@@ -28,7 +29,7 @@ extras_require = {
 
 setup(
     name='anydo_api',
-    version='0.0.1',
+    version='0.0.2',
     description="Unofficial AnyDo API client in object-oriented style.",
     long_description=readme + '\n\n' + history,
     author="Aliaksandr Buhayeu",

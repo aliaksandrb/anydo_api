@@ -1,5 +1,5 @@
 ================================================================
-anydo_api unofficial AnyDo API client for Python (v0.0.1 aplha)
+anydo_api unofficial AnyDo API client for Python (v0.0.2 aplha)
 ================================================================
 
 .. image:: https://img.shields.io/travis/aliaksandrb/anydo_api.svg
