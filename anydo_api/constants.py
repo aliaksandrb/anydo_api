@@ -12,6 +12,7 @@ __all__ = ('SERVER_API_URL', 'CONSTANTS', 'TASK_STATUSES')
 
 # Current API entry point
 SERVER_API_URL = 'https://sm-prod2.any.do'
+SERVER_API_V3_URL = 'https://sm-prod3.any.do'
 
 # API endpoints
 CONSTANTS = {
@@ -20,7 +21,8 @@ CONSTANTS = {
     'ME_URL'        : SERVER_API_URL + '/me',
     'USER_URL'      : SERVER_API_URL + '/user',
     'TASKS_URL'     : SERVER_API_URL + '/me/tasks',
-    'CATEGORIES_URL': SERVER_API_URL + '/me/categories'
+    'CATEGORIES_URL': SERVER_API_URL + '/me/categories',
+    'SYNC_URL'      : SERVER_API_V3_URL + '/api/v5/me/sync'
 }
 
 # Possible task statuses

@@ -9,6 +9,7 @@
 from anydo_api import request
 from anydo_api import errors
 from anydo_api.category import Category
+from anydo_api.tag import Tag
 from anydo_api.constants import CONSTANTS
 from anydo_api.resource import Resource
 from anydo_api.task import Task
@@ -33,13 +34,14 @@ class User(Resource):
         self.session_obj = session
         self.categories_list = None
         self.tasks_list = None
+        self.tags_list = None
         self._pending_tasks = None
 
     def save(self, alternate_endpoint=None):
         """
-        Pushe updated attributes to the server.
+        Push updated attributes to the server.
 
-        If nothing was changed we dont hit the API.
+        If nothing was changed we don't hit the API.
         """
         super(User, self).save(alternate_endpoint=self.get_endpoint())
 
@@ -113,6 +115,39 @@ class User(Resource):
         result = self.categories_list
         if not include_deleted:
             result = [cat for cat in result if not cat['isDeleted']]
+
+        return result
+
+    def tags(self, refresh=False,include_deleted=False):
+        """Return a remote or cached tags list for user."""
+        if not self.tags_list or refresh:
+            params = {
+                'includeDeleted': str(include_deleted).lower(),
+            }
+
+            payload = {
+                "models": {"label": {
+                        "items": [],
+                        "config": {
+                            "includeDone": "false",
+                            "includeDeleted": "false"
+                        }
+                }}
+            }
+
+            tags_data = request.post(
+                url=CONSTANTS.get('SYNC_URL'),
+                session=self.session(),
+                params=params,
+                json=payload
+            )['models']['label']['items']
+            self.tags_list = [
+                Tag(data_dict=tag, user=self) for tag in tags_data
+            ]
+
+        result = self.tags_list
+        if not include_deleted:
+            result = [tag for tag in result if not tag['isDeleted']]
 
         return result
 

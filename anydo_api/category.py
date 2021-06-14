@@ -57,7 +57,7 @@ class Category(Resource):
         """
         Add new task into category.
 
-        Update task and pushes changes remotly.
+        Update task and pushes changes remotely.
         """
         task.categoryId = self['id']
         task.save()
@@ -66,7 +66,7 @@ class Category(Resource):
         """
         Remove a task from the category and move to default one.
 
-        Updates task and pushes changes remotly.
+        Updates task and pushes changes remotely.
         If category already default do nothing.
         """
         if task.category()['isDefault']:
@@ -90,7 +90,7 @@ class Category(Resource):
     @classmethod
     def _create_callback(cls, resource_json, user):
         """
-        Callback method that is called automaticly after each successfull creation via remote API.
+        Callback method that is called automatically after each successfull creation via remote API.
 
         Return an category instance.
         """
