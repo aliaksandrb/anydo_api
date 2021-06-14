@@ -70,7 +70,7 @@ class Resource(object):
         """
         Push updated attributes to the server.
 
-        If nothing was changed we dont hit an API.
+        If nothing was changed we don't hit an API.
         """
         if self.is_dirty:
             processed_data = self._process_data_before_save(self.data_dict)
@@ -187,7 +187,7 @@ class Resource(object):
     @classmethod
     def _create_callback(cls, resource_json, user):
         """
-        Callback method that is called automaticly after each successfull creation via remote API.
+        Callback method that is called automatically after each successfull creation via remote API.
 
         Return an instance of the appropriate class.
         """

@@ -47,4 +47,3 @@ class TestCase(unittest.TestCase):
             filter_post_data_parameters=['j_password']
         ):
             return self.get_session().get_user()
-

@@ -176,7 +176,7 @@ class Task(Resource):
     @classmethod
     def _create_callback(cls, resource_json, user):
         """
-        Callback method that is called automaticly after each successfull creation via remote API.
+        Callback method that is called automatically after each successful creation via remote API.
 
         Return an task instance.
         """
